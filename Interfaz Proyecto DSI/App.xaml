@@ -4,4 +4,40 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Interfaz_Proyecto_DSI">
 
+    <Application.Resources>
+        <Style TargetType="Button" x:Key="ButtonTemplate">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="CornerRadius" Value="2"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                        <GradientStop Color="#e9e2ce" Offset="0.0"/>
+                        <GradientStop Color="#c9b888" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+
+            </Setter>
+            
+        </Style>
+
+        <Style TargetType="Button" x:Key="PointerOver ">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="CornerRadius" Value="2"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                        <GradientStop Color="red" Offset="0.0"/>
+                        <GradientStop Color="blue" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+
+    </Application.Resources>
+    
 </Application>
