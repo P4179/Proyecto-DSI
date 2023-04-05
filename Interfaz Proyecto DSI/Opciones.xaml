@@ -8,11 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Button Content="Button"
-                Margin="1444,691,0,0"
-                VerticalAlignment="Top"
-                Style="{StaticResource ButtonTemplate}" Height="88" Width="219"/>
 
+    <Grid Style="{StaticResource GridTemplate}">
+        <Button Content="Hee Hee"
+                Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="219" 
+                HorizontalAlignment="Center" />
     </Grid>
+    
 </Page>

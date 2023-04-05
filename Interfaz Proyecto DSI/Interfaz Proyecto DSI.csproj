@@ -161,6 +161,36 @@
       <Version>6.2.14</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-Black.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-BlackItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-BoldItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-ExtraBold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-ExtraBoldItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-Italic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-Medium.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-MediumItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\fonts\AlegreyaSC-Regular.ttf" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

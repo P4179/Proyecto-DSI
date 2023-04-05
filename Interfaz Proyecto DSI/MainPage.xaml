@@ -8,9 +8,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="#FFECE8DC">
-        <Button Content="Button"
-                Style="{StaticResource ButtonTemplate}" Height="88" Width="219" HorizontalAlignment="Center"/>
+    <Grid Style="{StaticResource GridTemplate}">
+        <Button Content="Options"
+                Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="219" 
+                HorizontalAlignment="Center" >
+
+            <Button.Flyout>
+                <Flyout FlyoutPresenterStyle="{StaticResource OptionsFlyout}" Placement="Full">
+                </Flyout>
+
+
+            </Button.Flyout>
+        </Button>
+
+
     </Grid>
 
 

@@ -5,10 +5,17 @@
     xmlns:local="using:Interfaz_Proyecto_DSI">
 
     <Application.Resources>
-        <Style TargetType="Button" x:Key="ButtonTemplate">
-            <Setter Property="BorderThickness" Value="2"/>
+        <Style TargetType="Grid" x:Key="GridTemplate">
+            <Setter Property="Background" Value="#FFECE8DC"/>
+        </Style>
+        
+        <Style TargetType="Button" x:Key="ClickableButtonTemplate">
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="CornerRadius" Value="2"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+            <Setter Property="FontSize" Value="40"/>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
@@ -16,27 +23,90 @@
                         <GradientStop Color="#c9b888" Offset="1.0"/>
                     </LinearGradientBrush>
                 </Setter.Value>
-
             </Setter>
-            
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    
+                                    
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                                                            <GradientStop Color="#9f8847" Offset="0.0"/>
+                                                            <GradientStop Color="#d4be7c" Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            
+                                        </Storyboard>
+                                    </VisualState>
+                                    
+                                    
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                                                            <GradientStop Color="#e9e2ce" Offset="0.0"/>
+                                                            <GradientStop Color="#c9b888" Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    
+                                    
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledTransparentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                            <ContentPresenter x:Name="ContentPresenter" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
         </Style>
 
-        <Style TargetType="Button" x:Key="PointerOver ">
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="CornerRadius" Value="2"/>
+        <Style TargetType="FlyoutPresenter" x:Key="OptionsFlyout">
             <Setter Property="Background">
                 <Setter.Value>
-                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
-                        <GradientStop Color="red" Offset="0.0"/>
-                        <GradientStop Color="blue" Offset="1.0"/>
-                    </LinearGradientBrush>
+                    <SolidColorBrush Color="Black" Opacity="0.37"/>
                 </Setter.Value>
-
             </Setter>
+            
 
         </Style>
-
 
     </Application.Resources>
     
