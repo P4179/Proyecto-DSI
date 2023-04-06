@@ -23,12 +23,30 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage()
-        {
+        public MainPage() {
             this.InitializeComponent();
+            //Window.Current.CoreWindow.SizeChanged += CoreWindow_SizeChanged;
         }
 
         
+        //private void CoreWindow_SizeChanged(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.WindowSizeChangedEventArgs args) => setTabSize();
+
+        private void openOptions(object sender, RoutedEventArgs e) {
+            OptionsMenu.Visibility = Visibility.Visible;
+        }
+
+        private void closeOptions(object sender, RoutedEventArgs e) {
+            OptionsMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void togglePause(object sender, RoutedEventArgs e) {
+            if (PauseMenu.Visibility == Visibility.Collapsed)
+                PauseMenu.Visibility = Visibility.Visible;
+            else
+                PauseMenu.Visibility = Visibility.Collapsed;
+        }
+
+
 
     }
 }

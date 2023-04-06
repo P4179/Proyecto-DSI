@@ -7,20 +7,63 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!--Loaded="Page_Loaded"-->
+
+
 
     <Grid Style="{StaticResource GridTemplate}">
-        <Button Content="Options"
-                Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="219" 
-                HorizontalAlignment="Center" >
 
-            <Button.Flyout>
-                <Flyout FlyoutPresenterStyle="{StaticResource OptionsFlyout}" Placement="Full">
-                </Flyout>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="300" Margin="20"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Click="openOptions" FontSize="40">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xF8B0;" FontSize="40" Margin="10,0,10,0"/>
+                    <TextBlock Text="Opciones"/>
+                </StackPanel>
+
+            </Button>
+
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="300" Margin="20"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Click="togglePause" FontSize="40">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xF8AE;" FontSize="40" Margin="10,0,10,0"/>
+                    <TextBlock Text="Pausa"/>
+                </StackPanel>
+
+            </Button>
+
+        </StackPanel>
+
+        
 
 
-            </Button.Flyout>
-        </Button>
+        <Grid x:Name="OptionsMenu" Style="{StaticResource GridTemplate}" Visibility="Collapsed">
+            <ContentControl x:Name="OptionsTemplate" ContentTemplate="{StaticResource OptionsTemplate}"
+                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40,0,0,40" 
+                Click="closeOptions" FontSize="40">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                    <TextBlock Text="Volver"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        
+        
+        <Grid x:Name="PauseMenu" Visibility="Collapsed">
+            <ContentControl ContentTemplate="{StaticResource PauseTemplate}"
+                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Grid>
+
+
+
 
 
     </Grid>
