@@ -112,13 +112,103 @@
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
-        <!--Estilo de los bloques de texto-->
-        <Style TargetType="TextBox" x:Key="TextBoxTemplate">
+        <!--Estilo de los bloques de texto placeholder-->
+        <Style TargetType="TextBox" x:Key="PlaceHolderTextTemplate">
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+        </Style>
+        
+        <!--Estilo de las opciones seleccionables en los menús-->
+        <Style TargetType="ListViewItem">
+            <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Grid x:Name="RootGrid" DataContext="{TemplateBinding DataContext}">
+                            
+                            <ContentPresenter />
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Margin">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0, 20, 0, 0"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+
+                                    </VisualState>
+
+
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e9e2ce"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderThickness">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="3"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#827e74"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="CornerRadius">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="3"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Margin">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0, 20, 0, 0"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e9e2ce"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Margin">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0, 20, 0, 0"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
         </Style>
 
-
+        
+        
         <!--Estados del las pestañas-->
         <Style TargetType="Pivot" x:Key="TabsTemplate">
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
@@ -228,121 +318,6 @@
 
         
         
-
-        <DataTemplate x:Key="OptionsTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="91*"/>
-                    <ColumnDefinition Width="37*"/>
-                </Grid.ColumnDefinitions>
-
-                <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
-
-                <Rectangle Grid.Column="0" Fill="#cbc2a8" Margin="80,80,80,200" Stroke="black"/>
-
-
-                <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200">
-                    <PivotItem>
-                        <PivotItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Glyph="&#xe7f4;" FontSize="30" Margin="10,0,10,0"/>
-                                <TextBlock Text="Gráficos"/>
-                            </StackPanel>
-                        </PivotItem.Header>
-
-                        <!--Pivot content goes here-->
-
-                    </PivotItem>
-                    <PivotItem>
-                        <PivotItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Glyph="&#xe995;" FontSize="30" Margin="10,0,10,0"/>
-                                <TextBlock Text="Sonido"/>
-                            </StackPanel>
-                        </PivotItem.Header>
-
-                        <!--Pivot content goes here-->
-
-                    </PivotItem>
-
-                    <PivotItem>
-                        <PivotItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Glyph="&#xE776;" FontSize="30" Margin="10,0,10,0"/>
-                                <TextBlock Text="Accesibilidad"/>
-                            </StackPanel>
-                        </PivotItem.Header>
-
-                        <!--Pivot content goes here-->
-
-                    </PivotItem>
-
-                    <PivotItem>
-                        <PivotItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon Glyph="&#xF210;" FontSize="30" Margin="10,0,10,0"/>
-                                <TextBlock Text="Controles"/>
-                            </StackPanel>
-                        </PivotItem.Header>
-
-                        <!--Pivot content goes here-->
-
-                    </PivotItem>
-                </Pivot>
-
-                
-
-                <StackPanel Grid.Column="1" Margin="0,80,80,200" VerticalAlignment="Stretch">
-                    <TextBlock Text="Configuración 1" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                    <Image Source="/Assets/imgPlaceholder.jpg"/>
-                    <TextBox TextWrapping="Wrap" Style="{StaticResource TextBoxTemplate}" IsReadOnly="True" IsHitTestVisible="False"
-                         Margin="0,40,0,0" Height ="auto" FontSize="30"
-                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                         " 
-                />
-
-                </StackPanel>
-            </Grid>
-        </DataTemplate>
-
-
-        <DataTemplate x:Key="PauseTemplate">
-            <Grid>
-                <Rectangle Fill="Black" Opacity="0.63"/>
-                
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100">
-                    <TextBlock Text="Juego Pausado" HorizontalAlignment="Center" 
-                               FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
-                               FontSize="100"/>
-
-                    <Button Style="{StaticResource ClickableButtonTemplate}"
-                            Height="130" Width="700" FontSize="70" Margin="40">
-                        <StackPanel Orientation="Horizontal" >
-                            <FontIcon Glyph="&#xF5B0;" FontSize="70" Margin="-110,0,110,0"/>
-                            <TextBlock Text="Reanudar"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource ClickableButtonTemplate}"
-                            Height="130" Width="700" FontSize="70" Margin="40">
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Glyph="&#xF8B0;" FontSize="70" Margin="-110,0,110,0"/>
-                            <TextBlock Text="Opciones"/>
-                        </StackPanel>
-                    </Button>
-                    
-                    <Button Style="{StaticResource ClickableButtonTemplate}"
-                            Height="130" Width="700" FontSize="70" Margin="40">
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Glyph="&#xEA8A;" FontSize="70" Margin="0,0,40,0"/>
-                            <TextBlock Text="Menú principal"/>
-                        </StackPanel>
-                    </Button>
-                    
-                </StackPanel>
-            </Grid>
-        </DataTemplate>
-
-
 
 
     </Application.Resources>

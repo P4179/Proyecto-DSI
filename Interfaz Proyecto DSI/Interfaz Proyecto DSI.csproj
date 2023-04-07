@@ -122,8 +122,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Opciones.xaml.cs">
-      <DependentUpon>Opciones.xaml</DependentUpon>
+    <Compile Include="Pociones.xaml.cs">
+      <DependentUpon>Pociones.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -152,7 +152,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Opciones.xaml">
+    <Page Include="Pociones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

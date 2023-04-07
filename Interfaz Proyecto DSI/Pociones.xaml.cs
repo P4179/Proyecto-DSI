@@ -20,11 +20,16 @@ namespace Interfaz_Proyecto_DSI
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class Opciones : Page
+    public sealed partial class Pociones : Page
     {
-        public Opciones()
-        {
+        public Pociones() {
             this.InitializeComponent();
+
+            for(int i = 0; i < 10; i++) PotionsList.Items.Add("Poción " + i.ToString());
+        }
+
+        private void returnToMain(object sender, RoutedEventArgs e){
+            Frame.GoBack();
         }
     }
 }
