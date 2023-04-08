@@ -115,9 +115,17 @@
         <!--Estilo de los bloques de texto placeholder-->
         <Style TargetType="TextBox" x:Key="PlaceHolderTextTemplate">
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="#cbc2a8" Opacity="0.63"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Padding" Value="20"/>
         </Style>
         
         <!--Estilo de las opciones seleccionables en los menús-->
@@ -316,8 +324,26 @@
             <Setter Property="BorderThickness" Value="4"/>
         </Style>
 
+
+
+        <!--Estilo de los bloques de texto placeholder-->
+        <Style TargetType="ComboBox" x:Key="ComboBoxTemplate">
+            <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+            <Setter Property="PlaceholderForeground" Value="Black"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+
+
+        </Style>
         
-        
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
 
 
     </Application.Resources>

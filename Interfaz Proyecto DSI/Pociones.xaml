@@ -125,12 +125,12 @@
 
 
             <!--Información del objeto-->
-            <StackPanel Grid.Column="1" Margin="0,80,80,200" VerticalAlignment="Stretch">
+            <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
                 <TextBlock Text="Poción X" Style="{StaticResource TextBlockTemplate}" 
                            FontSize="50" HorizontalAlignment="Center"
                            Foreground="White"
                            Margin="0,0,0,10"/>
-                <Image Source="/Assets/imgPlaceholder.jpg"/>
+                <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
                 <TextBox TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
                          Margin="0,40,0,0" Height ="auto" FontSize="30"
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 

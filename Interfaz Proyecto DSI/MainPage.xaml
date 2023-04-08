@@ -13,14 +13,27 @@
 
     <Grid Style="{StaticResource GridTemplate}">
         
-        <Button Style="{StaticResource ClickableButtonTemplate}"
+        <!--Botones para ir a las distintas pantallas-->
+        <StackPanel>
+            <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
                 FontSize="40" Click="goToPotions">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
-                <TextBlock Text="HeeHee"/>
-            </StackPanel>
-        </Button>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                    <TextBlock Text="HeeHee"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
+                FontSize="40" Click="goToShop">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                    <TextBlock Text="HoeHoe"/>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Style="{StaticResource ClickableButtonTemplate}"
@@ -183,9 +196,9 @@
 
             
             <!--Información de la opción-->
-            <StackPanel Grid.Column="1" Margin="0,80,80,200" VerticalAlignment="Stretch">
+            <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
                 <TextBlock Text="Configuración 1" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                <Image Source="/Assets/imgPlaceholder.jpg"/>
+                <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
                 <TextBox TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
                          Margin="0,40,0,0" Height ="auto" FontSize="30"
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
@@ -195,11 +208,11 @@
         </Grid>
 
 
-        
-        
-       
 
 
+        
+        
+        
 
     </Grid>
 
