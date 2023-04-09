@@ -9,8 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <!--Loaded="Page_Loaded"-->
 
-
-
     <Grid Style="{StaticResource GridTemplate}">
         
         <!--Botones para ir a las distintas pantallas-->

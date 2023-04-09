@@ -344,6 +344,25 @@
             <Setter Property="Background" Value="White"/>
         </Style>
 
+        <!-- Estilo del borde del menú de confirmación -->
+        <Style TargetType="Border" x:Key="ConfirmationMenuBorder">
+            <Setter Property="Grid.ColumnSpan" Value="3"/>
+            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="MaxWidth" Value="500"/>
+            <Setter Property="MaxHeight" Value="300"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                        <GradientStop Color="#e9e2ce" Offset="1.0"/>
+                        <GradientStop Color="#c9b888" Offset="0.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
 
 
     </Application.Resources>
