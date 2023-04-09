@@ -345,7 +345,7 @@
         </Style>
 
         <!-- Estilo del borde del menú de confirmación -->
-        <Style TargetType="Border" x:Key="ConfirmationMenuBorder">
+        <Style TargetType="Grid" x:Key="ConfirmationMenuGrid">
             <Setter Property="Grid.ColumnSpan" Value="3"/>
             <Setter Property="Grid.RowSpan" Value="2"/>
             <Setter Property="MaxWidth" Value="500"/>
@@ -362,6 +362,66 @@
             </Setter>
 
         </Style>
+
+        <Style x:Key="RadioAbility" TargetType="RadioButton">
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid x:Name="RootGrid"
+                              Width="{TemplateBinding Width}"
+                              Height="{TemplateBinding Height}"
+                              BorderBrush="Black">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.Setters>
+                                            <Setter Target="Image.Opacity" Value="1"/>
+                                        </VisualState.Setters>
+                                        <!-- This Storyboard is equivalent to the Setter. -->
+                                        <!--<Storyboard>
+                                            <DoubleAnimation Duration="0" To="1"
+                                                Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <VisualState.Setters>
+                                            <Setter Target="Image.Opacity" Value="0"/>
+                                        </VisualState.Setters>
+                                        <!-- This Storyboard is equivalent to the Setter. -->
+                                        <!--<Storyboard>
+                                            <DoubleAnimation Duration="0" To="1"
+                                                 Storyboard.TargetName="IndeterminateGlyph" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <!-- No se establece ningún estilo para estos estados -->
+                                    <VisualState x:Name="Disabled"/>
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="3"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="3"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Image x:Name="Image"
+                                   Source="Assets/selection.png"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
 
 
 

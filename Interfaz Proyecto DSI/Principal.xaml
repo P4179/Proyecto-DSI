@@ -18,19 +18,22 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
+        
+        <!-- Imagen izquierda -->
         <Border VerticalAlignment="Center" HorizontalAlignment="Center"
                 MaxHeight="200" Grid.RowSpan="2"
                 BorderThickness="2" BorderBrush="Black">
             <Image Source="/Assets/imgPlaceholder.jpg" />
         </Border>
-
+        
+        <!-- Image derecha -->
         <Border VerticalAlignment="Center" HorizontalAlignment="Center"
                 MaxHeight="200" Grid.RowSpan="2" Grid.Column="2"
                 BorderThickness="2" BorderBrush="Black">
             <Image Source="/Assets/imgPlaceholder.jpg" />
         </Border>
-
+        
+        <!-- Título -->
         <Border BorderBrush="Black" BorderThickness="1"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Grid.ColumnSpan="3" Padding="70, 45" Margin="70"
@@ -39,7 +42,8 @@
                    FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                    FontSize="90" FontWeight="Bold"/>
         </Border>
-
+        
+        <!-- Botones -->
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.2*" />
@@ -111,44 +115,35 @@
             </Button>
 
         </Grid>
-
-        <Border Style="{StaticResource ConfirmationMenuBorder}"
-                Visibility="Collapsed">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
-                    <GradientStop Color="#e9e2ce" Offset="1.0"/>
-                    <GradientStop Color="#c9b888" Offset="0.0"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="¿Seguro que quieres salir del juego?" FontSize="40"
-                           TextWrapping="WrapWholeWords" TextAlignment="Center"
-                           FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
-                           Grid.ColumnSpan="2"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button Style="{StaticResource ClickableButtonTemplate}"
-                        Grid.Column="0" Grid.Row="1" 
-                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                        FontSize="50" BorderThickness="0,1,1,0">
-                    <TextBlock Text="SI" Foreground="Green"/>
-                </Button>
-                <Button Style="{StaticResource ClickableButtonTemplate}"
-                        Grid.Column="1" Grid.Row="1" 
-                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                        FontSize="50" BorderThickness="0,1,0,0">
-                    <TextBlock Text="NO" Foreground="DarkRed"/>
-                </Button>
-            </Grid>
-            
-        </Border>
+        
+        <!-- Menú de confirmación -->
+        <Grid Style="{StaticResource ConfirmationMenuGrid}" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="¿Seguro que quieres salir del juego?" FontSize="40"
+                       TextWrapping="WrapWholeWords" TextAlignment="Center"
+                       FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                    Grid.Column="0" Grid.Row="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="50" BorderThickness="0,1,1,0">
+                <TextBlock Text="SI" Foreground="Green"/>
+            </Button>
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                    Grid.Column="1" Grid.Row="1" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="50" BorderThickness="0,1,0,0">
+                <TextBlock Text="NO" Foreground="DarkRed"/>
+            </Button>
+        </Grid>
 
 
     </Grid>

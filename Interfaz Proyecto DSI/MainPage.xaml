@@ -98,7 +98,7 @@
         
         
         <!--Menú de opciones-->
-        <Grid x:Name="OptionsMenu" Style="{StaticResource GridTemplate}" Visibility="Collapsed">
+        <Grid x:Name="OptionsMenu" Style="{StaticResource GridTemplate}" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
                 <ColumnDefinition Width="37*"/>

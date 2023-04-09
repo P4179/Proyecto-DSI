@@ -249,7 +249,7 @@
         
         
         <!--Ventana de selección de cantidad-->
-        <Grid x:Name="BuyQuantity" Grid.ColumnSpan="2" Visibility="Visible">
+        <Grid x:Name="BuyQuantity" Grid.ColumnSpan="2" Visibility="Collapsed">
             <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
             <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" 
                        Width="822" Height="520" RadiusX="50" RadiusY="50" Stroke="Black">

@@ -63,7 +63,7 @@ namespace Interfaz_Proyecto_DSI
         }
 
         private void goToPotions(object sender, RoutedEventArgs e) {
-            Frame.Navigate(typeof(Principal));
+            Frame.Navigate(typeof(Abilities));
         }
         private void goToShop(object sender, RoutedEventArgs e) {
             Frame.Navigate(typeof(Tienda));
