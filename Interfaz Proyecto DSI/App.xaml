@@ -362,10 +362,14 @@
             </Setter>
 
         </Style>
-
+        
+        <!-- Template de la selección de habilidades -->
         <Style x:Key="RadioAbility" TargetType="RadioButton">
             <Setter Property="MinHeight" Value="0"/>
             <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="IsChecked" Value="False"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="GroupName" Value="Ability"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
@@ -417,6 +421,98 @@
                             <Image x:Name="Image"
                                    Source="Assets/selection.png"/>
                         </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Template selección personaje -->
+        <Style x:Key="RadioCharacter" TargetType="RadioButton">
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="IsChecked" Value="False"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="GroupName" Value="Character"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <!-- Cambiar Tamaño -->
+                        <Viewbox Width="{TemplateBinding Width}"
+                                 Height="{TemplateBinding Height}">
+                            <!-- Para que funcionen siempre tienen que estar dentor del primer control -->
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.StateTriggers>
+                                            
+                                        </VisualState.StateTriggers>
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle2.Opacity" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle1.Opacity" Value="0"/>
+                                            <Setter Target="Triangle2.Opacity" Value="0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle1.Opacity" Value="0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle1.Opacity" Value="1"/>
+                                            <Setter Target="Triangle2.StrokeThickness" Value="0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle1.Opacity" Value="0"/>
+                                            <Setter Target="Triangle2.Opacity" Value="0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <!-- Se suele meter todo en un Grid -->
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Polygon x:Name="Triangle1"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"
+                                             Points="0,0 8,5, 0,10" Grid.Row="0"
+                                             Stroke="Black" StrokeThickness="0.3"
+                                             Fill="#c9b888" Margin="0,0,0,5"
+                                             RenderTransformOrigin="0.5,0.5" >
+                                    <Polygon.RenderTransform>
+                                        <CompositeTransform Rotation="90"/>
+                                    </Polygon.RenderTransform>
+                                </Polygon>
+                                <Polygon x:Name="Triangle2"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"
+                                             Points="0,0 8,5, 0,10" Grid.Row="0"
+                                             Stroke="Black" StrokeThickness="0.3"
+                                             Fill="#655c43" Margin="0,0,0,5"
+                                             RenderTransformOrigin="0.5,0.5" >
+                                    <Polygon.RenderTransform>
+                                        <CompositeTransform Rotation="90"/>
+                                    </Polygon.RenderTransform>
+                                </Polygon>
+                                <!-- El contenido del botón es un objeto complejo -->
+                                <ContentPresenter Width="30" Grid.Row="1"
+                                                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Viewbox>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

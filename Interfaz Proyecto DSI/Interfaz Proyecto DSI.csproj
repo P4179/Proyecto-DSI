@@ -122,6 +122,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Combate.xaml.cs">
+      <DependentUpon>Combate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Combate2.xaml.cs">
+      <DependentUpon>Combate2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -166,6 +172,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Abilities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Combate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Combate2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

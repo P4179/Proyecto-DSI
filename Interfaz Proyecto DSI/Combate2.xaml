@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="Interfaz_Proyecto_DSI.Combate2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Interfaz_Proyecto_DSI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Style="{StaticResource GridTemplate}">
+
+        <!-- Tablero y personajes -->
+        <Grid Margin="170, 0">
+            <Image Source="Assets/board.png"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Canvas>
+                <RadioButton Style="{StaticResource RadioCharacter}" 
+                             Width="95" IsEnabled="True"
+                    Canvas.Left="970" Canvas.Top="585" x:Name="Character1">
+                    <RadioButton.Content>
+                        <Image Source="Assets/character1.png"/>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Style="{StaticResource RadioCharacter}" 
+                             Width="90" IsEnabled="True"
+                    Canvas.Left="1225" Canvas.Top="470" x:Name="Character2">
+                    <RadioButton.Content>
+                        <Image Source="Assets/character2.png"/>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Style="{StaticResource RadioCharacter}" 
+                             Width="95" IsEnabled="True"
+                    Canvas.Left="200" Canvas.Top="450" x:Name="Character3">
+                    <RadioButton.Content>
+                        <Image Source="Assets/character3.png"/>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Style="{StaticResource RadioCharacter}" 
+                             Width="95" IsEnabled="True"
+                    Canvas.Left="508" Canvas.Top="305" x:Name="Character4">
+                    <RadioButton.Content>
+                        <Image Source="Assets/character4.png"/>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Style="{StaticResource RadioCharacter}" 
+                             Width="105" IsEnabled="True"
+                    Canvas.Left="790" Canvas.Top="350" x:Name="Character5">
+                    <RadioButton.Content>
+                        <Image Source="Assets/character5.png"/>
+                    </RadioButton.Content>
+                </RadioButton>
+            </Canvas>
+        </Grid>
+
+        <!-- Botón volver -->
+        <Button x:Name="BackButton" Style="{StaticResource ClickableButtonTemplate}" 
+                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
+                FontSize="40" Click="BackButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                <TextBlock Text="Volver"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

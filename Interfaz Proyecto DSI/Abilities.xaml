@@ -22,39 +22,31 @@
                 <Canvas>
                     <!-- Arriba izquierda -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="22" Canvas.Top="179"/>
                     <!-- Arriba centro -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="272" Canvas.Top="179"/>
                     <!-- Arriba derecha -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="522" Canvas.Top="179"/>
                     <!-- Medio izquierda -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="22" Canvas.Top="310"/>
                     <!-- Medio centro -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="True" GroupName="Radio"
+                             IsChecked="True"
                              Canvas.Left="272" Canvas.Top="310"/>
                     <!-- Medio derecha -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="522" Canvas.Top="310"/>
                     <!-- Abajo izquierda -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="22" Canvas.Top="440"/>
                     <!-- Abajo medio -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="272" Canvas.Top="440"/>
                     <!-- Abajo derecha -->
                     <RadioButton Style="{StaticResource RadioAbility}"
-                             Width="80" IsChecked="False" GroupName="Radio"
                              Canvas.Left="522" Canvas.Top="440"/>
                 </Canvas>
             </Grid>
@@ -91,17 +83,18 @@
                 </TextBlock>
             </Border>
             <Border
-                Background="#ffffff" 
+                Background="#ffffff"
                 BorderThickness="1,0,1,1" BorderBrush="Black">
                 <StackPanel>
                     <Border VerticalAlignment="Center" HorizontalAlignment="Center"
-                            Width="400" Margin="0, 20"
+                            Margin="150, 20"
                             BorderThickness="1" BorderBrush="Black">
                         <Image Source="/Assets/imgPlaceholder.jpg" />
                     </Border>
                     <TextBox TextWrapping="Wrap" TextAlignment="Justify"
                              FontSize="30" BorderThickness="0" 
-                             Width="400"
+                             Margin="150, 0" 
+                             IsHitTestVisible="False" IsReadOnly="True"
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                         />
                     <Button Style="{StaticResource ClickableButtonTemplate}"
@@ -137,7 +130,8 @@
             </StackPanel>
         </Border>
         
-         <Button Style="{StaticResource ClickableButtonTemplate}"
+        <!-- Botón volver -->
+        <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
                 FontSize="40">
             <StackPanel Orientation="Horizontal">
