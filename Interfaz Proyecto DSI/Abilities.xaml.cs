@@ -26,5 +26,10 @@ namespace Interfaz_Proyecto_DSI
         {
             this.InitializeComponent();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Mapa));
+        }
     }
 }

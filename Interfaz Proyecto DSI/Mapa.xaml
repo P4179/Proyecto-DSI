@@ -17,15 +17,15 @@
                        Width="1950"
                        Opacity="0.85"/>
                 <Canvas>
-                    <RadioButton Style="{StaticResource RadioLevel}"
-                                 DataContext="Tienda" Width="400"
+                    <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
+                                 DataContext="Tienda" Width="400" 
                                  Canvas.Left="650" Canvas.Top="500">
                         <RadioButton.Content>
                             <FontIcon Glyph="&#xE719;" FontSize="30" Foreground="Black"/>
                         </RadioButton.Content>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource RadioLevel}"
+                    <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                  DataContext="Jefe 1" Width="400"
                                  Canvas.Left="550" Canvas.Top="130">
                         <RadioButton.Content>
@@ -33,7 +33,7 @@
                         </RadioButton.Content>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource RadioLevel}"
+                    <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                  DataContext="Nivel 1" Width="300"
                                  Canvas.Left="650" Canvas.Top="780">
                     </RadioButton>
@@ -42,7 +42,8 @@
         </ScrollViewer>
 
         <!-- Panfleto con la información del nivel -->
-        <StackPanel Grid.Column="1" Width="650" Margin="0, 0, 140, 0"
+        <StackPanel x:Name="Info" Visibility="Collapsed"
+                    Grid.Column="1" Width="650" Margin="0, 0, 140, 0"
                     VerticalAlignment="Center" HorizontalAlignment="Right">
             <Border Background="#cfba8e" Height="90"
                 BorderBrush="Black" BorderThickness="1">
@@ -66,7 +67,7 @@
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                          />
                     <Button Style="{StaticResource ClickableButtonTemplate}"
-                            Height="88" Width="270" Margin="40" 
+                            Height="88" Width="270" Margin="40" Click="StartGameButton_Click"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             FontSize="38">
                         <TextBlock Text="Comenzar"/>
@@ -75,10 +76,10 @@
             </Border>
         </StackPanel>
 
-        <!--Botón de equpo -->
+        <!--Botón de equipo -->
         <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="140" Width="140" VerticalAlignment="Top" 
-                Margin="40" >
+                Margin="40" Click="TeamButton_Click">
             <FontIcon Glyph="&#xE716;" FontSize="90"/>
         </Button>
 

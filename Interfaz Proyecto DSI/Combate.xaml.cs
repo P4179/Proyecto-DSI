@@ -62,7 +62,7 @@ namespace Interfaz_Proyecto_DSI
 
         private void EndButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+            Frame.Navigate(typeof(Mapa));
         }
     }
 }

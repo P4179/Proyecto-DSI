@@ -133,7 +133,7 @@
         <!-- Botón volver -->
         <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40">
+                FontSize="40" Click="BackButton_Click">
             <StackPanel Orientation="Horizontal">
                 <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
                 <TextBlock Text="Volver"/>

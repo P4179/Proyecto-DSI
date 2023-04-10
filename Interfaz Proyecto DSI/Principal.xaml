@@ -51,7 +51,7 @@
             </Grid.RowDefinitions>
 
             <Button Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="600"
+                Height="88" Width="600" Click="NewGameButton_Click"
                 HorizontalAlignment="Center" VerticalAlignment="Top"
                 FontSize="50" Grid.Row="0">
                 <Grid Width="500">
@@ -99,7 +99,7 @@
             </Button>
 
             <Button Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="600"
+                Height="88" Width="600" Click="ExitButton_Click"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 FontSize="50" Grid.Row="2">
                 <Grid Width="500">
@@ -117,7 +117,8 @@
         </Grid>
         
         <!-- Menú de confirmación -->
-        <Grid Style="{StaticResource ConfirmationMenuGrid}" Visibility="Visible">
+        <Grid x:Name="ConfirmationMenu" Style="{StaticResource ConfirmationMenuGrid}" 
+              Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="*" />
@@ -132,13 +133,13 @@
                        Grid.ColumnSpan="2"
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Button Style="{StaticResource ClickableButtonTemplate}"
-                    Grid.Column="0" Grid.Row="1"
+                    Grid.Column="0" Grid.Row="1" Click="ButtonYes_Click"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     FontSize="50" BorderThickness="0,1,1,0">
                 <TextBlock Text="SI" Foreground="Green"/>
             </Button>
             <Button Style="{StaticResource ClickableButtonTemplate}"
-                    Grid.Column="1" Grid.Row="1" 
+                    Grid.Column="1" Grid.Row="1" Click="ButtonNo_Click"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     FontSize="50" BorderThickness="0,1,0,0">
                 <TextBlock Text="NO" Foreground="DarkRed"/>

@@ -533,7 +533,8 @@
         <!-- Niveles del mapa -->
         <Style x:Key="RadioLevel" TargetType="RadioButton">
             <Setter Property="GroupName" Value="Level"/>
-            <Setter Property="AccessKey" Value="Nivel 1"/>
+            <Setter Property="IsChecked" Value="False"/>
+            <Setter Property="DataContext" Value="Nivel 1"/>
             <Setter Property="Width" Value="150"/>
             <Setter Property="Template">
                 <Setter.Value>

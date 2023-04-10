@@ -26,5 +26,25 @@ namespace Interfaz_Proyecto_DSI
         {
             this.InitializeComponent();
         }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmationMenu.Visibility = Visibility.Visible;
+        }
+
+        private void ButtonNo_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmationMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void NewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Mapa));
+        }
+
+        private void ButtonYes_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
     }
 }

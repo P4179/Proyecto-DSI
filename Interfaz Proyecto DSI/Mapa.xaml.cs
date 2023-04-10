@@ -26,5 +26,20 @@ namespace Interfaz_Proyecto_DSI
         {
             this.InitializeComponent();
         }
+
+        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Combate));
+        }
+
+        private void TeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Abilities));
+        }
+
+        private void Level_Checked(object sender, RoutedEventArgs e)
+        {
+            Info.Visibility = Visibility.Visible;
+        }
     }
 }
