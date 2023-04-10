@@ -131,6 +131,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mapa.xaml.cs">
+      <DependentUpon>Mapa.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pociones.xaml.cs">
       <DependentUpon>Pociones.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,7 @@
     <Content Include="Assets\character4.png" />
     <Content Include="Assets\character5.png" />
     <Content Include="Assets\imgPlaceholder.jpg" />
+    <Content Include="Assets\map.png" />
     <Content Include="Assets\selection.png" />
     <Content Include="Assets\tree.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -186,6 +190,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pociones.xaml">
       <SubType>Designer</SubType>

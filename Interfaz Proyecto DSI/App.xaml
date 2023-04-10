@@ -443,9 +443,6 @@
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CheckStates">
                                     <VisualState x:Name="Checked">
-                                        <VisualState.StateTriggers>
-                                            
-                                        </VisualState.StateTriggers>
                                         <VisualState.Setters>
                                             <Setter Target="Triangle2.Opacity" Value="1"/>
                                         </VisualState.Setters>
@@ -510,15 +507,99 @@
                                 </Polygon>
                                 <!-- El contenido del botón es un objeto complejo -->
                                 <ContentPresenter Width="30" Grid.Row="1"
-                                                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                         </Viewbox>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!-- Estilo flechas -->
+        <Style x:Key="MapArrow" TargetType="Polygon">
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="0.3"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0, 0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#e8a541" Offset="0.0"/>
+                        <GradientStop Color="#fff87a" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Niveles del mapa -->
+        <Style x:Key="RadioLevel" TargetType="RadioButton">
+            <Setter Property="GroupName" Value="Level"/>
+            <Setter Property="AccessKey" Value="Nivel 1"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Viewbox Width="{TemplateBinding Width}"
+                                 Height="{TemplateBinding Height}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.Setters>
+                                            <Setter Target="Selector.Opacity" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <VisualState.Setters>
+                                            <Setter Target="Selector.Opacity" Value="0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
 
-
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="PointOver"/>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Opacity" Value="0.7"/>
+                                            <Setter Target="Selector.Opacity" Value="0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                            <Grid x:Name="RootGrid" Height="170">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- Círculo con o sin el icono del nivel -->
+                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
+                                    <Ellipse Width="50" Height="50" 
+                                             Fill="#cbc2a8" Stroke="Black"
+                                             StrokeThickness="2"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                                <!-- Seleccionador de mapa -->
+                                <Grid x:Name="Selector" VerticalAlignment="Top" HorizontalAlignment="Center"
+                                              Grid.Column="0">
+                                    <FontIcon Glyph="&#xE726;" FontSize="80" Foreground="White"/>
+                                    <FontIcon Glyph="&#xE726;" FontSize="75" Foreground="#444444"
+                                                      Margin="3, 0, 0, 3"/>
+                                </Grid>
+                                <!-- Texto a la derecha del círculo -->
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        BorderBrush="Black" Background="#cbc2a8" Grid.Column="2"
+                                        BorderThickness="1" CornerRadius="10" Padding="15, 12">
+                                    <!-- DUDA: ¿Por qué no me deja vincularla con Content?-->
+                                    <ContentPresenter Content="{TemplateBinding DataContext}" FontSize="23" FontWeight="Bold"
+                                                      FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+                                </Border>
+                            </Grid>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
 
     </Application.Resources>

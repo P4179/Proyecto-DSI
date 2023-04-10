@@ -50,17 +50,17 @@
 
         <!-- Panfleto con la información del objetivo del día -->
         <StackPanel x:Name="Objective" Margin="40" 
-                    Width="500"
+                    Width="450"
             VerticalAlignment="Top" HorizontalAlignment="Left">
             <Border
-                Background="#cfba8e" Height="75"
+                Background="#cfba8e"
                 BorderBrush="Black" BorderThickness="1">
                 <TextBlock Text="Objetivo" FontSize="45"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC">
                 </TextBlock>
             </Border>
-            <Border Background="#ffffff" Padding="15"
+            <Border Background="#ffffff" Padding="20"
                 BorderThickness="1" BorderBrush="Black">
                 <TextBox TextWrapping="Wrap" TextAlignment="Justify" Height="Auto"
                          FontSize="30" BorderThickness="0" 
