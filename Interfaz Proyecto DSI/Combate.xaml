@@ -8,6 +8,61 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!--Estilo de las pociones-->
+    <Page.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Grid x:Name="RootGrid" DataContext="{TemplateBinding DataContext}">
+                            <ContentPresenter />
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </Page.Resources>
+
+
     <Grid Style="{StaticResource GridTemplate}">
         
         <!-- Tablero y personajes -->
@@ -64,6 +119,7 @@
                 BorderThickness="1" BorderBrush="Black">
                 <TextBox TextWrapping="Wrap" TextAlignment="Justify" Height="Auto"
                          FontSize="30" BorderThickness="0" 
+                         FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                          IsHitTestVisible="False" IsReadOnly="True"
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                          />
@@ -110,7 +166,7 @@
             <!--Botón de poción-->
             <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0,0,0,40" 
-                FontSize="40" Foreground="#444444">
+                FontSize="40" Foreground="#444444" Click="openPotionsMenu">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xEC0A;" FontSize="40" Margin="0,5,20,0"/>
                     <TextBlock Text="Poción" Foreground="#444444"/>
@@ -128,5 +184,49 @@
                 <TextBlock Text="Volver"/>
             </StackPanel>
         </Button>
+
+
+        <!--Menú de pociones-->
+        <Grid x:Name="UsePotionMenu" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="91*"/>
+                <ColumnDefinition Width="37*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
+            <Rectangle Grid.Column="0" Fill="#cbc2a8" Margin="80,80,80,200" Stroke="black"/>
+
+
+            <!--Botón de volver-->
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
+                FontSize="40" Click="closePotionsMenu">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                    <TextBlock Text="Volver"/>
+                </StackPanel>
+            </Button>
+
+            <ListView x:Name="PotionsList" Margin="80,80,80,200"/>
+
+
+            <!--Información del objeto-->
+            <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
+                <TextBlock Text="Poción X" Style="{StaticResource TextBlockTemplate}" 
+                           FontSize="50" HorizontalAlignment="Center"
+                           Foreground="White"
+                           Margin="0,0,0,10"/>
+                <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
+                <TextBox TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
+                         Margin="0,40,0,0" Height ="auto" FontSize="30"
+                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
+                        />
+
+            </StackPanel>
+        </Grid>
+
+
     </Grid>
+    
+    
 </Page>

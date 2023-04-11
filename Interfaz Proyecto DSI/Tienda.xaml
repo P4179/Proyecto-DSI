@@ -9,9 +9,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
 
-
+    
+    <!--Estilo de los objetos de la tienda-->
     <Page.Resources>
-        <!--Estilo de los objetos-->
         <Style TargetType="ListViewItem">
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -28,67 +28,34 @@
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderThickness">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0.5"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Black"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e9e2ce"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderThickness">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0.5"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Black"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
                                     </VisualState>
 
                                     <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e9e2ce"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderThickness">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0.5"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Black"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
                                     </VisualState>
 
 
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-
-
-
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -184,60 +151,55 @@
 
         
         <!--Información del objeto-->
-        <StackPanel Grid.Column="1" Margin="-40,150,40,200" VerticalAlignment="Stretch">
+        <StackPanel Grid.Column="1" Margin="-40,150,40,20" VerticalAlignment="Stretch">
             <TextBlock Text="Nombre del objeto" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
             <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
 
-            <Grid x:Name="WeaponStats" Margin="0,40,0,-450">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Rectangle Grid.RowSpan="4" Fill="#cbc2a8" Stroke="black" />
-
-                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
-                    <FontIcon Glyph="&#xE720;" FontSize="40" Foreground="#444444"/>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Tipo de arma" Style="{StaticResource TextBlockTemplate}" 
+            <Border Background="#cbc2a8" BorderBrush="Black" VerticalAlignment="Bottom" Margin="20,50,20,0" BorderThickness="0.5">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                        <FontIcon Glyph="&#xE720;" FontSize="40" Foreground="#444444"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Tipo de arma" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                        <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
+                            <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="25" Padding="20,0,0,0"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
 
-                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
-                    <FontIcon Glyph="&#xE722;" FontSize="40" Foreground="#af3a11"/>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Daño" Style="{StaticResource TextBlockTemplate}" 
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
+                        <FontIcon Glyph="&#xE722;" FontSize="40" Foreground="#af3a11"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                        <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
+                            <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="25" Padding="20,0,0,0"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
 
-                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
-                    <FontIcon Glyph="&#xE719;" FontSize="40" Foreground="#7e2199"/>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Efecto especial" Style="{StaticResource TextBlockTemplate}" 
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
+                        <FontIcon Glyph="&#xE719;" FontSize="40" Foreground="#7e2199"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Efecto especial" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                        <TextBlock Text="Efecto" Style="{StaticResource TextBlockTemplate}" 
+                            <TextBlock Text="Efecto" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="25" Padding="20,0,0,0"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
 
-                <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
-                    <FontIcon Glyph="&#xE70B;" FontSize="40" Foreground="#5180e1"/>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Alcance" Style="{StaticResource TextBlockTemplate}" 
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
+                        <FontIcon Glyph="&#xE70B;" FontSize="40" Foreground="#5180e1"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Alcance" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                        <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
+                            <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="25" Padding="20,0,0,0"/>
+                        </StackPanel>
                     </StackPanel>
+
                 </StackPanel>
-            </Grid>
+            </Border>
+
 
             <!--<TextBox x:Name="ItemDescription" TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
                          Margin="0,40,0,0" Height ="auto" FontSize="30"

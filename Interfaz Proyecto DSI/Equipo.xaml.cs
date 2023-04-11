@@ -27,6 +27,8 @@ namespace Interfaz_Proyecto_DSI
         public Equipo()
         {
             this.InitializeComponent();
+            for (int i = 0; i < 10; i++) MyListView1.Items.Add("Arma " + i.ToString());
+
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -37,6 +39,15 @@ namespace Interfaz_Proyecto_DSI
         private void ButtonTree_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Abilities));
+        }
+
+        private void openWeaponList(object sender, RoutedEventArgs e)
+        {
+            weaponList.Visibility = Visibility.Visible;
+        }
+        private void closeWeaponList(object sender, RoutedEventArgs e)
+        {
+            weaponList.Visibility = Visibility.Collapsed;
         }
     }
 }

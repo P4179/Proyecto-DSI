@@ -24,36 +24,41 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
-            
+
             <!--Estados del botón al pasarle el ratón encima-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                        <Grid x:Name="RootGrid">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
-                                    
+
                                     <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                                                        <GradientStop Color="#e9e2ce" Offset="0.0"/>
+                                                        <GradientStop Color="#c9b888" Offset="1.0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </VisualState.Setters>
                                     </VisualState>
-                                    
-                                    
-                                    <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
-                                                            <GradientStop Color="#9f8847" Offset="0.0"/>
-                                                            <GradientStop Color="#d4be7c" Offset="1.0"/>
-                                                        </LinearGradientBrush>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                            
-                                        </Storyboard>
+
+                                        <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                                                        <GradientStop Color="#9f8847" Offset="0.0"/>
+                                                        <GradientStop Color="#d4be7c" Offset="1.0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </VisualState.Setters>
                                     </VisualState>
                                     
                                     
@@ -76,29 +81,29 @@
                                     
                                     
                                     <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
-                                                            <GradientStop Color="#9f8847" Offset="0.0"/>
-                                                            <GradientStop Color="#d4be7c" Offset="1.0"/>
-                                                        </LinearGradientBrush>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                                                        <GradientStop Color="#e9e2ce" Offset="0.0"/>
+                                                        <GradientStop Color="#c9b888" Offset="1.0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Target="RootGrid.Opacity" Value="0.37"/>
 
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0.37" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        </VisualState.Setters>
                                     </VisualState>
-                                    
-                                    
+
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             
-                            <ContentPresenter x:Name="ContentPresenter" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw"/>
+                            <ContentPresenter BorderBrush="{TemplateBinding BorderBrush}" 
+                                              BorderThickness="{TemplateBinding BorderThickness}" 
+                                              Padding="{TemplateBinding Padding}" 
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              AutomationProperties.AccessibilityView="Raw"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -140,66 +145,35 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
                         <Grid x:Name="RootGrid" DataContext="{TemplateBinding DataContext}">
-
                             <ContentPresenter />
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Margin">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0, 20, 0, 0"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Margin" Value="0,20,0,0"/>
+                                            <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
+                                        </VisualState.Setters>
                                     </VisualState>
 
 
                                     <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e9e2ce"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderThickness">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="3"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#827e74"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="CornerRadius">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="3"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Margin">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0, 20, 0, 0"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="3"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="#827e74"/>
+                                            <Setter Target="RootGrid.CornerRadius" Value="3"/>
+                                            <Setter Target="RootGrid.Margin" Value="0,20,0,0"/>
+                                            <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
+                                        </VisualState.Setters>
                                     </VisualState>
                                     
                                     <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e9e2ce"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Margin">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="0, 20, 0, 0"/>
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Padding">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.Margin" Value="0,20,0,0"/>
+                                            <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
+                                        </VisualState.Setters>
                                     </VisualState>
                                     
 
@@ -229,87 +203,63 @@
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="Foreground" Value="Black"/>
 
-            
+
             <!--Estados de las pestañas al pasarle el ratón encima-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="PivotHeaderItem">
-                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
-                            <Border x:Name="Border"
-                                    BorderBrush="Black"
+                        <Grid x:Name="RootGrid">
+                            <Border BorderBrush="Black"
                                     BorderThickness="1"
                                     CornerRadius="5,5,0,0">
-                                <ContentPresenter x:Name="ContentPresenter"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Content="{TemplateBinding Content}"
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                  FontFamily="{TemplateBinding FontFamily}"
-                                                  FontSize="{TemplateBinding FontSize}"
-                                                  FontWeight="{TemplateBinding FontWeight}">
-                                    <ContentPresenter.RenderTransform>
-                                        <TranslateTransform x:Name="ContentPresenterTranslateTransform" />
-                                    </ContentPresenter.RenderTransform>
-                                </ContentPresenter>
+                                <ContentPresenter />
                             </Border>
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="SelectionStates">
 
-                                    <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    
-                                    
+                                    <VisualState x:Name="Normal"/>
+
                                     <VisualState x:Name="Unselected">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
-                                                            <GradientStop Color="#e9e2ce" Offset="0.0"/>
-                                                            <GradientStop Color="#c9b888" Offset="1.0"/>
-                                                        </LinearGradientBrush>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                                                        <GradientStop Color="#e9e2ce" Offset="0.0"/>
+                                                        <GradientStop Color="#c9b888" Offset="1.0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </VisualState.Setters>
                                     </VisualState>
 
-                                    
+
                                     <VisualState x:Name="UnselectedPointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
-                                                            <GradientStop Color="#9f8847" Offset="0.0"/>
-                                                            <GradientStop Color="#d4be7c" Offset="1.0"/>
-                                                        </LinearGradientBrush>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    
-                                    <VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#cbc2a8"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5,1">
+                                                        <GradientStop Color="#9f8847" Offset="0.0"/>
+                                                        <GradientStop Color="#d4be7c" Offset="1.0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </VisualState.Setters>
                                     </VisualState>
 
-                                    
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#cbc2a8"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
 
-                            
-                            
-                            
+
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -362,6 +312,8 @@
             </Setter>
 
         </Style>
+        
+        
         
         <!-- Template de la selección de habilidades -->
         <Style x:Key="RadioAbility" TargetType="RadioButton">
@@ -425,6 +377,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        
         
         <!-- Template selección personaje -->
         <Style x:Key="RadioCharacter" TargetType="RadioButton">
@@ -516,6 +470,8 @@
             </Setter>
         </Style>
         
+        
+        
         <!-- Estilo flechas -->
         <Style x:Key="MapArrow" TargetType="Polygon">
             <Setter Property="Stroke" Value="Black"/>
@@ -530,6 +486,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        
+        
         
         <!-- Niveles del mapa -->
         <Style x:Key="RadioLevel" TargetType="RadioButton">
@@ -604,6 +563,8 @@
             </Setter>
         </Style>
         
+        
+        
         <!-- Estilo de los ítems de la plantilla de personajes -->
         <Style x:Name="CharacterGridViewItem" TargetType="GridViewItem">
             <Setter Property="Margin" Value="0"/>
@@ -617,7 +578,11 @@
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="PointerOver"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#cfba8e"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
                                     <VisualState x:Name="Disabled"/>
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
@@ -637,6 +602,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        
         
         <!-- Estilo de la propia plantilla de personajes -->
         <Style x:Name="CharacterTemplateStyle" TargetType="GridView">

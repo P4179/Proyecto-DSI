@@ -10,73 +10,172 @@
     <!--Loaded="Page_Loaded"-->
 
     <Grid Style="{StaticResource GridTemplate}">
-        
-        <!--Botones para ir a las distintas pantallas-->
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Imagen izquierda -->
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                MaxHeight="200" Grid.RowSpan="2"
+                BorderThickness="2" BorderBrush="Black">
+            <Image Source="/Assets/imgPlaceholder.jpg" />
+        </Border>
+
+        <!-- Image derecha -->
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                MaxHeight="200" Grid.RowSpan="2" Grid.Column="2"
+                BorderThickness="2" BorderBrush="Black">
+            <Image Source="/Assets/imgPlaceholder.jpg" />
+        </Border>
+
+        <!-- Título -->
+        <Border BorderBrush="Black" BorderThickness="1"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Grid.ColumnSpan="3" Padding="70, 45" Margin="70"
+                CornerRadius="50">
+            <TextBlock Text="Logo del juego"
+                   FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                   FontSize="90" FontWeight="Bold"/>
+        </Border>
+
+        <!-- Botones -->
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--Partida nueva-->
             <Button Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40" Click="goToPotions">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
-                    <TextBlock Text="HeeHee"/>
-                </StackPanel>
+                Height="88" Width="600" Click="NewGameButton_Click"
+                HorizontalAlignment="Center" VerticalAlignment="Top"
+                FontSize="50" Grid.Row="0">
+                <Grid Width="500">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE792;" FontSize="43" Grid.Column="0" 
+                              HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="Partida Nueva" Grid.Column="1" VerticalAlignment="Center"/>
+                </Grid>
             </Button>
 
+            <!--Cargar-->
             <Button Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40" Click="goToShop">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
-                    <TextBlock Text="HoeHoe"/>
-                </StackPanel>
-            </Button>
-
-        </StackPanel>
-
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="300" Margin="20"
+                Height="88" Width="600"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                FontSize="40" Click="openOptions">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xF8B0;" FontSize="40" Margin="10,0,10,0"/>
-                    <TextBlock Text="Opciones"/>
-                </StackPanel>
-
+                FontSize="50" Grid.Row="0" IsEnabled="False">
+                <Grid Width="500">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE74E;" FontSize="43" Grid.Column="0" 
+                              HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="Cargar Partida" Grid.Column="1" VerticalAlignment="Center"/>
+                </Grid>
             </Button>
 
-            <Button Style="{StaticResource ClickableButtonTemplate}" 
-                Height="88" Width="300" Margin="20"
+            <!--Opciones-->
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="600"
+                HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                FontSize="50" Grid.Row="0" Click="openOptions">
+                <Grid Width="500">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE700;" FontSize="43" Grid.Column="0" 
+                              HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="Opciones" Grid.Column="1" VerticalAlignment="Center"/>
+                </Grid>
+            </Button>
+
+            <!--Salir-->
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="600" Click="ExitButton_Click"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                FontSize="40" Click="togglePause">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xF8AE;" FontSize="40" Margin="10,0,10,0"/>
-                    <TextBlock Text="Pausa"/>
-                </StackPanel>
-
+                FontSize="50" Grid.Row="2">
+                <Grid Width="500">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Glyph="&#xE72B;" FontSize="43" Grid.Column="0"
+                              HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="Salir" Grid.Column="1" VerticalAlignment="Center"/>
+                </Grid>
             </Button>
 
-        </StackPanel>
+        </Grid>
 
-                
+        <!-- Menú de confirmación -->
+        <Grid x:Name="ConfirmationMenu" Style="{StaticResource ConfirmationMenuGrid}" 
+              Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="¿Seguro que quieres salir del juego?" FontSize="40"
+                       TextWrapping="WrapWholeWords" TextAlignment="Center"
+                       FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                    Grid.Column="0" Grid.Row="1" Click="ButtonYes_Click"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="50" BorderThickness="0,1,1,0">
+                <TextBlock Text="SI" Foreground="Green"/>
+            </Button>
+            <Button Style="{StaticResource ClickableButtonTemplate}"
+                    Grid.Column="1" Grid.Row="1" Click="ButtonNo_Click"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    FontSize="50" BorderThickness="0,1,0,0">
+                <TextBlock Text="NO" Foreground="DarkRed"/>
+            </Button>
+        </Grid>
+
+
+
         <!--Menú de pausa-->
-        <Grid x:Name="PauseMenu" Visibility="Collapsed">
+        <Grid x:Name="PauseMenu" Grid.ColumnSpan="3" Grid.RowSpan="2" Visibility="Collapsed">
             <Rectangle Fill="Black" Opacity="0.63"/>
+            
+            <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                    MaxHeight="350" Opacity="0.37"
+                    BorderThickness="2" BorderBrush="Black">
+                <Image Source="/Assets/imgPlaceholder.jpg"/>
+            </Border>
 
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100">
                 <TextBlock Text="Juego Pausado" HorizontalAlignment="Center" 
                                FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                                FontSize="100"/>
-
-                <Button Style="{StaticResource ClickableButtonTemplate}"  Click="togglePause"
+                <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="130" Width="700" FontSize="70" Margin="40">
                     <StackPanel Orientation="Horizontal" >
                         <FontIcon Glyph="&#xF5B0;" FontSize="70" Margin="-110,0,110,0"/>
                         <TextBlock Text="Reanudar"/>
                     </StackPanel>
                 </Button>
-                
-                <Button Style="{StaticResource ClickableButtonTemplate}" Click="openOptions"
+
+                <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="130" Width="700" FontSize="70" Margin="40">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xF8B0;" FontSize="70" Margin="-110,0,110,0"/>
@@ -96,9 +195,8 @@
         </Grid>
 
         
-        
         <!--Menú de opciones-->
-        <Grid x:Name="OptionsMenu" Style="{StaticResource GridTemplate}" Visibility="Collapsed">
+        <Grid x:Name="OptionsMenu" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
                 <ColumnDefinition Width="37*"/>
@@ -107,7 +205,7 @@
             <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
             <Rectangle Grid.Column="0" Fill="#cbc2a8" Margin="80,80,80,200" Stroke="black"/>
 
-            
+
             <!--Botón de volver-->
             <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
@@ -127,7 +225,7 @@
                         <TextBlock Text="Guardar"/>
                     </StackPanel>
                 </Button>
-                
+
                 <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="Auto" VerticalAlignment="Bottom" Margin="20,0,40,40" Padding="20,0,20,0" 
                 FontSize="35" IsEnabled="False">
@@ -138,7 +236,7 @@
                 </Button>
             </StackPanel>
 
-            
+
             <!--Pestañas-->
             <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200">
                 <PivotItem>
@@ -192,7 +290,7 @@
                 </PivotItem>
             </Pivot>
 
-            
+
             <!--Información de la opción-->
             <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
                 <TextBlock Text="Configuración 1" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
@@ -205,14 +303,7 @@
             </StackPanel>
         </Grid>
 
-
-
-
-        
-        
-        
-
+        <Button Width="500" Height="200" Click="Equipo"/>
     </Grid>
-
 
 </Page>

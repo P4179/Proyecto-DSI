@@ -95,7 +95,8 @@
                              FontSize="30" BorderThickness="0" 
                              Margin="150, 0" 
                              IsHitTestVisible="False" IsReadOnly="True"
-                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
+                             FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                             Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                         />
                     <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="88" Width="300" Margin="40" 

@@ -26,6 +26,8 @@ namespace Interfaz_Proyecto_DSI
         public Combate()
         {
             this.InitializeComponent();
+            for (int i = 0; i < 10; i++) PotionsList.Items.Add("Poción " + i.ToString());
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -63,6 +65,17 @@ namespace Interfaz_Proyecto_DSI
         private void EndButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Mapa));
+        }
+
+        private void openPotionsMenu(object sender, RoutedEventArgs e)
+        {
+            UsePotionMenu.Visibility = Visibility.Visible;
+        }
+
+        private void closePotionsMenu(object sender, RoutedEventArgs e)
+        {
+            UsePotionMenu.Visibility = Visibility.Collapsed;
+
         }
     }
 }
