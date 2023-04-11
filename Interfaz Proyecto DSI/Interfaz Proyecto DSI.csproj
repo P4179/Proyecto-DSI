@@ -128,6 +128,9 @@
     <Compile Include="Combate2.xaml.cs">
       <DependentUpon>Combate2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Equipo.xaml.cs">
+      <DependentUpon>Equipo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Combate2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Equipo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

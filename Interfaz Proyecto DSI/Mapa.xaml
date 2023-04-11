@@ -18,7 +18,7 @@
                        Opacity="0.85"/>
                 <Canvas>
                     <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
-                                 DataContext="Tienda" Width="400" 
+                                 DataContext="Tienda" Width="400"
                                  Canvas.Left="650" Canvas.Top="500">
                         <RadioButton.Content>
                             <FontIcon Glyph="&#xE719;" FontSize="30" Foreground="Black"/>
@@ -28,9 +28,8 @@
                     <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                  DataContext="Jefe 1" Width="400"
                                  Canvas.Left="550" Canvas.Top="130">
-                        <RadioButton.Content>
-                            <FontIcon Glyph="&#xE99A;" FontSize="30" Foreground="Black"/>
-                        </RadioButton.Content>
+                        <!-- Contenido del botón -->
+                        <FontIcon Glyph="&#xE99A;" FontSize="30" Foreground="Black"/>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"

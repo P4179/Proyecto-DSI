@@ -85,8 +85,8 @@
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0, 0, 30, 40" 
                 FontSize="40" Click="Button_Click">
                 <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xE722;" FontSize="40" Margin="0,5,20,0" Foreground="DarkRed"/>
-                    <TextBlock Text="Atacar" Foreground="DarkRed"/>
+                    <FontIcon Glyph="&#xE722;" FontSize="40" Margin="0,5,20,0" Foreground="#af3a11"/>
+                    <TextBlock Text="Atacar" Foreground="#af3a11"/>
                 </StackPanel>
             </Button>
             <!--Botón de habilidad-->
@@ -94,8 +94,8 @@
                 Height="88" Width="270" VerticalAlignment="Bottom" Margin="0,0,80,40" 
                 FontSize="40" Click="Button_Click">
                 <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xE719;" FontSize="40" Margin="0,5,20,0" Foreground="DarkMagenta"/>
-                    <TextBlock Text="Habilidad" Foreground="DarkMagenta"/>
+                    <FontIcon Glyph="&#xE735;" FontSize="40" Margin="0,5,20,0" Foreground="#7e2199"/>
+                    <TextBlock Text="Habilidad" Foreground="#7e2199"/>
                 </StackPanel>
             </Button>
             <!--Botón de mover-->
@@ -103,17 +103,17 @@
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0,0,80,40" 
                 FontSize="40" Click="Button_Click">
                 <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xE740;" FontSize="40" Margin="0,5,20,0" Foreground="DarkGreen"/>
-                    <TextBlock Text="Mover" Foreground="DarkGreen"/>
+                    <FontIcon Glyph="&#xE740;" FontSize="40" Margin="0,5,20,0" Foreground="#5180e1"/>
+                    <TextBlock Text="Mover" Foreground="#5180e1"/>
                 </StackPanel>
             </Button>
             <!--Botón de poción-->
             <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0,0,0,40" 
-                FontSize="40">
+                FontSize="40" Foreground="#444444">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xEC0A;" FontSize="40" Margin="0,5,20,0"/>
-                    <TextBlock Text="Poción"/>
+                    <TextBlock Text="Poción" Foreground="#444444"/>
                 </StackPanel>
             </Button>
 

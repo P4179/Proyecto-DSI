@@ -433,6 +433,8 @@
             <Setter Property="IsChecked" Value="False"/>
             <Setter Property="IsEnabled" Value="False"/>
             <Setter Property="GroupName" Value="Character"/>
+            <Setter Property="MinHeight" Value="1"/>
+            <Setter Property="MinHeight" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -561,41 +563,42 @@
                                     <VisualState x:Name="PointOver"/>
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.Opacity" Value="0.7"/>
-                                            <Setter Target="Selector.Opacity" Value="0"/>
+                                            <Setter Target="RootStackPanel.Opacity" Value="0.7"/>
+                                            <Setter Target="RootStackPanel.Opacity" Value="0"/>
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
-                            <Grid x:Name="RootGrid" Height="170">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <!-- Círculo con o sin el icono del nivel -->
-                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
+                            <StackPanel x:Name="RootStackPanel" Orientation="Horizontal" Height="140"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Grid Margin="0,0,10,0">
+                                    <!-- Círculo con o sin el icono del nivel -->
                                     <Ellipse Width="50" Height="50" 
-                                             Fill="#cbc2a8" Stroke="Black"
-                                             StrokeThickness="2"/>
+                                             HorizontalAlignment="Center" VerticalAlignment="Center"
+                                             Fill="#cbc2a8" Stroke="Black" StrokeThickness="2"/>
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <!-- Seleccionador de mapa -->
+                                    <Grid x:Name="Selector" VerticalAlignment="Top" HorizontalAlignment="Center"
+                                          Margin="0,0,0,0">
+                                        <FontIcon Glyph="&#xEB49;" FontSize="60" Foreground="#444444"/>
+                                        <FontIcon Glyph="&#xEB49;" FontSize="25" Foreground="#444444"
+                                                  Margin="0,0,0,14.5"/>
+                                        <FontIcon Glyph="&#xEB49;" FontSize="50" Foreground="#a58563"
+                                                  Margin="0,0,0,4"/>
+                                    </Grid>
                                 </Grid>
-                                <!-- Seleccionador de mapa -->
-                                <Grid x:Name="Selector" VerticalAlignment="Top" HorizontalAlignment="Center"
-                                              Grid.Column="0">
-                                    <FontIcon Glyph="&#xE726;" FontSize="80" Foreground="White"/>
-                                    <FontIcon Glyph="&#xE726;" FontSize="75" Foreground="#444444"
-                                                      Margin="3, 0, 0, 3"/>
-                                </Grid>
-                                <!-- Texto a la derecha del círculo -->
+                                    <!-- Texto a la derecha del círculo -->
                                 <Border HorizontalAlignment="Left" VerticalAlignment="Center"
                                         BorderBrush="Black" Background="#cbc2a8" Grid.Column="2"
                                         BorderThickness="1" CornerRadius="10" Padding="15, 12">
-                                    <!-- DUDA: ¿Por qué no me deja vincularla con Content?-->
-                                    <ContentPresenter Content="{TemplateBinding DataContext}" FontSize="23" FontWeight="Bold"
+                                    <!-- DUDA: ¿Por qué no me deja vincularla con Content?
+                                    ¿Utilizar un ContentPresenter o un TextBlock?
+                                    Al dar valor a la Propiedad Content, se crea un TextBlock dentro del ContentPresenter -->
+                                    <ContentPresenter Content="{TemplateBinding DataContext}" 
+                                                      FontSize="23" FontWeight="Bold"
                                                       FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
                                 </Border>
-                            </Grid>
+                            </StackPanel>
                         </Viewbox>
                     </ControlTemplate>
                 </Setter.Value>

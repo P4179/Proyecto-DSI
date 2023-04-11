@@ -20,26 +20,21 @@ namespace Interfaz_Proyecto_DSI
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class Mapa : Page
+    public sealed partial class Equipo : Page
     {
-        public Mapa()
+        public Equipo()
         {
             this.InitializeComponent();
         }
 
-        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Combate));
+            Frame.Navigate(typeof(Mapa));
         }
 
-        private void TeamButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonTree_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Equipo));
-        }
-
-        private void Level_Checked(object sender, RoutedEventArgs e)
-        {
-            Info.Visibility = Visibility.Visible;
+            Frame.Navigate(typeof(Abilities));
         }
     }
 }
