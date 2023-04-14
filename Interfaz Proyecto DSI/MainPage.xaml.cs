@@ -24,27 +24,16 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private List<String> settingsList = new List<string>() { "Configuración 1", "Configuración 2", "Configuración 3", "Configuración 4" };
+        private List<String> comboBoxSettingsList = new List<string>() { "Alto", "Medio", "Bajo"};
+
+
         public MainPage() {
             this.InitializeComponent();
-            MyListView1.Items.Add("Configuración 1");
-            MyListView1.Items.Add("Configuración 2");
-            MyListView1.Items.Add("Configuración 3");
-            MyListView1.Items.Add("Configuración 4");
 
-            MyListView2.Items.Add("Configuración 1");
-            MyListView2.Items.Add("Configuración 2");
-            MyListView2.Items.Add("Configuración 3");
-            MyListView2.Items.Add("Configuración 4");
-
-            MyListView3.Items.Add("Configuración 1");
-            MyListView3.Items.Add("Configuración 2");
-            MyListView3.Items.Add("Configuración 3");
-            MyListView3.Items.Add("Configuración 4");
-
-            MyListView4.Items.Add("Configuración 1");
-            MyListView4.Items.Add("Configuración 2");
-            MyListView4.Items.Add("Configuración 3");
-            MyListView4.Items.Add("Configuración 4");
+            foreach(string setting in comboBoxSettingsList) {
+                
+            }
         }
 
 
@@ -109,7 +98,7 @@ namespace Interfaz_Proyecto_DSI
             IEnumerable<PivotHeaderItem> items = FindVisualChildren<PivotHeaderItem>(optionsTabs);
             int headitemcount = items.Count();
             for (int i = 0; i < headitemcount; i++)
-                items.ElementAt<PivotHeaderItem>(i).Width = totalwidth / headitemcount;
+                items.ElementAt<PivotHeaderItem>(i).Width = (totalwidth / headitemcount) - 0.1f ;
         }
     }
 }

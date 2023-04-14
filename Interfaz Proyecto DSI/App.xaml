@@ -151,7 +151,7 @@
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.Margin" Value="0,20,0,0"/>
+                                            <Setter Target="RootGrid.Margin" Value="0,30,0,0"/>
                                             <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
                                         </VisualState.Setters>
                                     </VisualState>
@@ -163,7 +163,7 @@
                                             <Setter Target="RootGrid.BorderThickness" Value="3"/>
                                             <Setter Target="RootGrid.BorderBrush" Value="#827e74"/>
                                             <Setter Target="RootGrid.CornerRadius" Value="3"/>
-                                            <Setter Target="RootGrid.Margin" Value="0,20,0,0"/>
+                                            <Setter Target="RootGrid.Margin" Value="0,30,0,0"/>
                                             <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
                                         </VisualState.Setters>
                                     </VisualState>
@@ -171,7 +171,7 @@
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
-                                            <Setter Target="RootGrid.Margin" Value="0,20,0,0"/>
+                                            <Setter Target="RootGrid.Margin" Value="0,30,0,0"/>
                                             <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
                                         </VisualState.Setters>
                                     </VisualState>
@@ -189,8 +189,38 @@
             
         </Style>
 
+
+        <Style x:Name="ComboBoxTemplate" TargetType="ComboBox">
+            <Setter Property="Width" Value="500"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,-20,0,-20"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="PlaceholderForeground" Value="Black"/>
+            <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+
         
         
+        <Style x:Name="CheckBoxTemplate" TargetType="CheckBox">
+
+
+
+        </Style>
+
+
         <!--Estados del las pestañas-->
         <Style TargetType="Pivot" x:Key="TabsTemplate">
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
@@ -275,25 +305,6 @@
         </Style>
 
 
-
-        <!--Estilo de los bloques de texto placeholder-->
-        <Style TargetType="ComboBox" x:Key="ComboBoxTemplate">
-            <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
-            <Setter Property="PlaceholderForeground" Value="Black"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Padding" Value="20"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-
-
-        </Style>
-        
-        <Style TargetType="ComboBoxItem">
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="White"/>
-        </Style>
-
         <!-- Estilo del borde del menú de confirmación -->
         <Style TargetType="Grid" x:Key="ConfirmationMenuGrid">
             <Setter Property="Grid.ColumnSpan" Value="3"/>
@@ -312,7 +323,6 @@
             </Setter>
 
         </Style>
-        
         
         
         <!-- Template de la selección de habilidades -->
@@ -377,7 +387,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
         
         
         <!-- Template selección personaje -->
@@ -471,7 +480,6 @@
         </Style>
         
         
-        
         <!-- Estilo flechas -->
         <Style x:Key="MapArrow" TargetType="Polygon">
             <Setter Property="Stroke" Value="Black"/>
@@ -486,8 +494,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        
         
         
         <!-- Niveles del mapa -->
@@ -564,7 +570,6 @@
         </Style>
         
         
-        
         <!-- Estilo de los ítems de la plantilla de personajes -->
         <Style x:Name="CharacterGridViewItem" TargetType="GridViewItem">
             <Setter Property="Margin" Value="0"/>
@@ -604,7 +609,6 @@
         </Style>
         
         
-        
         <!-- Estilo de la propia plantilla de personajes -->
         <Style x:Name="CharacterTemplateStyle" TargetType="GridView">
             <Setter Property="SelectionMode" Value="Single"/>
@@ -614,6 +618,9 @@
         </Style>
 
 
+
+        
+        
     </Application.Resources>
     
 </Application>
