@@ -8,6 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    
+    
     <Page.Resources>
         <DataTemplate x:Name="CharactersTemplate">
             <!-- Foreground y FontSize cambina con las propiedades del padre.
@@ -76,229 +78,232 @@
 
     </Page.Resources>
 
-    <Grid Style="{StaticResource GridTemplate}">
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="0.25*"/>
-        </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <!-- Equipo -->
-            <StackPanel Margin="0, 0, 0, 30">
-                <TextBlock Text="Equipo" Grid.Column="0" 
+
+    <Viewbox >
+        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.25*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <!-- Equipo -->
+                <StackPanel Margin="0, 0, 0, 30">
+                    <TextBlock Text="Equipo" Grid.Column="0" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                <GridView VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <GridView VerticalAlignment="Center" HorizontalAlignment="Center"
                           SelectionMode="Single"
                           ItemsSource="1234"
                           Style="{StaticResource CharacterTemplateStyle}"
                           ItemTemplate="{StaticResource CharactersTemplate}"
                           ItemsPanel="{StaticResource CharactersPanel}"
                           ItemContainerStyle="{StaticResource CharacterGridViewItem}">
-                </GridView>
-            </StackPanel>
+                    </GridView>
+                </StackPanel>
 
-            <!-- Plantilla -->
-            <StackPanel>
-                <TextBlock Text="Plantilla" Grid.Column="0" 
+                <!-- Plantilla -->
+                <StackPanel>
+                    <TextBlock Text="Plantilla" Grid.Column="0" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                <GridView VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <GridView VerticalAlignment="Center" HorizontalAlignment="Center"
                           SelectionMode="Single"
                           ItemsSource="12345678ABCD"
                           Style="{StaticResource CharacterTemplateStyle}"
                           ItemTemplate="{StaticResource CharactersTemplate}"
                           ItemsPanel="{StaticResource CharactersPanel}"
                           ItemContainerStyle="{StaticResource CharacterGridViewItem }">
-                </GridView>
+                    </GridView>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="0.7*"/>
-            </Grid.RowDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
 
-            <Border HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                <Border HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         Background="#cbc2a8" Width="1050" Margin="0,0,0,20"
                         BorderBrush="Black" BorderThickness="1">
 
-                <!-- Información del personaje -->
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <!-- Arriba izquierda -->
-                    <StackPanel Grid.Row="0" Grid.Column="0"
+                    <!-- Información del personaje -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Arriba izquierda -->
+                        <StackPanel Grid.Row="0" Grid.Column="0"
                                     Orientation="Horizontal" Margin="60,10,0,5"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xEB52;" FontSize="50" Foreground="#4c7a34"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Vida" Style="{StaticResource TextBlockTemplate}" 
+                            <FontIcon Glyph="&#xEB51;" FontSize="50" Foreground="#4c7a34"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Vida" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#4c7a34" FontSize="40" Margin="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Puntos de Vida" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Puntos de Vida" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#4c7a34" FontSize="30" Margin="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <!-- Arriba derecha -->
-                    <StackPanel Grid.Row="0" Grid.Column="1"
+                        <!-- Arriba derecha -->
+                        <StackPanel Grid.Row="0" Grid.Column="1"
                                     Orientation="Horizontal" Margin="60,0"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xE740;" FontSize="50" Foreground="#5180e1"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Desplazamiento" Style="{StaticResource TextBlockTemplate}" 
+                            <FontIcon Glyph="&#xE740;" FontSize="50" Foreground="#5180e1"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Desplazamiento" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="40" Margin="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="30" Margin="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <!-- Medio izquierda -->
-                    <StackPanel Grid.Row="1" Grid.Column="0"
+                        <!-- Medio izquierda -->
+                        <StackPanel Grid.Row="1" Grid.Column="0"
                                     Orientation="Horizontal" Margin="60,5"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xEB44;" FontSize="50" Foreground="#af3a11"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Arma 1" Style="{StaticResource TextBlockTemplate}" 
+                            <FontIcon Glyph="&#xEB44;" FontSize="50" Foreground="#af3a11"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Arma 1" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="40" Padding="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="30" Padding="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <!-- Medio derecha -->
-                    <StackPanel Grid.Row="1" Grid.Column="1"
+                        <!-- Medio derecha -->
+                        <StackPanel Grid.Row="1" Grid.Column="1"
                                     Orientation="Horizontal" Margin="60,5"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xEA18;" FontSize="50" Foreground="#af3a11"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Arma 2" Style="{StaticResource TextBlockTemplate}" 
+                            <FontIcon Glyph="&#xEA18;" FontSize="50" Foreground="#af3a11"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Arma 2" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="40" Margin="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="30" Margin="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <!-- Abajo izquierda -->
-                    <StackPanel Grid.Row="2" Grid.Column="0"
+                        <!-- Abajo izquierda -->
+                        <StackPanel Grid.Row="2" Grid.Column="0"
                                     Orientation="Horizontal" Margin="60,5,0,10"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xE735;" FontSize="50" Foreground="#7e2199"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Habilidad 1" Style="{StaticResource TextBlockTemplate}" 
+                            <FontIcon Glyph="&#xE734;" FontSize="50" Foreground="#7e2199"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Habilidad 1" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="40" Margin="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="30" Margin="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <!-- Abajo derecha -->
-                    <StackPanel Grid.Row="2" Grid.Column="1"
+                        <!-- Abajo derecha -->
+                        <StackPanel Grid.Row="2" Grid.Column="1"
                                     Orientation="Horizontal" Margin="60,5"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xE735;" FontSize="50" Foreground="#7e2199"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Habilidad 2" Style="{StaticResource TextBlockTemplate}" 
+                            <FontIcon Glyph="&#xE734;" FontSize="50" Foreground="#7e2199"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Habilidad 2" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="40" Margin="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="30" Margin="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </Grid>
-            </Border>
-            <!-- Texto nombre personaje -->
-            <TextBlock Text="Nombre personaje" Margin="0, 0, 0, 250"
+                    </Grid>
+                </Border>
+                <!-- Texto nombre personaje -->
+                <TextBlock Text="Nombre personaje" Margin="0, 0, 0, 250"
                        HorizontalAlignment="Left" VerticalAlignment="Top"
                        FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                        Grid.Row="1" FontSize="60"/>
 
-            <!-- Botones e imagen del personaje -->
-            <StackPanel Grid.Row="1" Orientation="Horizontal"
+                <!-- Botones e imagen del personaje -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal"
                             VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                <Button Style="{StaticResource ClickableButtonTemplate}"
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="200" Width="330"
                             FontSize="50" Click="openWeaponList">
-                    <TextBlock Text="Cambiar arma" TextAlignment="Center" TextWrapping="Wrap"/>
-                </Button>
+                        <TextBlock Text="Cambiar arma" TextAlignment="Center" TextWrapping="Wrap"/>
+                    </Button>
 
-                <Button Style="{StaticResource ClickableButtonTemplate}"
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="200" Width="330" Margin="100,0,80,0"
                             FontSize="50" Click="ButtonTree_Click">
-                    <TextBlock Text="Árbol de habilidades" 
+                        <TextBlock Text="Árbol de habilidades" 
                                    TextAlignment="Center" TextWrapping="Wrap"/>
-                </Button>
+                    </Button>
 
-                <Border BorderThickness="1" BorderBrush="Black"
+                    <Border BorderThickness="1" BorderBrush="Black"
                             Height="150">
-                    <Image Source="/Assets/imgPlaceholder.jpg"/>
-                </Border>
-            </StackPanel>
-            <!--Botón de volver-->
-        </Grid>
+                        <Image Source="/Assets/imgPlaceholder.jpg"/>
+                    </Border>
+                </StackPanel>
+                <!--Botón de volver-->
+            </Grid>
 
-        <!--Botón de volver-->
-        <Button Style="{StaticResource ClickableButtonTemplate}"
+            <!--Botón de volver-->
+            <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" 
                 Margin="40" Grid.Row="1"
                 FontSize="40" Click="BackButton_Click">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
-                <TextBlock Text="Volver"/>
-            </StackPanel>
-        </Button>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                    <TextBlock Text="Volver"/>
+                </StackPanel>
+            </Button>
 
 
-        <!--Lista de armas-->
-        <StackPanel x:Name="weaponList" Visibility="Collapsed"
+            <!--Lista de armas-->
+            <StackPanel x:Name="weaponList" Visibility="Collapsed"
                     Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="700,400,0,0"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
-            
-            <Border BorderBrush="Black" BorderThickness="1" Padding="10">
-                <Border.Background>
-                    <SolidColorBrush Color="#FFCFBA8E" Opacity="0.67"/>
-                </Border.Background>
-                <Grid>
-                    <Rectangle Margin="60,10,60,10" Fill="#FFD8CCA9" Stroke="Black" HorizontalAlignment="Stretch" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <FontIcon Glyph="&#xEB44;" FontSize="30"/>
-                        <TextBlock Text="Arma 1" FontSize="30" Padding="15"
+
+                <Border BorderBrush="Black" BorderThickness="1" Padding="10">
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFCFBA8E" Opacity="0.67"/>
+                    </Border.Background>
+                    <Grid>
+                        <Rectangle Margin="60,10,60,10" Fill="#FFD8CCA9" Stroke="Black" HorizontalAlignment="Stretch" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <FontIcon Glyph="&#xEB44;" FontSize="30"/>
+                            <TextBlock Text="Arma 1" FontSize="30" Padding="15"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"
                                    FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
-            <Border BorderThickness="1,0,1,1" BorderBrush="Black">
-                <Border.Background>
-                    <SolidColorBrush Color="White" Opacity="0.63"/>
-                </Border.Background>
-                <StackPanel Margin="20" >
-                    <Border BorderThickness="0.5" BorderBrush="Black"/>
-                    <ListView x:Name="MyListView1" Background="#cbc2a8" MaxHeight="300"/>
-                    <Border BorderThickness="0.5" BorderBrush="Black"/>
-                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1,0,1,1" BorderBrush="Black">
+                    <Border.Background>
+                        <SolidColorBrush Color="White" Opacity="0.63"/>
+                    </Border.Background>
+                    <StackPanel Margin="20" >
+                        <Border BorderThickness="0.5" BorderBrush="Black"/>
+                        <ListView x:Name="MyListView1" Background="#cbc2a8" MaxHeight="300"/>
+                        <Border BorderThickness="0.5" BorderBrush="Black"/>
+                        <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="auto" Width="auto" Margin="100,25,100,0" Padding="10"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             FontSize="30" Click="closeWeaponList">
-                        <TextBlock Text="Confirmar"/>
-                    </Button>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+                            <TextBlock Text="Confirmar"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
 
 
-    </Grid>
-    
-    
+        </Grid>
+    </Viewbox>
+
 </Page>

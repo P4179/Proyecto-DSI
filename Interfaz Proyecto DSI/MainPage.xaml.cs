@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
@@ -24,32 +25,30 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private List<String> settingsList = new List<string>() { "Configuración 1", "Configuración 2", "Configuración 3", "Configuración 4" };
-        private List<String> comboBoxSettingsList = new List<string>() { "Alto", "Medio", "Bajo"};
+       
 
 
         public MainPage() {
             this.InitializeComponent();
-
-            foreach(string setting in comboBoxSettingsList) {
-                
-            }
         }
 
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             ConfirmationMenu.Visibility = Visibility.Visible;
+            ConfirmationBg.Visibility = Visibility.Visible;
         }
 
         private void ButtonNo_Click(object sender, RoutedEventArgs e)
         {
             ConfirmationMenu.Visibility = Visibility.Collapsed;
+            ConfirmationBg.Visibility = Visibility.Collapsed;
+
         }
 
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Mapa));
+            Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
         }
 
         private void ButtonYes_Click(object sender, RoutedEventArgs e)
@@ -60,45 +59,16 @@ namespace Interfaz_Proyecto_DSI
 
         private void openOptions(object sender, RoutedEventArgs e)
         {
-            OptionsMenu.Visibility = Visibility.Visible;
+            Frame.Navigate(typeof(Opciones), null, new DrillInNavigationTransitionInfo());
         }
-        private void closeOptions(object sender, RoutedEventArgs e)
-        {
-            OptionsMenu.Visibility = Visibility.Collapsed;
-        }
-
         private void Equipo(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Tienda));
+            Frame.Navigate(typeof(Tienda), null, new DrillInNavigationTransitionInfo());
         }
 
 
 
 
-        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                        yield return (T)child;
-
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                        yield return childOfChild;
-                }
-            }
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            IEnumerable<PivotHeaderPanel> headerpanel = FindVisualChildren<PivotHeaderPanel>(optionsTabs);
-            double totalwidth = headerpanel.ElementAt<PivotHeaderPanel>(0).ActualWidth;
-            IEnumerable<PivotHeaderItem> items = FindVisualChildren<PivotHeaderItem>(optionsTabs);
-            int headitemcount = items.Count();
-            for (int i = 0; i < headitemcount; i++)
-                items.ElementAt<PivotHeaderItem>(i).Width = (totalwidth / headitemcount) - 0.1f ;
-        }
+        
     }
 }

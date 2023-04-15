@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.UI.Xaml.Media"
     mc:Ignorable="d"
+    Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
 
     
@@ -18,6 +19,7 @@
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="UseSystemFocusVisuals" Value="False"/>
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -53,8 +55,32 @@
                                         </VisualState.Setters>
                                     </VisualState>
 
+                                    
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="FocusStates">
+
+                                    <VisualState x:Name="Unfocused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+
 
                                 </VisualStateGroup>
+
                             </VisualStateManager.VisualStateGroups>
                         </Grid>
                     </ControlTemplate>
@@ -64,196 +90,241 @@
         </Style>
 
 
+        <DataTemplate x:Key="PotionsTemplate" x:DataType="local:Potion">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="WeaponsTemplate" x:DataType="local:Weap">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="AccessoriesTemplate" x:DataType="local:Acc">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+
+        
+        
     </Page.Resources>
 
+    
+    
 
-    <Grid Style="{StaticResource GridTemplate}">
+    <Viewbox >
+        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="91*"/>
+                <ColumnDefinition Width="37*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="91*"/>
-            <ColumnDefinition Width="37*"/>
-        </Grid.ColumnDefinitions>
-
-        <Rectangle Grid.Column="0" Fill="#cbc2a8" Margin="80,80,80,200" Stroke="black"/>
+            <Rectangle Grid.Column="0" Fill="#cbc2a8" Margin="80,80,80,200" Stroke="black"/>
 
 
-        <!--Botón de volver-->
-        <Button Style="{StaticResource ClickableButtonTemplate}"
+            <!--Botón de volver-->
+            <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
                 FontSize="40" Click="returnToMain">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
-                <TextBlock Text="Volver"/>
-            </StackPanel>
-        </Button>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                    <TextBlock Text="Volver"/>
+                </StackPanel>
+            </Button>
 
 
-        <!--Pestañas-->
-        <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200">
-            <PivotItem>
-                <PivotItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE704;" FontSize="30" Margin="10,0,10,0"/>
-                        <TextBlock Text="Pociones"/>
-                    </StackPanel>
-                </PivotItem.Header>
+            <!--Pestañas-->
+            <Pivot x:Name="tabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200">
+                <PivotItem>
+                    <PivotItem.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <FontIcon Glyph="&#xE704;" FontSize="30" Margin="10,0,10,0"/>
+                            <TextBlock Text="Pociones"/>
+                        </StackPanel>
+                    </PivotItem.Header>
 
-                <ListView x:Name="MyListView1" Margin="-10,0,-10,0"/>
-
-            </PivotItem>
-
-
-            <PivotItem>
-                <PivotItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE728;" FontSize="30" Margin="10,0,10,0"/>
-                        <TextBlock Text="Armas"/>
-                    </StackPanel>
-                </PivotItem.Header>
-
-                <ListView x:Name="MyListView2" Margin="-10,0,-10,0"/>
-
-            </PivotItem>
+                    <ListView Margin="-10,0,-10,0"
+                              ItemTemplate="{StaticResource PotionsTemplate}"
+                              ItemsSource="{x:Bind potionsList}"/>
+                </PivotItem>
 
 
-            <PivotItem>
-                <PivotItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE717;" FontSize="30" Margin="10,0,10,0"/>
-                        <TextBlock Text="Accesorios"/>
-                    </StackPanel>
-                </PivotItem.Header>
+                <PivotItem>
+                    <PivotItem.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <FontIcon Glyph="&#xE728;" FontSize="30" Margin="10,0,10,0"/>
+                            <TextBlock Text="Armas"/>
+                        </StackPanel>
+                    </PivotItem.Header>
 
-                <ListView x:Name="MyListView3" Margin="-10,0,-10,0"/>
+                    <ListView Margin="-10,0,-10,0"
+                              ItemTemplate="{StaticResource WeaponsTemplate}"
+                              ItemsSource="{x:Bind weaponsList}"/>
+                </PivotItem>
 
-            </PivotItem>
 
-        </Pivot>
+                <PivotItem>
+                    <PivotItem.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <FontIcon Glyph="&#xE717;" FontSize="30" Margin="10,0,10,0"/>
+                            <TextBlock Text="Accesorios"/>
+                        </StackPanel>
+                    </PivotItem.Header>
+
+                    <ListView Margin="-10,0,-10,0"
+                              ItemTemplate="{StaticResource AccessoriesTemplate}"
+                              ItemsSource="{x:Bind accList}"/>
+                </PivotItem>
+
+            </Pivot>
 
 
-        <!--<ComboBox x:Name="Filters" Style="{StaticResource ComboBoxTemplate}"
+            <!--<ComboBox x:Name="Filters" Style="{StaticResource ComboBoxTemplate}"
                       PlaceholderText="Tipo" FontSize="30" Padding="100,20,50,20"
                       VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,80,119" 
                       CornerRadius="0,0,20,20"
                       Width="Auto" Height="Auto">
 
             </ComboBox>-->
-        <!--Icono de embudo E71C-->
+            <!--Icono de embudo E71C-->
 
-        
-        <!--Cantidad de dinero-->
-        <TextBox Grid.Column="1" Style="{StaticResource PlaceHolderTextTemplate}"
+
+            <!--Cantidad de dinero-->
+            <TextBox Grid.Column="1" Style="{StaticResource PlaceHolderTextTemplate}"
                  HorizontalAlignment="Right" VerticalAlignment="Top"
                  Height="Auto" Padding="100, 10,40,10" Margin="50"
                  CornerRadius="40" Text="1020 C" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                  Foreground="Black" Background="#cbc2a8" BorderBrush="#232323"/>
 
 
-        
-        <!--Información del objeto-->
-        <StackPanel Grid.Column="1" Margin="-40,150,40,20" VerticalAlignment="Stretch">
-            <TextBlock Text="Nombre del objeto" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-            <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
 
-            <Border Background="#cbc2a8" BorderBrush="Black" VerticalAlignment="Bottom" Margin="20,50,20,0" BorderThickness="0.5">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                        <FontIcon Glyph="&#xE720;" FontSize="40" Foreground="#444444"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Tipo de arma" Style="{StaticResource TextBlockTemplate}" 
+            <!--Información del objeto-->
+            <StackPanel Grid.Column="1" Margin="-40,150,40,20" VerticalAlignment="Stretch">
+                <TextBlock Text="Nombre del objeto" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
+
+                <Border Background="#cbc2a8" BorderBrush="Black" VerticalAlignment="Bottom" Margin="20,50,20,0" BorderThickness="0.5">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="30,10,20,10">
+                            <FontIcon Glyph="&#xEA18;" FontSize="40" Foreground="#444444"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Tipo de arma" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="25" Padding="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
-                        <FontIcon Glyph="&#xE722;" FontSize="40" Foreground="#af3a11"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Daño" Style="{StaticResource TextBlockTemplate}" 
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="30,10,20,10">
+                            <FontIcon Glyph="&#xEB44;" FontSize="40" Foreground="#af3a11"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="25" Padding="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
-                        <FontIcon Glyph="&#xE719;" FontSize="40" Foreground="#7e2199"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Efecto especial" Style="{StaticResource TextBlockTemplate}" 
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="30,10,20,10">
+                            <FontIcon Glyph="&#xE734;" FontSize="40" Foreground="#7e2199"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Efecto especial" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Efecto" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Efecto" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="25" Padding="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,10,20,10">
-                        <FontIcon Glyph="&#xE70B;" FontSize="40" Foreground="#5180e1"/>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Alcance" Style="{StaticResource TextBlockTemplate}" 
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="30,10,20,10">
+                            <FontIcon Glyph="&#xE740;" FontSize="40" Foreground="#5180e1"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Alcance" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                            <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="25" Padding="20,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
+
                     </StackPanel>
-
-                </StackPanel>
-            </Border>
+                </Border>
 
 
-            <!--<TextBox x:Name="ItemDescription" TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
+                <!--<TextBox x:Name="ItemDescription" TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
                          Margin="0,40,0,0" Height ="auto" FontSize="30"
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                         />-->
 
-        </StackPanel>
+            </StackPanel>
 
-        
-        
-        <!--Ventana de selección de cantidad-->
-        <Grid x:Name="BuyQuantity" Grid.ColumnSpan="2" Visibility="Collapsed">
-            <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
-            <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" 
+
+
+            <!--Ventana de selección de cantidad-->
+            <Grid x:Name="BuyQuantity" Grid.ColumnSpan="2" Visibility="Collapsed">
+                <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
+                <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" 
                        Width="822" Height="520" RadiusX="50" RadiusY="50" Stroke="Black">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFECE8DC"/>
-                        <GradientStop Color="#FFC8BD9A" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFECE8DC"/>
+                            <GradientStop Color="#FFC8BD9A" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-            <TextBlock Text="Cantidad:" Style="{StaticResource TextBlockTemplate}" 
+                <TextBlock Text="Cantidad:" Style="{StaticResource TextBlockTemplate}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="70" Margin="-350,0,0,260"/>
-            <TextBlock Text="Total:" Style="{StaticResource TextBlockTemplate}" 
+                <TextBlock Text="Total:" Style="{StaticResource TextBlockTemplate}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="60" Margin="-200,0,0,0"/>
-            <TextBlock Text="200C" Style="{StaticResource TextBlockTemplate}" 
+                <TextBlock Text="200C" Style="{StaticResource TextBlockTemplate}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="60" Margin="400,0,0,0"/>
-            
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Padding="100, 10,100,10" Margin="375,0,0,250"
+
+                <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Padding="100, 10,100,10" Margin="375,0,0,250"
                     CornerRadius="40" Text="20" FontSize="50" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                     Foreground="Black" Background="#cbc2a8" BorderBrush="#232323"/>
 
-            <Button Style="{StaticResource ClickableButtonTemplate}"
+                <Button Style="{StaticResource ClickableButtonTemplate}"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Width="299" Padding="20" Margin="-350,0,0,-300"
                     FontSize="50" Content="Cancelar" Click="hideQuantitySelection">
-            </Button>
-            <Button Style="{StaticResource ClickableButtonTemplate}" IsEnabled="False"
+                </Button>
+                <Button Style="{StaticResource ClickableButtonTemplate}" IsEnabled="False"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Width="299" Padding="20" Margin="350,0,0,-300"
                     FontSize="50" Content="Comprar">
-            </Button>
-            
+                </Button>
+
+            </Grid>
+
+
+
         </Grid>
 
-
-
-    </Grid>
-
-
+    </Viewbox>
 
 </Page>

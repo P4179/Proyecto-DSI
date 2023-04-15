@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
@@ -64,7 +65,7 @@ namespace Interfaz_Proyecto_DSI
 
         private void EndButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Mapa));
+            Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
         }
 
         private void openPotionsMenu(object sender, RoutedEventArgs e)
@@ -76,6 +77,43 @@ namespace Interfaz_Proyecto_DSI
         {
             UsePotionMenu.Visibility = Visibility.Collapsed;
 
+        }
+
+
+        private void keyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Escape) {
+                if (UsePotionMenu.Visibility == Visibility.Visible)
+                    UsePotionMenu.Visibility = Visibility.Collapsed;
+                else togglePause();
+            }
+        }
+
+        private void togglePause()
+        {
+            if (PauseMenu.Visibility == Visibility.Collapsed) PauseMenu.Visibility = Visibility.Visible;
+            else PauseMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void exitPause(object sender, RoutedEventArgs e)
+        {
+            togglePause();
+        }
+
+        private void goToOptions(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Opciones), null, new DrillInNavigationTransitionInfo());
+        }
+
+        private void returnToMain(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage), null, new DrillInNavigationTransitionInfo());
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (Frame.BackStack.Last().SourcePageType == typeof(Opciones))
+                PauseMenu.Visibility = Visibility.Visible;
         }
     }
 }

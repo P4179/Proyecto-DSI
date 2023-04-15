@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
@@ -33,12 +34,12 @@ namespace Interfaz_Proyecto_DSI
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Mapa));
+            Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
         }
 
         private void ButtonTree_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Abilities));
+            Frame.Navigate(typeof(Abilities), null, new DrillInNavigationTransitionInfo());
         }
 
         private void openWeaponList(object sender, RoutedEventArgs e)

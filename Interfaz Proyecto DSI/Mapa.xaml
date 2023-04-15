@@ -8,116 +8,168 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Style="{StaticResource GridTemplate}">
-        <!-- Mapa y niveles -->
-        <ScrollViewer HorizontalScrollBarVisibility="Visible"
+
+
+    <Viewbox >
+        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920" KeyDown="keyDown">
+            <!-- Mapa y niveles -->
+            <ScrollViewer HorizontalScrollBarVisibility="Visible"
                       VerticalScrollBarVisibility="Visible">
-            <Grid>
-                <Image Source="Assets/map.png"
+                <Grid>
+                    <Image Source="Assets/map.png"
                        Width="1950"
                        Opacity="0.85"/>
-                <Canvas>
-                    <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
+                    <Canvas>
+                        <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                  DataContext="Tienda" Width="400"
                                  Canvas.Left="650" Canvas.Top="500">
-                        <RadioButton.Content>
-                            <FontIcon Glyph="&#xE719;" FontSize="30" Foreground="Black"/>
-                        </RadioButton.Content>
-                    </RadioButton>
+                            <RadioButton.Content>
+                                <FontIcon Glyph="&#xE719;" FontSize="30" Foreground="Black"/>
+                            </RadioButton.Content>
+                        </RadioButton>
 
-                    <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
+                        <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                  DataContext="Jefe 1" Width="400"
                                  Canvas.Left="550" Canvas.Top="130">
-                        <!-- Contenido del botón -->
-                        <FontIcon Glyph="&#xE99A;" FontSize="30" Foreground="Black"/>
-                    </RadioButton>
+                            <!-- Contenido del botón -->
+                            <FontIcon Glyph="&#xEBE8;" FontSize="30" Foreground="Black"/>
+                        </RadioButton>
 
-                    <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
+                        <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                  DataContext="Nivel 1" Width="300"
                                  Canvas.Left="650" Canvas.Top="780">
-                    </RadioButton>
-                </Canvas>
-            </Grid>
-        </ScrollViewer>
+                        </RadioButton>
+                    </Canvas>
+                </Grid>
+            </ScrollViewer>
 
-        <!-- Panfleto con la información del nivel -->
-        <StackPanel x:Name="Info" Visibility="Collapsed"
+            <!-- Panfleto con la información del nivel -->
+            <StackPanel x:Name="Info" Visibility="Collapsed"
                     Grid.Column="1" Width="650" Margin="0, 0, 140, 0"
                     VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Border Background="#cfba8e" Height="90"
+                <Border Background="#cfba8e" Height="90"
                 BorderBrush="Black" BorderThickness="1">
-                <TextBlock Text="Nivel 1-1" FontSize="50"
+                    <TextBlock Text="Nivel 1-1" FontSize="50"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC">
-                </TextBlock>
-            </Border>
-            <Border Background="#ffffff"
+                    </TextBlock>
+                </Border>
+                <Border Background="#ffffff"
                 BorderThickness="1,0,1,1" BorderBrush="Black">
-                <StackPanel>
-                    <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <StackPanel>
+                        <Border VerticalAlignment="Center" HorizontalAlignment="Center"
                         Width="400" Margin="30"
                         BorderThickness="1" BorderBrush="Black">
-                        <Image Source="/Assets/imgPlaceholder.jpg" />
-                    </Border>
-                    <TextBox TextWrapping="Wrap" TextAlignment="Justify"
+                            <Image Source="/Assets/imgPlaceholder.jpg" />
+                        </Border>
+                        <TextBox TextWrapping="Wrap" TextAlignment="Justify"
                          FontSize="30" BorderThickness="0" Width="400"
                          FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                          IsHitTestVisible="False" IsReadOnly="True"
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                          />
-                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                        <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="88" Width="270" Margin="40" Click="StartGameButton_Click"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             FontSize="38">
-                        <TextBlock Text="Comenzar"/>
-                    </Button>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+                            <TextBlock Text="Comenzar"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
 
-        <!--Botón de equipo -->
-        <Button Style="{StaticResource ClickableButtonTemplate}"
+            <!--Botón de equipo -->
+            <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="140" Width="140" VerticalAlignment="Top" 
                 Margin="40" Click="TeamButton_Click">
-            <FontIcon Glyph="&#xE716;" FontSize="90"/>
-        </Button>
+                <FontIcon Glyph="&#xE716;" FontSize="90"/>
+            </Button>
 
-        <Viewbox Width="55" Margin="40"
+            <Viewbox Width="55" Margin="40"
                  HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Polygon Style="{StaticResource MapArrow}"
+                <Polygon Style="{StaticResource MapArrow}"
                      Points="0,0 7,5 0,10">
-                <Polygon.RenderTransform>
-                    <CompositeTransform Rotation="180"/>
-                </Polygon.RenderTransform>
-            </Polygon>
-        </Viewbox>
+                    <Polygon.RenderTransform>
+                        <CompositeTransform Rotation="180"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+            </Viewbox>
 
-        <Viewbox Width="55" Margin="40"
+            <Viewbox Width="55" Margin="40"
                  HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Polygon Style="{StaticResource MapArrow}"
+                <Polygon Style="{StaticResource MapArrow}"
                      Points="0,0 7,5 0,10">
-                <Polygon.RenderTransform>
-                    <CompositeTransform Rotation="270"/>
-                </Polygon.RenderTransform>
-            </Polygon>
-        </Viewbox>
+                    <Polygon.RenderTransform>
+                        <CompositeTransform Rotation="270"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+            </Viewbox>
 
-        <Viewbox Width="55" Margin="40"
+            <Viewbox Width="55" Margin="40"
                  HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Polygon Style="{StaticResource MapArrow}"
+                <Polygon Style="{StaticResource MapArrow}"
                      Points="0,0 7,5 0,10">
-            </Polygon>
-        </Viewbox>
+                </Polygon>
+            </Viewbox>
 
-        <Viewbox Width="55" Margin="40"
+            <Viewbox Width="55" Margin="40"
                  HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <Polygon Style="{StaticResource MapArrow}"
+                <Polygon Style="{StaticResource MapArrow}"
                      Points="0,0 7,5 0,10">
-                <Polygon.RenderTransform>
-                    <CompositeTransform Rotation="90"/>
-                </Polygon.RenderTransform>
-            </Polygon>
-        </Viewbox>
+                    <Polygon.RenderTransform>
+                        <CompositeTransform Rotation="90"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+            </Viewbox>
 
-    </Grid>
+
+            <!--Menú de pausa-->
+            <Grid x:Name="PauseMenu" Grid.ColumnSpan="3" Grid.RowSpan="2" Visibility="Collapsed">
+                <Rectangle Fill="Black" Opacity="0.63"/>
+
+                <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                    MaxHeight="350" Opacity="0.37"
+                    BorderThickness="2" BorderBrush="Black">
+                    <Image Source="/Assets/imgPlaceholder.jpg"/>
+                </Border>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100">
+                    <TextBlock Text="Juego Pausado" HorizontalAlignment="Center" 
+                               FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                               FontSize="100"/>
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                            Height="130" Width="700" FontSize="70" Margin="40"
+                            Click="exitPause">
+                        <StackPanel Orientation="Horizontal" >
+                            <FontIcon Glyph="&#xEDB5;" FontSize="70" Margin="-110,0,110,0"/>
+                            <TextBlock Text="Reanudar"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                            Height="130" Width="700" FontSize="70" Margin="40"
+                            Click="goToOptions">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE713;" FontSize="70" Margin="-110,0,110,0"/>
+                            <TextBlock Text="Opciones"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                            Height="130" Width="700" FontSize="70" Margin="40"
+                            Click="returnToMain">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE80F;" FontSize="70" Margin="0,0,40,0"/>
+                            <TextBlock Text="Menú principal"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
+    </Viewbox>
+    
+    
 </Page>

@@ -8,6 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    
+    
     <!--Estilo de las pociones-->
     <Page.Resources>
         <Style TargetType="ListViewItem">
@@ -16,6 +18,7 @@
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="UseSystemFocusVisuals" Value="False"/>
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -51,8 +54,31 @@
                                         </VisualState.Setters>
                                     </VisualState>
 
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="FocusStates">
+
+                                    <VisualState x:Name="Unfocused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+
 
                                 </VisualStateGroup>
+
                             </VisualStateManager.VisualStateGroups>
                         </Grid>
                     </ControlTemplate>
@@ -63,170 +89,215 @@
     </Page.Resources>
 
 
-    <Grid Style="{StaticResource GridTemplate}">
-        
-        <!-- Tablero y personajes -->
-        <Grid Margin="170, 0">
-            <Image Source="Assets/board.png"
+    <Viewbox >
+        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920" KeyDown="keyDown">
+
+            <!-- Tablero y personajes -->
+            <Grid Margin="170, 0">
+                <Image Source="Assets/board.png"
                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Canvas>
-                <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
+                <Canvas>
+                    <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
                     Canvas.Left="970" Canvas.Top="585" x:Name="Character1">
-                    <RadioButton.Content>
-                        <Image Source="Assets/character1.png"/>
-                    </RadioButton.Content>
-                </RadioButton>
-                <RadioButton Style="{StaticResource RadioCharacter}" Width="90"
+                        <RadioButton.Content>
+                            <Image Source="Assets/character1.png"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource RadioCharacter}" Width="90"
                     Canvas.Left="1225" Canvas.Top="470" x:Name="Character2">
-                    <RadioButton.Content>
-                        <Image Source="Assets/character2.png"/>
-                    </RadioButton.Content>
-                </RadioButton>
-                <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
+                        <RadioButton.Content>
+                            <Image Source="Assets/character2.png"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
                     Canvas.Left="200" Canvas.Top="450" x:Name="Character3">
-                    <RadioButton.Content>
-                        <Image Source="Assets/character3.png"/>
-                    </RadioButton.Content>
-                </RadioButton>
-                <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
+                        <RadioButton.Content>
+                            <Image Source="Assets/character3.png"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
                     Canvas.Left="508" Canvas.Top="305" x:Name="Character4">
-                    <RadioButton.Content>
-                        <Image Source="Assets/character4.png"/>
-                    </RadioButton.Content>
-                </RadioButton>
-                <RadioButton Style="{StaticResource RadioCharacter}" Width="105"
+                        <RadioButton.Content>
+                            <Image Source="Assets/character4.png"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource RadioCharacter}" Width="105"
                     Canvas.Left="790" Canvas.Top="350" x:Name="Character5">
-                    <RadioButton.Content>
-                        <Image Source="Assets/character5.png"/>
-                    </RadioButton.Content>
-                </RadioButton>
-            </Canvas>
-        </Grid>
+                        <RadioButton.Content>
+                            <Image Source="Assets/character5.png"/>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Canvas>
+            </Grid>
 
-        <!-- Panfleto con la información del objetivo del día -->
-        <StackPanel x:Name="Objective" Margin="40" 
+            <!-- Panfleto con la información del objetivo del día -->
+            <StackPanel x:Name="Objective" Margin="40" 
                     Width="450"
-            VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Border
-                Background="#cfba8e"
-                BorderBrush="Black" BorderThickness="1">
-                <TextBlock Text="Objetivo" FontSize="45"
+                    VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Border Background="#cfba8e"
+                        BorderBrush="Black" BorderThickness="1">
+                    <TextBlock Text="Objetivo" FontSize="45"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                           FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC">
-                </TextBlock>
-            </Border>
-            <Border Background="#ffffff" Padding="20"
+                           FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
+                </Border>
+                <Border Background="#ffffff" Padding="20"
                 BorderThickness="1" BorderBrush="Black">
-                <TextBox TextWrapping="Wrap" TextAlignment="Justify" Height="Auto"
-                         FontSize="30" BorderThickness="0" 
-                         FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
-                         IsHitTestVisible="False" IsReadOnly="True"
-                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
+                    <TextBox TextWrapping="Wrap" TextAlignment="Justify" Height="Auto"
+                            FontSize="30" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                            IsHitTestVisible="False" IsReadOnly="True" IsTabStop="False" 
+                             Background="Transparent" Foreground="Black" BorderBrush="Transparent"
+                             Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                          />
-            </Border>
-        </StackPanel>
+                </Border>
+            </StackPanel>
 
-        <!-- Botón Fin de turno -->
-        <Button x:Name="EndButton" Style="{StaticResource ClickableButtonTemplate}"
+            <!-- Botón Fin de turno -->
+            <Button x:Name="EndButton" Style="{StaticResource ClickableButtonTemplate}"
                 VerticalAlignment="Top" HorizontalAlignment="Right"
                 Height="88" Width="270" Click="EndButton_Click"
                 Margin="40" FontSize="40">
-            <TextBlock Text="Fin de Turno"/>
-        </Button>
+                <TextBlock Text="Fin de Turno"/>
+            </Button>
 
-        <StackPanel x:Name="Buttons" Orientation="Horizontal"
+            <StackPanel x:Name="Buttons" Orientation="Horizontal"
             HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <!--Botón de atacar-->
-            <Button Style="{StaticResource ClickableButtonTemplate}"
+                <!--Botón de atacar-->
+                <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0, 0, 30, 40" 
                 FontSize="40" Click="Button_Click">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xE722;" FontSize="40" Margin="0,5,20,0" Foreground="#af3a11"/>
-                    <TextBlock Text="Atacar" Foreground="#af3a11"/>
-                </StackPanel>
-            </Button>
-            <!--Botón de habilidad-->
-            <Button Style="{StaticResource ClickableButtonTemplate}"
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xEB44;" FontSize="40" Margin="0,5,20,0" Foreground="#af3a11"/>
+                        <TextBlock Text="Atacar" Foreground="#af3a11"/>
+                    </StackPanel>
+                </Button>
+                <!--Botón de habilidad-->
+                <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="270" VerticalAlignment="Bottom" Margin="0,0,80,40" 
                 FontSize="40" Click="Button_Click">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xE735;" FontSize="40" Margin="0,5,20,0" Foreground="#7e2199"/>
-                    <TextBlock Text="Habilidad" Foreground="#7e2199"/>
-                </StackPanel>
-            </Button>
-            <!--Botón de mover-->
-            <Button Style="{StaticResource ClickableButtonTemplate}"
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE734;" FontSize="40" Margin="0,5,20,0" Foreground="#7e2199"/>
+                        <TextBlock Text="Habilidad" Foreground="#7e2199"/>
+                    </StackPanel>
+                </Button>
+                <!--Botón de mover-->
+                <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0,0,80,40" 
                 FontSize="40" Click="Button_Click">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xE740;" FontSize="40" Margin="0,5,20,0" Foreground="#5180e1"/>
-                    <TextBlock Text="Mover" Foreground="#5180e1"/>
-                </StackPanel>
-            </Button>
-            <!--Botón de poción-->
-            <Button Style="{StaticResource ClickableButtonTemplate}"
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE740;" FontSize="40" Margin="0,5,20,0" Foreground="#5180e1"/>
+                        <TextBlock Text="Mover" Foreground="#5180e1"/>
+                    </StackPanel>
+                </Button>
+                <!--Botón de poción-->
+                <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0,0,0,40" 
                 FontSize="40" Foreground="#444444" Click="openPotionsMenu">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xEC0A;" FontSize="40" Margin="0,5,20,0"/>
-                    <TextBlock Text="Poción" Foreground="#444444"/>
-                </StackPanel>
-            </Button>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xEC0A;" FontSize="40" Margin="0,5,20,0"/>
+                        <TextBlock Text="Poción" Foreground="#444444"/>
+                    </StackPanel>
+                </Button>
 
-        </StackPanel>
+            </StackPanel>
 
-        <!-- Botón volver -->
-        <Button x:Name="BackButton" Style="{StaticResource ClickableButtonTemplate}" 
+            <!-- Botón volver -->
+            <Button x:Name="BackButton" Style="{StaticResource ClickableButtonTemplate}" 
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
                 FontSize="40" Visibility="Collapsed" Click="BackButton_Click">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
-                <TextBlock Text="Volver"/>
-            </StackPanel>
-        </Button>
-
-
-        <!--Menú de pociones-->
-        <Grid x:Name="UsePotionMenu" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="91*"/>
-                <ColumnDefinition Width="37*"/>
-            </Grid.ColumnDefinitions>
-
-            <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
-            <Rectangle Grid.Column="0" Fill="#cbc2a8" Margin="80,80,80,200" Stroke="black"/>
-
-
-            <!--Botón de volver-->
-            <Button Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40" Click="closePotionsMenu">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
                     <TextBlock Text="Volver"/>
                 </StackPanel>
             </Button>
+            
+            
+            <!--Menú de pociones-->
+            <Grid x:Name="UsePotionMenu" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="91*"/>
+                    <ColumnDefinition Width="37*"/>
+                </Grid.ColumnDefinitions>
 
-            <ListView x:Name="PotionsList" Margin="80,80,80,200"/>
+                <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
+                <Rectangle Grid.Column="0" Fill="#cbc2a8" Margin="80,80,80,200" Stroke="black"/>
 
 
-            <!--Información del objeto-->
-            <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
-                <TextBlock Text="Poción X" Style="{StaticResource TextBlockTemplate}" 
+                <!--Botón de volver-->
+                <Button Style="{StaticResource ClickableButtonTemplate}"
+                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
+                FontSize="40" Click="closePotionsMenu">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
+                        <TextBlock Text="Volver"/>
+                    </StackPanel>
+                </Button>
+
+                <ListView x:Name="PotionsList" Margin="80,80,80,200"/>
+
+
+                <!--Información del objeto-->
+                <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
+                    <TextBlock Text="Poción X" Style="{StaticResource TextBlockTemplate}" 
                            FontSize="50" HorizontalAlignment="Center"
                            Foreground="White"
                            Margin="0,0,0,10"/>
-                <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
-                <TextBox TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
+                    <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
+                    <TextBox TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
                          Margin="0,40,0,0" Height ="auto" FontSize="30"
                          Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
                         />
 
-            </StackPanel>
+                </StackPanel>
+            </Grid>
+
+
+            <!--Menú de pausa-->
+            <Grid x:Name="PauseMenu" Grid.ColumnSpan="3" Grid.RowSpan="2" Visibility="Collapsed">
+                <Rectangle Fill="Black" Opacity="0.63"/>
+
+                <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                    MaxHeight="350" Opacity="0.37"
+                    BorderThickness="2" BorderBrush="Black">
+                    <Image Source="/Assets/imgPlaceholder.jpg"/>
+                </Border>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100">
+                    <TextBlock Text="Juego Pausado" HorizontalAlignment="Center" 
+                               FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                               FontSize="100"/>
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                            Height="130" Width="700" FontSize="70" Margin="40"
+                            Click="exitPause">
+                        <StackPanel Orientation="Horizontal" >
+                            <FontIcon Glyph="&#xEDB5;" FontSize="70" Margin="-110,0,110,0"/>
+                            <TextBlock Text="Reanudar"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                            Height="130" Width="700" FontSize="70" Margin="40"
+                            Click="goToOptions">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE713;" FontSize="70" Margin="-110,0,110,0"/>
+                            <TextBlock Text="Opciones"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource ClickableButtonTemplate}"
+                            Height="130" Width="700" FontSize="70" Margin="40"
+                            Click="returnToMain">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE80F;" FontSize="70" Margin="0,0,40,0"/>
+                            <TextBlock Text="Menú principal"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+
         </Grid>
 
+    </Viewbox>
 
-    </Grid>
-    
     
 </Page>
