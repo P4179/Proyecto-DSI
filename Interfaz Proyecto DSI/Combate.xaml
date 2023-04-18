@@ -242,13 +242,6 @@
             <!--Menú de pausa-->
             <Grid x:Name="PauseMenu" Grid.ColumnSpan="3" Grid.RowSpan="2" Visibility="Collapsed">
                 <Rectangle Fill="Black" Opacity="0.63"/>
-
-                <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                    MaxHeight="350" Opacity="0.37"
-                    BorderThickness="2" BorderBrush="Black">
-                    <Image Source="/Assets/imgPlaceholder.jpg"/>
-                </Border>
-
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100">
                     <TextBlock Text="Juego Pausado" HorizontalAlignment="Center" 
                                FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"

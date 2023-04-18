@@ -24,6 +24,7 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
+            <Setter Property="UseSystemFocusVisuals" Value="False"/>
 
             <!--Estados del botón al pasarle el ratón encima-->
             <Setter Property="Template">
@@ -292,10 +293,17 @@
 
         
         
-        <Style x:Name="CheckBoxTemplate" TargetType="CheckBox">
+        <Style TargetType="CheckBox">
 
 
 
+        </Style>
+
+        <Style TargetType="Slider">
+            
+            <Setter Property="BorderThickness" Value="4"/>
+
+            
         </Style>
 
 
@@ -310,14 +318,14 @@
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="Foreground" Value="Black"/>
-
+            <Setter Property="UseSystemFocusVisuals" Value="False"/>
 
             <!--Estados de las pestañas al pasarle el ratón encima-->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="PivotHeaderItem">
                         <Grid x:Name="RootGrid">
-                            <Border BorderBrush="Black"
+                            <Border x:Name="RootBorder" BorderBrush="Black"
                                     BorderThickness="1"
                                     CornerRadius="5,5,0,0">
                                 <ContentPresenter />
@@ -365,6 +373,27 @@
 
 
                                 </VisualStateGroup>
+
+
+                                <VisualStateGroup x:Name="FocusStates">
+
+                                    <VisualState x:Name="Unfocused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="50"/>
+
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+
+
+                                </VisualStateGroup>
+
                             </VisualStateManager.VisualStateGroups>
 
 
@@ -374,7 +403,6 @@
             </Setter>
 
         </Style>
-
         <Style TargetType="PivotItem">
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="FontSize" Value="30"/>
@@ -637,14 +665,8 @@
                                              Fill="#cbc2a8" Stroke="Black" StrokeThickness="2"/>
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <!-- Seleccionador de mapa -->
-                                    <Grid x:Name="Selector" VerticalAlignment="Top" HorizontalAlignment="Center"
-                                          Margin="0,0,0,0">
-                                        <FontIcon Glyph="&#xEB49;" FontSize="60" Foreground="#444444"/>
-                                        <FontIcon Glyph="&#xEB49;" FontSize="25" Foreground="#444444"
-                                                  Margin="0,0,0,14.5"/>
-                                        <FontIcon Glyph="&#xEB49;" FontSize="50" Foreground="#a58563"
-                                                  Margin="0,0,0,4"/>
-                                    </Grid>
+                                    <Image x:Name="Selector" Source="/Assets/mapSelector.png" Width="60" Margin="0,0,0,70"/>
+
                                 </Grid>
                                 <!-- Texto a la derecha del círculo -->
                                 <Border HorizontalAlignment="Left" VerticalAlignment="Center"

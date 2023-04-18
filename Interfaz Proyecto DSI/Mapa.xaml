@@ -28,7 +28,7 @@
                                      Canvas.Left="650" Canvas.Top="500"
                                      TabIndex="1">
                             <RadioButton.Content>
-                                <FontIcon Glyph="&#xE7BF;" FontSize="30" Foreground="Black"/>
+                                <Image Source="/Assets/shop.png" MaxWidth="30"/>
                             </RadioButton.Content>
                         </RadioButton>
 
@@ -36,7 +36,7 @@
                                      DataContext="Jefe 1" Width="400" IsEnabled="False"
                                      Canvas.Left="550" Canvas.Top="130" IsTabStop="False">
                             <!-- Contenido del botón -->
-                            <FontIcon Glyph="&#xEBE8;" FontSize="30" Foreground="Black"/>
+                            <Image Source="/Assets/boss.png" MaxWidth="30" Margin="0,4,0,0"/>
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
@@ -131,13 +131,6 @@
             <!--Menú de pausa-->
             <Grid x:Name="PauseMenu" Grid.ColumnSpan="3" Grid.RowSpan="2" Visibility="Collapsed">
                 <Rectangle Fill="Black" Opacity="0.63"/>
-
-                <Border VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                    MaxHeight="350" Opacity="0.37"
-                    BorderThickness="2" BorderBrush="Black">
-                    <Image Source="/Assets/imgPlaceholder.jpg"/>
-                </Border>
-
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100">
                     <TextBlock Text="Juego Pausado" HorizontalAlignment="Center" 
                                FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"

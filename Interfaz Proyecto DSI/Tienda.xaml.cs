@@ -108,12 +108,23 @@ namespace Interfaz_Proyecto_DSI
 
 
 
-        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
+
+
+
+        // Hace que las pestañas sean del mismo tamaño y ocupen todo el ancho del pivot
+        private void Page_Loaded(object sender, RoutedEventArgs e) {
+            float widthOffset = 0.5f;
+
+            IEnumerable<PivotHeaderPanel> headerpanel = FindVisualChildren<PivotHeaderPanel>(tabs);
+            double totalwidth = headerpanel.ElementAt<PivotHeaderPanel>(0).ActualWidth;
+            IEnumerable<PivotHeaderItem> items = FindVisualChildren<PivotHeaderItem>(tabs);
+            int headitemcount = items.Count();
+            for (int i = 0; i < headitemcount; i++)
+                items.ElementAt<PivotHeaderItem>(i).Width = (totalwidth / headitemcount) - widthOffset;
+        }
+        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject {
+            if (depObj != null) {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) {
                     DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
                     if (child != null && child is T)
                         yield return (T)child;
@@ -122,16 +133,6 @@ namespace Interfaz_Proyecto_DSI
                         yield return childOfChild;
                 }
             }
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            IEnumerable<PivotHeaderPanel> headerpanel = FindVisualChildren<PivotHeaderPanel>(tabs);
-            double totalwidth = headerpanel.ElementAt<PivotHeaderPanel>(0).ActualWidth;
-            IEnumerable<PivotHeaderItem> items = FindVisualChildren<PivotHeaderItem>(tabs);
-            int headitemcount = items.Count();
-            for (int i = 0; i < headitemcount; i++)
-                items.ElementAt<PivotHeaderItem>(i).Width = (totalwidth / headitemcount) - 0.1f;
         }
 
     }

@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\board.png" />
+    <Content Include="Assets\boss.png" />
     <Content Include="Assets\character1.png" />
     <Content Include="Assets\character2.png" />
     <Content Include="Assets\character3.png" />
@@ -160,7 +161,9 @@
     <Content Include="Assets\character5.png" />
     <Content Include="Assets\imgPlaceholder.jpg" />
     <Content Include="Assets\map.png" />
+    <Content Include="Assets\mapSelector.png" />
     <Content Include="Assets\selection.png" />
+    <Content Include="Assets\shop.png" />
     <Content Include="Assets\tree.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
