@@ -30,7 +30,7 @@ namespace Interfaz_Proyecto_DSI
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Combate), null, new DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(Combate), null, new SuppressNavigationTransitionInfo());
         }
     }
 }

@@ -131,9 +131,8 @@
             </Grid>
 
             <!-- Panfleto con la información del objetivo del día -->
-            <StackPanel x:Name="Objective" Margin="40" 
-                    Width="450"
-                    VerticalAlignment="Top" HorizontalAlignment="Left">
+            <StackPanel Margin="40" Width="450"
+                        VerticalAlignment="Top" HorizontalAlignment="Left">
                 <Border Background="#cfba8e"
                         BorderBrush="Black" BorderThickness="1">
                     <TextBlock Text="Objetivo" FontSize="45"
@@ -200,17 +199,6 @@
 
             </StackPanel>
 
-            <!-- Botón volver -->
-            <Button x:Name="BackButton" Style="{StaticResource ClickableButtonTemplate}" 
-                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40" Visibility="Collapsed" Click="BackButton_Click">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
-                    <TextBlock Text="Volver"/>
-                </StackPanel>
-            </Button>
-            
-            
             <!--Menú de pociones-->
             <Grid x:Name="UsePotionMenu" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>

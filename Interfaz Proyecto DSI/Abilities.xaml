@@ -25,32 +25,14 @@
                     <Canvas>
                         <!-- Arriba izquierda -->
                         <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="22" Canvas.Top="179"/>
+                                     Canvas.Left="22" Canvas.Top="179"
+                                     UseSystemFocusVisuals="False"/>
                         <!-- Arriba centro -->
                         <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="272" Canvas.Top="179"/>
+                                     Canvas.Left="272" Canvas.Top="179"/>
                         <!-- Arriba derecha -->
                         <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="522" Canvas.Top="179"/>
-                        <!-- Medio izquierda -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="22" Canvas.Top="310"/>
-                        <!-- Medio centro -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                             IsChecked="True"
-                             Canvas.Left="272" Canvas.Top="310"/>
-                        <!-- Medio derecha -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="522" Canvas.Top="310"/>
-                        <!-- Abajo izquierda -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="22" Canvas.Top="440"/>
-                        <!-- Abajo medio -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="272" Canvas.Top="440"/>
-                        <!-- Abajo derecha -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                             Canvas.Left="522" Canvas.Top="440"/>
+                                     Canvas.Left="522" Canvas.Top="179"/>
                     </Canvas>
                 </Grid>
 

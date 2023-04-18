@@ -399,6 +399,7 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
+            <Setter Property="CornerRadius" Value="10"/>
 
         </Style>
         
@@ -518,7 +519,21 @@
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
-                                
+
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Unfocused">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle2.Opacity" Value="0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle2.Opacity" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+
                             </VisualStateManager.VisualStateGroups>
 
                             <!-- Se suele meter todo en un Grid -->
@@ -580,6 +595,7 @@
             <Setter Property="IsChecked" Value="False"/>
             <Setter Property="DataContext" Value="Nivel 1"/>
             <Setter Property="Width" Value="150"/>
+            <Setter Property="UseSystemFocusVisuals" Value="False"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -605,12 +621,13 @@
                                     <VisualState x:Name="PointOver"/>
                                     <VisualState x:Name="Disabled">
                                         <VisualState.Setters>
-                                            <Setter Target="RootStackPanel.Opacity" Value="0.7"/>
-                                            <Setter Target="RootStackPanel.Opacity" Value="0"/>
+                                            <Setter Target="RootStackPanel.Opacity" Value="0.5"/>
+                                            <Setter Target="Selector.Opacity" Value="0"/>
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
+                            
                             <StackPanel x:Name="RootStackPanel" Orientation="Horizontal" Height="140"
                                             VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Grid Margin="0,0,10,0">

@@ -28,39 +28,28 @@ namespace Interfaz_Proyecto_DSI
         {
             this.InitializeComponent();
             for (int i = 0; i < 10; i++) PotionsList.Items.Add("Poción " + i.ToString());
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (Frame.BackStack.Last().SourcePageType == typeof(Opciones))
+                PauseMenu.Visibility = Visibility.Visible;
+        }
+
+        private void enableFocus(bool enabled)
+        {
+            EndButton.IsTabStop = enabled;
+            foreach (Button button in Buttons.Children)
+            {
+                button.IsTabStop = enabled;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            Buttons.Visibility = Visibility.Collapsed;
-            EndButton.Visibility = Visibility.Collapsed;
-            Objective.Visibility = Visibility.Collapsed;
-            BackButton.Visibility = Visibility.Visible;
-
-            Character1.IsEnabled = true;
-            Character2.IsEnabled = true;
-            Character3.IsEnabled = true;
-            Character4.IsEnabled = true;
-            Character5.IsEnabled = true;
-            */
-
-            Frame.Navigate(typeof(Combate2));
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Buttons.Visibility = Visibility.Visible;
-            EndButton.Visibility = Visibility.Visible;
-            Objective.Visibility = Visibility.Visible;
-            BackButton.Visibility = Visibility.Collapsed;
-
-            Character1.IsEnabled = false;
-            Character2.IsEnabled = false;
-            Character3.IsEnabled = false;
-            Character4.IsEnabled = false;
-            Character5.IsEnabled = false;
+            // el último parámetro es la transición a realizar al cambiar de página
+            // en este caso, se suprime la transición
+            Frame.Navigate(typeof(Combate2), null, new SuppressNavigationTransitionInfo());
         }
 
         private void EndButton_Click(object sender, RoutedEventArgs e)
@@ -70,29 +59,44 @@ namespace Interfaz_Proyecto_DSI
 
         private void openPotionsMenu(object sender, RoutedEventArgs e)
         {
+            enableFocus(false);
             UsePotionMenu.Visibility = Visibility.Visible;
         }
 
         private void closePotionsMenu(object sender, RoutedEventArgs e)
         {
+            enableFocus(true);
             UsePotionMenu.Visibility = Visibility.Collapsed;
-
         }
-
 
         private void keyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Escape) {
+            if (e.Key == Windows.System.VirtualKey.Escape)
+            {
                 if (UsePotionMenu.Visibility == Visibility.Visible)
+                {
+                    enableFocus(true);
                     UsePotionMenu.Visibility = Visibility.Collapsed;
-                else togglePause();
+                }
+                else
+                {
+                    togglePause();
+                }
             }
         }
 
         private void togglePause()
         {
-            if (PauseMenu.Visibility == Visibility.Collapsed) PauseMenu.Visibility = Visibility.Visible;
-            else PauseMenu.Visibility = Visibility.Collapsed;
+            if (PauseMenu.Visibility == Visibility.Collapsed)
+            {
+                enableFocus(false);
+                PauseMenu.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                enableFocus(true);
+                PauseMenu.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void exitPause(object sender, RoutedEventArgs e)
@@ -108,12 +112,6 @@ namespace Interfaz_Proyecto_DSI
         private void returnToMain(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage), null, new DrillInNavigationTransitionInfo());
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            if (Frame.BackStack.Last().SourcePageType == typeof(Opciones))
-                PauseMenu.Visibility = Visibility.Visible;
         }
     }
 }

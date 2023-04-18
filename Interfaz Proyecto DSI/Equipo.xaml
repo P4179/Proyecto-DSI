@@ -264,9 +264,30 @@
                 </StackPanel>
             </Button>
 
+            <Button VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <Polygon Points="0,0 7,5 0,10"
+                                                 Fill="Beige"
+                                                 Stroke="Black"
+                                                 StrokeThickness="1">
+                                            
+                                        </Polygon>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
 
             <!--Lista de armas-->
-            <StackPanel x:Name="weaponList" Visibility="Collapsed"
+            <StackPanel x:Name="weaponList" Visibility="Visible"
                     Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="700,400,0,0"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
 

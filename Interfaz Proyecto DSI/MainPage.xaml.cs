@@ -25,50 +25,59 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class MainPage : Page
     {
-       
-
-
         public MainPage() {
             this.InitializeComponent();
         }
 
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ConfirmationMenu.Visibility = Visibility.Visible;
-            ConfirmationBg.Visibility = Visibility.Visible;
+            // si se puede volver atrás, es que ya se ha entrado en el juego
+            if (Frame.CanGoBack)
+            {
+                SaveGame.IsEnabled = true;
+            }
+            base.OnNavigatedTo(e);
         }
 
-        private void ButtonNo_Click(object sender, RoutedEventArgs e)
-        {
-            ConfirmationMenu.Visibility = Visibility.Collapsed;
-            ConfirmationBg.Visibility = Visibility.Collapsed;
-
-        }
-
+        // NUEVA PARTIDA
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
         }
 
-        private void ButtonYes_Click(object sender, RoutedEventArgs e)
+        // GUARDAR PARTIDA
+        private void SaveGame_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Exit();
+            Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
         }
 
-
+        // OPCIONES
         private void openOptions(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Opciones), null, new DrillInNavigationTransitionInfo());
         }
-        private void Equipo(object sender, RoutedEventArgs e)
+
+        // MENÚ DE CONFIRMACIÓN
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Tienda), null, new DrillInNavigationTransitionInfo());
+            ConfirmationMenu.Visibility = Visibility.Visible;
+            ConfirmationBg.Visibility = Visibility.Visible;
+        }
+        private void ButtonYes_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+        private void ButtonNo_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmationMenu.Visibility = Visibility.Collapsed;
+            ConfirmationBg.Visibility = Visibility.Collapsed;
         }
 
 
 
-
-        
+        private void Equipo(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Tienda), null, new DrillInNavigationTransitionInfo());
+        }
     }
 }
