@@ -92,12 +92,12 @@
         <DataTemplate x:Key="ShopItemsTemplate" x:DataType="local:Objeto">
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="9*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="{x:Bind name }" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,40,0"  Grid.Column="1"/>
+                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Column="1"/>
             </Grid>
         </DataTemplate>
 
@@ -119,9 +119,9 @@
 
 
             <!--Botón de volver-->
-            <Button Style="{StaticResource ClickableButtonTemplate}"
+            <Button x:Name="ReturnButton" Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40" Click="returnToMain">
+                FontSize="40" Click="returnToMap">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
                     <TextBlock Text="Volver"/>
@@ -141,7 +141,7 @@
 
                     <ListView x:Name="PotionsListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
-                              ItemsSource="{x:Bind potionsList}"
+                              ItemsSource="{x:Bind shopLogic.potionsList}"
                               IsItemClickEnabled="True" ItemClick="potItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
@@ -156,8 +156,7 @@
 
                     <ListView x:Name="WeaponsListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
-                              ItemsSource="{x:Bind weaponList}" 
-                              SelectedItem="{x:Bind selWeapon}"
+                              ItemsSource="{x:Bind shopLogic.weaponList}"
                               IsItemClickEnabled="True" ItemClick="weapItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
@@ -172,8 +171,7 @@
 
                     <ListView x:Name="AccessoriesListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
-                              ItemsSource="{x:Bind accessoriesList}"
-                              SelectedItem="{x:Bind selObj}"
+                              ItemsSource="{x:Bind shopLogic.accessoriesList}"
                               IsItemClickEnabled="True" ItemClick="accItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
@@ -191,10 +189,10 @@
 
 
             <!--Cantidad de dinero-->
-            <TextBox Grid.Column="1" Style="{StaticResource PlaceHolderTextTemplate}"
+            <TextBox x:Name="CoinsBox" Grid.Column="1" Style="{StaticResource PlaceHolderTextTemplate}"
                  HorizontalAlignment="Right" VerticalAlignment="Top"
                  Height="Auto" Padding="100, 10,40,10" Margin="50"
-                 CornerRadius="40" Text="{x:Bind coinsTxt}" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                 CornerRadius="40" Text="{x:Bind shopLogic.coinsTxt}" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                  Foreground="Black" Background="#cbc2a8" BorderBrush="#232323"/>
 
 
@@ -277,20 +275,21 @@
                 <TextBlock Text="Total:" Style="{StaticResource TextBlockTemplate}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="60" Margin="-200,0,0,0"/>
-                <TextBlock Text="200C" Style="{StaticResource TextBlockTemplate}" 
+                <TextBlock x:Name="TotalPrice" Style="{StaticResource TextBlockTemplate}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="60" Margin="400,0,0,0"/>
 
-                <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Padding="100, 10,100,10" Margin="375,0,0,250"
-                    CornerRadius="40" Text="20" FontSize="50" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
-                    Foreground="Black" Background="#cbc2a8" BorderBrush="#232323"/>
+                <TextBox x:Name="Quantity" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Padding="100, 10,100,10" Margin="375,0,0,250"
+                    CornerRadius="40" FontSize="50" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                    Foreground="Black" Background="#cbc2a8" BorderBrush="#232323" TextChanged="changeQuant"/>
 
                 <Button Style="{StaticResource ClickableButtonTemplate}"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Width="299" Padding="20" Margin="-350,0,0,-300"
                     FontSize="50" Content="Cancelar" Click="hideQuantitySelection">
                 </Button>
-                <Button Style="{StaticResource ClickableButtonTemplate}" IsEnabled="False"
+                <Button x:Name="BuyButton" Click="buyItem"
+                        Style="{StaticResource ClickableButtonTemplate}" IsEnabled="False"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Width="299" Padding="20" Margin="350,0,0,-300"
                     FontSize="50" Content="Comprar">

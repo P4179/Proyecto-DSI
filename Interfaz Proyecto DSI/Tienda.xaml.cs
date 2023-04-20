@@ -28,47 +28,65 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Tienda : Page
     {
-        public ObservableCollection<CommObject> potionsList { get; } = new ObservableCollection<CommObject>();
-        public ObservableCollection<Weapon> weaponList { get; } = new ObservableCollection<Weapon>();
-
-        public ObservableCollection<CommObject> accessoriesList { get; } = new ObservableCollection<CommObject>();
-
-        public CommObject selObj { get; set; }
-        public Weapon selWeapon { get; set; }
-
-        public int coins;
-        public string coinsTxt;
-
+        TiendaLogic shopLogic = new TiendaLogic();
         public Tienda() {
             this.InitializeComponent();
 
-            coins = 2000;
-            coinsTxt = coins.ToString() + " C";
+            shopLogic.coins = 2000;
             foreach(CommObject pot in ObjectLists.getPotions()) {
-                potionsList.Add(pot);
+                shopLogic.potionsList.Add(pot);
             }
             foreach (Weapon weap in ObjectLists.getWeapons()) {
-                weaponList.Add(weap);
+                shopLogic.weaponList.Add(weap);
             }
             foreach (CommObject acc in ObjectLists.getAccessories()) {
-                accessoriesList.Add(acc);
+                shopLogic.accessoriesList.Add(acc);
             }
         }
 
-        private void returnToMain(object sender, RoutedEventArgs e)
-        {
+        private void returnToMap(object sender, RoutedEventArgs e) {
             Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
         }
 
-        private void hideQuantitySelection(object sender, RoutedEventArgs e)
-        {
+        private void hideQuantitySelection(object sender, RoutedEventArgs e) {
             BuyQuantity.Visibility= Visibility.Collapsed;
+            ReturnButton.IsTabStop = true;
+            tabs.IsTabStop = true;
+
+            PotionsListView.IsTabStop = true;
+            WeaponsListView.IsTabStop = true;
+            AccessoriesListView.IsTabStop = true;
         }
         private void showQuantitySelection(object sender, RoutedEventArgs e)
         {
             BuyQuantity.Visibility = Visibility.Visible;
+            Quantity.Text = "1";
+            ReturnButton.IsTabStop = false;
+            tabs.IsTabStop = false;
+            PotionsListView.IsTabStop = false;
+            WeaponsListView.IsTabStop = false;
+            AccessoriesListView.IsTabStop = false;
+            TotalPrice.Text = (shopLogic.selectedObject.price * int.Parse(Quantity.Text)).ToString() + " C";
+
         }
 
+        int total;
+        private void changeQuant(object sender, TextChangedEventArgs e) {
+            if (int.TryParse(Quantity.Text, out int parsedNumber)) {
+                if (parsedNumber > 1000) {
+                    Quantity.Text = "999";
+                    parsedNumber = 999;
+                }
+                total = shopLogic.selectedObject.price * parsedNumber;
+                TotalPrice.Text = total.ToString() + " C";
+
+                if (total <= shopLogic.coins) BuyButton.IsEnabled = true;
+                else BuyButton.IsEnabled = false;
+            }
+            else {
+                Quantity.Text = Quantity.Text.TrimEnd(Quantity.Text.LastOrDefault());
+            }
+        }
 
 
 
@@ -105,39 +123,47 @@ namespace Interfaz_Proyecto_DSI
             currTabName = selected.Name;
             if (currTabName == "PotionsTab" || currTabName == "AccessoriesTab") {
                 if (currTabName == "PotionsTab") {
+                    shopLogic.selectedObject = shopLogic.potionsList[0];
                     PotionsListView.SelectedIndex = 0;
-                    ItemName.Text = potionsList[0].name;
-                    ItemDescription.Text = potionsList[0].desc;
+                    ItemName.Text = shopLogic.potionsList[0].name;
+                    ItemDescription.Text = shopLogic.potionsList[0].desc;
                 }
                 else {
+                    shopLogic.selectedObject = shopLogic.accessoriesList[0];
                     AccessoriesListView.SelectedIndex = 0;
-                    ItemName.Text = accessoriesList[0].name;
-                    ItemDescription.Text = accessoriesList[0].desc;
+                    ItemName.Text = shopLogic.accessoriesList[0].name;
+                    ItemDescription.Text = shopLogic.accessoriesList[0].desc;
                 }
                 WeaponsInfo.Visibility = Visibility.Collapsed;
                 ItemDescription.Visibility = Visibility.Visible;
 
             }
             else {
+                shopLogic.selectedObject = shopLogic.weaponList[0];
                 WeaponsListView.SelectedIndex= 0;
-                ItemName.Text = weaponList[0].name;
-                WeaponDmg.Text= weaponList[0].dmg.ToString();
-                WeaponEff.Text = weaponList[0].effect;
-                WeaponReach.Text = weaponList[0].reach.ToString();
-                WeaponType.Text = weaponList[0].type;
+                ItemName.Text = shopLogic.weaponList[0].name;
+                WeaponDmg.Text= shopLogic.weaponList[0].dmg.ToString();
+                WeaponEff.Text = shopLogic.weaponList[0].effect;
+                WeaponReach.Text = shopLogic.weaponList[0].reach.ToString();
+                WeaponType.Text = shopLogic.weaponList[0].type;
                 WeaponsInfo.Visibility = Visibility.Visible;
                 ItemDescription.Visibility = Visibility.Collapsed;
             }
         }
 
         private void potItClick(object sender, ItemClickEventArgs e) {
+            shopLogic.coins = 2;
+
             var clicked = e.ClickedItem as CommObject;
+            shopLogic.selectedObject = clicked;
+
             ItemName.Text = clicked.name;
             ItemDescription.Text = clicked.desc;
         }
 
         private void weapItClick(object sender, ItemClickEventArgs e) {
             var clicked = e.ClickedItem as Weapon;
+            shopLogic.selectedObject = clicked;
 
             ItemName.Text = clicked.name;
             WeaponDmg.Text = clicked.dmg.ToString();
@@ -148,8 +174,18 @@ namespace Interfaz_Proyecto_DSI
 
         private void accItClick(object sender, ItemClickEventArgs e) {
             var clicked = e.ClickedItem as CommObject;
+            shopLogic.selectedObject = clicked;
+
             ItemName.Text = clicked.name;
             ItemDescription.Text = clicked.desc;
+        }
+
+        private void buyItem(object sender, RoutedEventArgs e) {
+            shopLogic.coins -= total;
+            shopLogic.coinsTxt = shopLogic.coins.ToString() + " C";
+            CoinsBox.Text = shopLogic.coinsTxt;
+
+            hideQuantitySelection(null, null);
         }
     }
 
