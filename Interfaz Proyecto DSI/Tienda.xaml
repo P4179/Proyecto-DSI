@@ -19,7 +19,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="UseSystemFocusVisuals" Value="False"/>
-
+            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
@@ -96,8 +96,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center" HorizontalAlignment="Stretch" PointerEntered="itemPointerEntered"/>
-                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,40,0"  Grid.Column="1" PointerEntered="itemPointerEntered"/>
+                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,40,0"  Grid.Column="1"/>
             </Grid>
         </DataTemplate>
 
@@ -141,7 +141,8 @@
 
                     <ListView x:Name="PotionsListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
-                              ItemsSource="{x:Bind potionsList}"/>
+                              ItemsSource="{x:Bind potionsList}"
+                              IsItemClickEnabled="True" ItemClick="potItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
 
@@ -155,7 +156,9 @@
 
                     <ListView x:Name="WeaponsListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
-                              ItemsSource="{x:Bind weaponList}" />
+                              ItemsSource="{x:Bind weaponList}" 
+                              SelectedItem="{x:Bind selWeapon}"
+                              IsItemClickEnabled="True" ItemClick="weapItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
 
@@ -169,7 +172,9 @@
 
                     <ListView x:Name="AccessoriesListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
-                              ItemsSource="{x:Bind accessoriesList}" />
+                              ItemsSource="{x:Bind accessoriesList}"
+                              SelectedItem="{x:Bind selObj}"
+                              IsItemClickEnabled="True" ItemClick="accItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
             </Pivot>
@@ -196,7 +201,7 @@
 
             <!--Información del objeto-->
             <StackPanel Grid.Column="1" Margin="-40,150,40,20" VerticalAlignment="Stretch">
-                <TextBlock Text="Nombre del objeto" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock x:Name="ItemName" Text="Nombre del objeto" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
 
                 <Border x:Name="WeaponsInfo" Background="#cbc2a8" BorderBrush="Black" BorderThickness="0.5"
@@ -207,7 +212,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Tipo de arma" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="{x:Bind selWeapon.type}" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock x:Name="WeaponType" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -217,7 +222,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="{x:Bind selWeapon.dmg}" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock x:Name="WeaponDmg" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -227,7 +232,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Efecto especial" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="{x:Bind selWeapon.effect}" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock x:Name="WeaponEff" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -237,7 +242,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Alcance" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="{x:Bind selWeapon.reach}" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock x:Name="WeaponReach" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -247,9 +252,7 @@
 
 
                 <TextBox x:Name="ItemDescription" TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
-                         Margin="0,40,0,0" Height ="auto" FontSize="30"
-                         Text="{x:Bind selObj.desc}" 
-                        />
+                         Margin="0,40,0,0" Height="310" FontSize="30"/>
 
             </StackPanel>
 

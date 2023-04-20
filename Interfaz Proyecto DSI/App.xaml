@@ -197,13 +197,18 @@
                                     </VisualState>
 
 
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Margin" Value="0,30,0,0"/>
+                                            <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.Margin" Value="0,30,0,0"/>
                                             <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
                                         </VisualState.Setters>
                                     </VisualState>
-
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
@@ -278,17 +283,17 @@
             <Setter Property="PlaceholderForeground" Value="Black"/>
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="CornerRadius" Value="5"
+                    />
         </Style>
         <Style TargetType="ComboBoxItem">
-            <Setter Property="Width" Value="{Binding}"/>
-            <Setter Property="Height" Value="{Binding}"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="FontSize" Value="30"/>
+            <Setter Property="IsTextScaleFactorEnabled" Value="True"/>
         </Style>
 
         

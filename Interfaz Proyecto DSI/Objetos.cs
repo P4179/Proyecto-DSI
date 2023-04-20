@@ -49,17 +49,17 @@ namespace Interfaz_Proyecto_DSI
         };
 
         public static List<Weapon> weapons { get; } = new List<Weapon>() {
-            new Weapon() {id = 0, name = "Arma 1", price = 100, displayPrice = "100 C", dmg = 10, effect = "Efecto 1", reach = 1 },
-            new Weapon() {id = 1,  name = "Arma 2", price = 200, displayPrice = "200 C", dmg = 20, effect = "Efecto 2", reach = 2 },
-            new Weapon() {id = 2,  name = "Arma 3", price = 300, displayPrice = "300 C", dmg = 30, effect = "Efecto 3", reach = 3 },
-            new Weapon() {id = 3,  name = "Arma 4", price = 400, displayPrice = "400 C", dmg = 40, effect = "Efecto 4", reach = 4 },
-            new Weapon() {id = 4,  name = "Arma 5", price = 500, displayPrice = "500 C", dmg = 50, effect = "Efecto 5", reach = 5 },
-            new Weapon() {id = 5,  name = "Arma 6", price = 600, displayPrice = "600 C", dmg = 60, effect = "Efecto 6", reach = 6 },
-            new Weapon() {id = 6,  name = "Arma 7", price = 700, displayPrice = "700 C", dmg = 70, effect = "Efecto 7", reach = 7 },
-            new Weapon() {id = 7, name = "Arma 8", price = 800, displayPrice = "800 C", dmg = 80, effect = "Efecto 8", reach = 8 },
-            new Weapon() {id = 8,  name = "Arma 9", price = 900, displayPrice = "900 C", dmg = 90, effect = "Efecto 9", reach = 9 },
-            new Weapon() {id = 9,  name = "Arma 10", price = 1000, displayPrice = "1000 C", dmg = 100, effect = "Efecto 10", reach = 10 },
-            new Weapon() {id = 10,  name = "Arma 11", price = 1100, displayPrice = "1100 C" , dmg = 110, effect = "Efecto 11", reach = 11}
+            new Weapon() {id = 0, name = "Arma 1", price = 100, displayPrice = "100 C", type="Escudo", dmg = 10, effect = "Efecto 1", reach = 1 },
+            new Weapon() {id = 1,  name = "Arma 2", price = 200, displayPrice = "200 C", type="Espada", dmg = 20, effect = "Efecto 2", reach = 2 },
+            new Weapon() {id = 2,  name = "Arma 3", price = 300, displayPrice = "300 C", type="Lanza", dmg = 30, effect = "Efecto 3", reach = 3 },
+            new Weapon() {id = 3,  name = "Arma 4", price = 400, displayPrice = "400 C", type="Espada", dmg = 40, effect = "Efecto 4", reach = 4 },
+            new Weapon() {id = 4,  name = "Arma 5", price = 500, displayPrice = "500 C", type="Lanza", dmg = 50, effect = "Efecto 5", reach = 5 },
+            new Weapon() {id = 5,  name = "Arma 6", price = 600, displayPrice = "600 C", type="Lanza", dmg = 60, effect = "Efecto 6", reach = 6 },
+            new Weapon() {id = 6,  name = "Arma 7", price = 700, displayPrice = "700 C", type="Escudo", dmg = 70, effect = "Efecto 7", reach = 7 },
+            new Weapon() {id = 7, name = "Arma 8", price = 800, displayPrice = "800 C", type="Escudo", dmg = 80, effect = "Efecto 8", reach = 8 },
+            new Weapon() {id = 8,  name = "Arma 9", price = 900, displayPrice = "900 C", type="Espada", dmg = 90, effect = "Efecto 9", reach = 9 },
+            new Weapon() {id = 9,  name = "Arma 10", price = 1000, displayPrice = "1000 C", type="Espada", dmg = 100, effect = "Efecto 10", reach = 10 },
+            new Weapon() {id = 10,  name = "Arma 11", price = 1100, displayPrice = "1100 C", type="Lanza", dmg = 110, effect = "Efecto 11", reach = 11}
         };
 
 

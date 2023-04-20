@@ -64,7 +64,10 @@ namespace Interfaz_Proyecto_DSI
         {
             BuyQuantity.Visibility= Visibility.Collapsed;
         }
-
+        private void showQuantitySelection(object sender, RoutedEventArgs e)
+        {
+            BuyQuantity.Visibility = Visibility.Visible;
+        }
 
 
 
@@ -80,6 +83,8 @@ namespace Interfaz_Proyecto_DSI
             int headitemcount = items.Count();
             for (int i = 0; i < headitemcount; i++)
                 items.ElementAt<PivotHeaderItem>(i).Width = (totalwidth / headitemcount) - widthOffset;
+
+
         }
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject {
             if (depObj != null) {
@@ -99,37 +104,53 @@ namespace Interfaz_Proyecto_DSI
             PivotItem selected = e.AddedItems[0] as PivotItem;
             currTabName = selected.Name;
             if (currTabName == "PotionsTab" || currTabName == "AccessoriesTab") {
-                if (currTabName == "PotionsTab") selObj = potionsList[0];
-                else selObj = accessoriesList[0];
+                if (currTabName == "PotionsTab") {
+                    PotionsListView.SelectedIndex = 0;
+                    ItemName.Text = potionsList[0].name;
+                    ItemDescription.Text = potionsList[0].desc;
+                }
+                else {
+                    AccessoriesListView.SelectedIndex = 0;
+                    ItemName.Text = accessoriesList[0].name;
+                    ItemDescription.Text = accessoriesList[0].desc;
+                }
                 WeaponsInfo.Visibility = Visibility.Collapsed;
                 ItemDescription.Visibility = Visibility.Visible;
 
             }
             else {
-                selWeapon = weaponList[0];
+                WeaponsListView.SelectedIndex= 0;
+                ItemName.Text = weaponList[0].name;
+                WeaponDmg.Text= weaponList[0].dmg.ToString();
+                WeaponEff.Text = weaponList[0].effect;
+                WeaponReach.Text = weaponList[0].reach.ToString();
+                WeaponType.Text = weaponList[0].type;
                 WeaponsInfo.Visibility = Visibility.Visible;
                 ItemDescription.Visibility = Visibility.Collapsed;
             }
         }
 
-
-        private void itemPointerEntered(object sender, PointerRoutedEventArgs e) {
-            if (currTabName == "PotionsTab") {
-                int ind = PotionsListView.IndexFromContainer((DependencyObject)sender);
-                selObj = potionsList[ind];
-            }
-            else if (currTabName == "AccessoriesTab") {
-                int ind = AccessoriesListView.IndexFromContainer((DependencyObject)sender);
-                selObj = accessoriesList[ind];
-            }
-            else {
-                int ind = WeaponsListView.IndexFromContainer((DependencyObject)sender);
-                selWeapon = weaponList[ind];
-            }
+        private void potItClick(object sender, ItemClickEventArgs e) {
+            var clicked = e.ClickedItem as CommObject;
+            ItemName.Text = clicked.name;
+            ItemDescription.Text = clicked.desc;
         }
 
+        private void weapItClick(object sender, ItemClickEventArgs e) {
+            var clicked = e.ClickedItem as Weapon;
 
+            ItemName.Text = clicked.name;
+            WeaponDmg.Text = clicked.dmg.ToString();
+            WeaponEff.Text = clicked.effect;
+            WeaponReach.Text = clicked.reach.ToString();
+            WeaponType.Text = clicked.type;
+        }
 
+        private void accItClick(object sender, ItemClickEventArgs e) {
+            var clicked = e.ClickedItem as CommObject;
+            ItemName.Text = clicked.name;
+            ItemDescription.Text = clicked.desc;
+        }
     }
 
 
