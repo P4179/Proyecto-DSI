@@ -40,8 +40,6 @@ namespace Interfaz_Proyecto_DSI
         private CoreCursor cursorHand = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 0);
         private CoreCursor cursorArrow = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 0);
         private bool dragginObject = false;
-        public bool itemTeamPressed = false;
-        private bool itemTemplatePressed = false;
 
         // al añadir o quitar un objeto, se actualiza el grid solo porque se trata de una
         // ObservableCollection, es decir, que manda notificaciones cuando se modifican sus elementos
@@ -145,10 +143,12 @@ namespace Interfaz_Proyecto_DSI
                     // se intercambian
                     int indexTeam = TeamList.IndexOf(cTeam);
                     TeamList[indexTeam] = cTemplate;
+                    // se habilita
                     (TeamGrid.ContainerFromItem(cTemplate) as GridViewItem).IsEnabled = true;
 
                     int indexTemplate = TemplateList.IndexOf(cTemplate);
                     TemplateList[indexTemplate] = cTeam;
+                    // se deshabilita
                     (TemplateGrid.ContainerFromItem(cTeam) as GridViewItem).IsEnabled = false;
 
                     break;
@@ -190,54 +190,30 @@ namespace Interfaz_Proyecto_DSI
 
         private void TeamGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            /*
-            GridView g = sender as GridView;
-            // devuelve el contenedor que guarda el item
-            GridViewItem item = g.ContainerFromItem(e.ClickedItem) as GridViewItem;
-            Character character = e.ClickedItem as Character;
-            if (character.Glyph == "")
+            foreach (Character character in TemplateGrid.Items)
             {
-                VisualStateManager.GoToState(item, "Normal", false);
-                itemTeamPressed = false;
-            }
-            else
-            {
-                if (!itemTemplatePressed)
+                GridViewItem item = TemplateGrid.ContainerFromItem(character) as GridViewItem;
+                if (item.IsSelected)
                 {
-                    itemTeamPressed = true;
-                }
-                else
-                {
+                    item.IsSelected = false;
                     VisualStateManager.GoToState(item, "Normal", false);
+                    break;
                 }
             }
-            */
         }
 
         private void TemplateGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            /*
-            GridView g = sender as GridView;
-            // devuelve el contenedor que guarda el item
-            GridViewItem item = g.ContainerFromItem(e.ClickedItem) as GridViewItem;
-            Character character = e.ClickedItem as Character;
-            if (character.Glyph == "")
+            foreach (Character character in TeamGrid.Items)
             {
-                VisualStateManager.GoToState(item, "Normal", false);
-                itemTemplatePressed = false;
-            }
-            else
-            {
-                if (!itemTeamPressed)
+                GridViewItem item = TeamGrid.ContainerFromItem(character) as GridViewItem;
+                if (item.IsSelected)
                 {
-                    itemTemplatePressed = true;
-                }
-                else
-                {
+                    item.IsSelected = false;
                     VisualStateManager.GoToState(item, "Normal", false);
+                    break;
                 }
             }
-            */
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
