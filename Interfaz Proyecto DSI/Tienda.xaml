@@ -89,7 +89,7 @@
         </Style>
 
 
-        <DataTemplate x:Key="ShopItemsTemplate" x:DataType="local:Object">
+        <DataTemplate x:Key="ShopItemsTemplate" x:DataType="local:Objeto">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>

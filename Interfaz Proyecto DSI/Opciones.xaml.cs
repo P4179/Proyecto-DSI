@@ -57,6 +57,7 @@ namespace Interfaz_Proyecto_DSI
             for (int i = 0; i < headitemcount; i++)
                 items.ElementAt<PivotHeaderItem>(i).Width = (totalwidth / headitemcount) - widthOffset;
         }
+
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject {
             if (depObj != null) {
                 for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) {

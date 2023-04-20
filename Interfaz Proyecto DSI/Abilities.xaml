@@ -22,17 +22,19 @@
                     HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid>
                     <Image Source="Assets/Tree.png"/>
-                    <Canvas>
+                    <Canvas x:Name="Tree">
                         <!-- Arriba izquierda -->
                         <RadioButton Style="{StaticResource RadioAbility}"
                                      Canvas.Left="22" Canvas.Top="179"
-                                     UseSystemFocusVisuals="False"/>
+                                     GotFocus="Ability_GotFocus"/>
                         <!-- Arriba centro -->
                         <RadioButton Style="{StaticResource RadioAbility}"
-                                     Canvas.Left="272" Canvas.Top="179"/>
+                                     Canvas.Left="272" Canvas.Top="179"
+                                     GotFocus="Ability_GotFocus"/>
                         <!-- Arriba derecha -->
                         <RadioButton Style="{StaticResource RadioAbility}"
-                                     Canvas.Left="522" Canvas.Top="179"/>
+                                     Canvas.Left="522" Canvas.Top="179"
+                                     GotFocus="Ability_GotFocus"/>
                     </Canvas>
                 </Grid>
 
@@ -78,7 +80,7 @@
                         </Border>
                         <TextBox TextWrapping="Wrap" TextAlignment="Justify"
                              FontSize="30" BorderThickness="0" 
-                             Margin="150, 0" 
+                             Margin="150, 0" IsTabStop="False"
                              IsHitTestVisible="False" IsReadOnly="True"
                              FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                              Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 

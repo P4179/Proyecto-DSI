@@ -76,20 +76,32 @@
                         <Button x:Name="StartGameButton" Style="{StaticResource ClickableButtonTemplate}"
                                 Height="88" Width="270" Margin="40" Click="StartGameButton_Click"
                                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                                FontSize="38" TabIndex="4">
+                                FontSize="38" TabIndex="5">
                             <TextBlock Text="Comenzar"/>
                         </Button>
                     </StackPanel>
                 </Border>
             </StackPanel>
 
-            <!--Botón de equipo -->
-            <Button x:Name="TeamButton" Style="{StaticResource ClickableButtonTemplate}"
-                    Height="140" Width="140" VerticalAlignment="Top" 
-                    Margin="40" Click="TeamButton_Click"
-                    TabIndex="3">
-                <FontIcon Glyph="&#xE716;" FontSize="90"/>
-            </Button>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top" HorizontalAlignment="Left">
+                <!--Botón de pausa -->
+                <Button x:Name="PauseButton" Style="{StaticResource ClickableButtonTemplate}"
+                        Height="130" Width="130"
+                        Margin="40,40,0,0" Click="PauseButton_Click"
+                        TabIndex="3">
+                    <FontIcon Glyph="&#xE769;" FontSize="80"/>
+                </Button>
+
+                <!--Botón de equipo -->
+                <Button x:Name="TeamButton" Style="{StaticResource ClickableButtonTemplate}"
+                        Height="130" Width="130"
+                        Margin="40,40,0,0" Click="TeamButton_Click"
+                        TabIndex="4">
+                    <FontIcon Glyph="&#xE716;" FontSize="80"/>
+                </Button>
+            </StackPanel>
+
 
             <Viewbox Width="45" Margin="40"
                  HorizontalAlignment="Left" VerticalAlignment="Center">

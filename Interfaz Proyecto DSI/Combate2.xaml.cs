@@ -23,9 +23,38 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Combate2 : Page
     {
+        private DispatcherTimer timer;
         public Combate2()
         {
+            timer = new DispatcherTimer();
+            timer.Tick += timer_Tick;
+            timer.Interval = new TimeSpan(100000);
+
             this.InitializeComponent();
+        }
+
+        void timer_Tick(object sender, object e)
+        {
+            Object focus = FocusManager.GetFocusedElement();
+            RadioButton character = focus as RadioButton;
+            if (character != null && character.Parent == Map)
+            {
+                character.IsChecked = true;
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // se inicia el timer
+            timer.Start();
+            base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            // se para el timer
+            timer.Stop();
+            base.OnNavigatedFrom(e);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

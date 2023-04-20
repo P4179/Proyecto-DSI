@@ -23,6 +23,8 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Abilities : Page
     {
+        private DispatcherTimer timer;
+
         public Abilities()
         {
             this.InitializeComponent();
@@ -31,6 +33,12 @@ namespace Interfaz_Proyecto_DSI
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Equipo), null, new DrillInNavigationTransitionInfo());
+        }
+
+        private void Ability_GotFocus(object sender, RoutedEventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
+            radioButton.IsChecked = true;
         }
     }
 }

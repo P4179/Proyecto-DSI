@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace Interfaz_Proyecto_DSI
 {
-    public class Object : ObservableObject {
+    public class Objeto : ObservableObject {
         public int id { get; set; }
 
         public string name { get; set; }
         public int price { get; set; }
         public string displayPrice { get; set; }
 
-        public Object() { }
+        public Objeto() { }
     }
 
-    public class CommObject : Object {
+    public class CommObject : Objeto {
         public string desc { get; set; }
         public CommObject() { }
     }
 
-    public class Weapon : Object {
+    public class Weapon : Objeto {
         public string type { get; set; }
         public int dmg { get; set; }
         public string effect { get; set; }

@@ -432,13 +432,14 @@
         </Style>
         
         
-        <!-- Template de la selección de habilidades -->
+        <!-- Estilo de la selección de habilidades -->
         <Style x:Key="RadioAbility" TargetType="RadioButton">
             <Setter Property="MinHeight" Value="0"/>
             <Setter Property="MinWidth" Value="0"/>
             <Setter Property="IsChecked" Value="False"/>
             <Setter Property="Width" Value="80"/>
             <Setter Property="GroupName" Value="Ability"/>
+            <Setter Property="UseSystemFocusVisuals" Value="False"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
@@ -496,7 +497,7 @@
         </Style>
         
         
-        <!-- Template selección personaje -->
+        <!-- Estilo selección personaje -->
         <Style x:Key="RadioCharacter" TargetType="RadioButton">
             <Setter Property="MinHeight" Value="0"/>
             <Setter Property="MinWidth" Value="0"/>
@@ -547,21 +548,6 @@
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
-
-                                <VisualStateGroup x:Name="FocusStates">
-                                    <VisualState x:Name="Unfocused">
-                                        <VisualState.Setters>
-                                            <Setter Target="Triangle2.Opacity" Value="0"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-
-                                    <VisualState x:Name="Focused">
-                                        <VisualState.Setters>
-                                            <Setter Target="Triangle2.Opacity" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-
                             </VisualStateManager.VisualStateGroups>
 
                             <!-- Se suele meter todo en un Grid -->
@@ -655,7 +641,7 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
+
                             <StackPanel x:Name="RootStackPanel" Orientation="Horizontal" Height="140"
                                             VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Grid Margin="0,0,10,0">
@@ -685,8 +671,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        
+
         <!-- Estilo de los ítems de la plantilla de personajes -->
         <Style x:Name="CharacterGridViewItem" TargetType="GridViewItem">
             <Setter Property="Margin" Value="0"/>
@@ -699,13 +684,17 @@
                               Padding="10, 10, 10, 0">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Disabled"/>
                                     <VisualState x:Name="Normal"/>
+
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.Background" Value="#cfba8e"/>
                                         </VisualState.Setters>
+                                        <VisualState.StateTriggers>
+                                            <StateTrigger IsActive="False"/>
+                                        </VisualState.StateTriggers>
                                     </VisualState>
-                                    <VisualState x:Name="Disabled"/>
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.Background" Value="#cfba8e"/>
@@ -715,6 +704,25 @@
                                     </VisualState>
                                 </VisualStateGroup>
 
+                                <VisualStateGroup>
+                                    <VisualState>
+                                        <VisualState.StateTriggers>
+                                            <StateTrigger IsActive="False"/>
+                                        </VisualState.StateTriggers>
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Opacity" Value="0.5"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#cfba8e"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
 
                             <ContentPresenter x:Name="Item" FontSize="90" Foreground="#606060"
@@ -724,20 +732,90 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        
+
         <!-- Estilo de la propia plantilla de personajes -->
         <Style x:Name="CharacterTemplateStyle" TargetType="GridView">
             <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="0"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+        </Style>
+        
+        <!-- Estilo de los botones triángulos -->
+        <Style x:Key="TriangleButton" TargetType="Button">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Viewbox Width="{TemplateBinding Width}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle.Fill">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="1,1">
+                                                        <GradientStop Color="#9f8847" Offset="1.0"/>
+                                                        <GradientStop Color="#d4be7c" Offset="0.0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="Triangle" />
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle.Opacity" Value="0.37"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Unfocused"/>
+
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Target="Triangle.Fill">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="1,1">
+                                                        <GradientStop Color="#9f8847" Offset="1.0"/>
+                                                        <GradientStop Color="#d4be7c" Offset="0.0"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid>
+                                <Polygon x:Name="Triangle" Points="0,0 6,5 0,10"
+                                         Stroke="Black"
+                                         StrokeThickness="0.2">
+                                    <Polygon.Fill>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="1,1">
+                                            <GradientStop Color="#e9e2ce" Offset="0.0"/>
+                                            <GradientStop Color="#c9b888" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Polygon.Fill>
+                                </Polygon>
+                            </Grid>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
 
-
-        
-        
     </Application.Resources>
     
 </Application>

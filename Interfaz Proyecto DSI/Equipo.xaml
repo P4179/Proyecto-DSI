@@ -8,16 +8,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    
-    
     <Page.Resources>
-        <DataTemplate x:Name="CharactersTemplate">
+        <DataTemplate x:Name="CharactersTemplate"
+                      x:DataType="local:Character">
             <!-- Foreground y FontSize cambina con las propiedades del padre.
             Por lo tanto, ya se pueden modificar durante los estados -->
-            <FontIcon Glyph="&#xEA8C;" 
+            <FontIcon Glyph="{x:Bind Glyph}"
                       Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" 
                       FontSize="{Binding FontSize, RelativeSource={RelativeSource TemplatedParent}}"/>
         </DataTemplate>
+        <!-- Número de elementos por fila y cómo se distribuyen, en horizontal o vertical -->
         <ItemsPanelTemplate x:Name="CharactersPanel">
             <ItemsWrapGrid MaximumRowsOrColumns="4" 
                            Orientation="Horizontal"/>
@@ -100,13 +100,18 @@
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                    <GridView VerticalAlignment="Center" HorizontalAlignment="Center"
-                          SelectionMode="Single"
-                          ItemsSource="1234"
-                          Style="{StaticResource CharacterTemplateStyle}"
-                          ItemTemplate="{StaticResource CharactersTemplate}"
-                          ItemsPanel="{StaticResource CharactersPanel}"
-                          ItemContainerStyle="{StaticResource CharacterGridViewItem}">
+                    <GridView x:Name="TeamGrid"
+                              VerticalAlignment="Center" HorizontalAlignment="Center"
+                              ItemsSource="{x:Bind TeamList}"
+                              Style="{StaticResource CharacterTemplateStyle}"
+                              ItemTemplate="{StaticResource CharactersTemplate}"
+                              ItemsPanel="{StaticResource CharactersPanel}"
+                              ItemContainerStyle="{StaticResource CharacterGridViewItem}"
+                              AllowDrop="True"
+                              DragOver="TeamGrid_DragOver" Drop="TeamGrid_Drop"
+                              IsItemClickEnabled="True"
+                              ItemClick="TeamGrid_ItemClick"
+                              Loaded="Grid_Loaded">
                     </GridView>
                 </StackPanel>
 
@@ -117,13 +122,19 @@
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                    <GridView VerticalAlignment="Center" HorizontalAlignment="Center"
-                          SelectionMode="Single"
-                          ItemsSource="12345678ABCD"
-                          Style="{StaticResource CharacterTemplateStyle}"
-                          ItemTemplate="{StaticResource CharactersTemplate}"
-                          ItemsPanel="{StaticResource CharactersPanel}"
-                          ItemContainerStyle="{StaticResource CharacterGridViewItem }">
+                    <GridView x:Name="TemplateGrid"
+                              VerticalAlignment="Center" HorizontalAlignment="Center"
+                              ItemsSource="{x:Bind TemplateList}"
+                              Style="{StaticResource CharacterTemplateStyle}"
+                              ItemTemplate="{StaticResource CharactersTemplate}"
+                              ItemsPanel="{StaticResource CharactersPanel}"
+                              ItemContainerStyle="{StaticResource CharacterGridViewItem }"
+                              CanDragItems="True" DragItemsStarting="TemplateGrid_DragItemsStarting"
+                              PointerMoved="TemplateGrid_PointerMoved"
+                              PointerExited="TemplateGrid_PointerExited"
+                              IsItemClickEnabled="True"
+                              ItemClick="TemplateGrid_ItemClick"
+                              Loaded="Grid_Loaded">
                     </GridView>
                 </StackPanel>
             </StackPanel>
@@ -264,30 +275,8 @@
                 </StackPanel>
             </Button>
 
-            <Button VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Polygon Points="0,0 7,5 0,10"
-                                                 Fill="Beige"
-                                                 Stroke="Black"
-                                                 StrokeThickness="1">
-                                            
-                                        </Polygon>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-
-
             <!--Lista de armas-->
-            <StackPanel x:Name="weaponList" Visibility="Visible"
+            <StackPanel x:Name="weaponList" Visibility="Collapsed"
                     Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="700,400,0,0"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
 
@@ -296,7 +285,19 @@
                         <SolidColorBrush Color="#FFCFBA8E" Opacity="0.67"/>
                     </Border.Background>
                     <Grid>
-                        <Rectangle Margin="60,10,60,10" Fill="#FFD8CCA9" Stroke="Black" HorizontalAlignment="Stretch" />
+                        <Button Style="{StaticResource TriangleButton}" 
+                                VerticalAlignment="Center" HorizontalAlignment="Left"
+                                Margin="10,0,0,0">
+                            <Button.RenderTransform>
+                                <ScaleTransform ScaleX="-1" />
+                            </Button.RenderTransform>
+                        </Button>
+                        <Button Style="{StaticResource TriangleButton}" 
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                                Margin="0,0,10,0">
+                        </Button>
+                        <Rectangle Margin="60,10,60,10" Fill="#FFD8CCA9" Stroke="Black" HorizontalAlignment="Stretch"/>
+
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <FontIcon Glyph="&#xEB44;" FontSize="30"/>
                             <TextBlock Text="Arma 1" FontSize="30" Padding="15"

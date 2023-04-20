@@ -44,8 +44,5 @@ namespace P4 {
             RaisePropertyChanged(propertyName);
             return true;
         }
-
-
-
     }
 }

@@ -90,6 +90,11 @@ namespace Interfaz_Proyecto_DSI
             Frame.Navigate(typeof(Equipo), null, new DrillInNavigationTransitionInfo());
         }
 
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            togglePause();
+        }
+
         private void Level_Checked(object sender, RoutedEventArgs e)
         {
             levelSelected = sender as RadioButton;
@@ -107,6 +112,7 @@ namespace Interfaz_Proyecto_DSI
         private void enableMapFocus(bool enabled)
         {
             TeamButton.IsTabStop = enabled;
+            PauseButton.IsTabStop = enabled;
             foreach (RadioButton level in LevelsMap.Children)
             {
                 level.IsTabStop = enabled;
