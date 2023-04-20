@@ -48,7 +48,7 @@ namespace Interfaz_Proyecto_DSI
         // Hace que las pestañas sean del mismo tamaño y ocupen todo el ancho del pivot
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            float widthOffset = 0.5f;
+            double widthOffset = 0.26;
 
             IEnumerable<PivotHeaderPanel> headerpanel = FindVisualChildren<PivotHeaderPanel>(optionsTabs);
             double totalwidth = headerpanel.ElementAt<PivotHeaderPanel>(0).ActualWidth;

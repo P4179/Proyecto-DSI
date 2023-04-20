@@ -54,8 +54,7 @@
             <!--Pestañas-->
             <Border BorderBrush="Black" BorderThickness="1" Margin="80,80,80,200">
 
-                <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}"  
-                   Background="#cbc2a8" >
+                <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}" Background="#cbc2a8">
                     <PivotItem>
                         <PivotItem.Header>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
@@ -68,12 +67,12 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Opción 1" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                                     <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -84,12 +83,12 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
                                     <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -100,27 +99,27 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
                                     <Slider Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="400,0,50,0" Value="50" IsTabStop="False"/>
+                                            Margin="60,0,20,0" Value="50" IsTabStop="False"/>
                                 </Grid>
                             </ListViewItem>
 
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3.21*"/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
                                     <CheckBox Grid.Column="2" 
-                                              VerticalAlignment="Center" HorizontalAlignment="Right" 
-                                              FontSize="20" Margin="0,0,140,0" IsTabStop="False"/>
+                                              VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                              FontSize="20" IsTabStop="False"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -141,12 +140,12 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Opción 1" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                                     <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -157,12 +156,12 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
                                     <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -173,27 +172,27 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
                                     <Slider Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="400,0,50,0" Value="50" IsTabStop="False"/>
+                                            Margin="60,0,20,0" Value="50" IsTabStop="False"/>
                                 </Grid>
                             </ListViewItem>
 
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3.21*"/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
                                     <CheckBox Grid.Column="2" 
-                                              VerticalAlignment="Center" HorizontalAlignment="Right" 
-                                              FontSize="20" Margin="0,0,140,0" IsTabStop="False"/>
+                                              VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                              FontSize="20" IsTabStop="False"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -214,12 +213,12 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Opción 1" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                                     <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -230,12 +229,12 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
                                     <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -246,27 +245,27 @@
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
                                     <Slider Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="350,0,0,0" Value="50" IsTabStop="False"/>
+                                            Margin="60,0,20,0" Value="50" IsTabStop="False"/>
                                 </Grid>
                             </ListViewItem>
 
                             <ListViewItem>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3.21*"/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
                                     <CheckBox Grid.Column="2" 
-                                              VerticalAlignment="Center" HorizontalAlignment="Right" 
-                                              FontSize="20" Margin="0,0,140,0" IsTabStop="False"/>
+                                              VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                              FontSize="20" IsTabStop="False"/>
                                 </Grid>
                             </ListViewItem>
 

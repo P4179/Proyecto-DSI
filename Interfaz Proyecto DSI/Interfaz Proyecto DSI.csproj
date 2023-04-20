@@ -128,6 +128,8 @@
     <Compile Include="Combate2.xaml.cs">
       <DependentUpon>Combate2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controller.cs" />
+    <Compile Include="ControllerLoop.cs" />
     <Compile Include="Equipo.xaml.cs">
       <DependentUpon>Equipo.xaml</DependentUpon>
     </Compile>
@@ -137,6 +139,7 @@
     <Compile Include="Mapa.xaml.cs">
       <DependentUpon>Mapa.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Objetos.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="Opciones.xaml.cs">
       <DependentUpon>Opciones.xaml</DependentUpon>

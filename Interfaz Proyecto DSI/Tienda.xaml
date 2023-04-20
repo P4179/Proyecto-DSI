@@ -5,7 +5,6 @@
     xmlns:local="using:Interfaz_Proyecto_DSI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:media="using:Microsoft.UI.Xaml.Media"
     mc:Ignorable="d"
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
@@ -90,45 +89,19 @@
         </Style>
 
 
-        <DataTemplate x:Key="PotionsTemplate" x:DataType="local:Potion">
+        <DataTemplate x:Key="ShopItemsTemplate" x:DataType="local:Object">
             <Grid >
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center"/>
-                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0" Grid.Column="1"/>
+                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center" HorizontalAlignment="Stretch" PointerEntered="itemPointerEntered"/>
+                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,40,0"  Grid.Column="1" PointerEntered="itemPointerEntered"/>
             </Grid>
         </DataTemplate>
 
 
-        <DataTemplate x:Key="WeaponsTemplate" x:DataType="local:Weap">
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center"/>
-                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0" Grid.Column="1"/>
-            </Grid>
-        </DataTemplate>
-
-
-        <DataTemplate x:Key="AccessoriesTemplate" x:DataType="local:Acc">
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center"/>
-                <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0" Grid.Column="1"/>
-            </Grid>
-        </DataTemplate>
-
-        
         
     </Page.Resources>
 
@@ -157,8 +130,8 @@
 
 
             <!--Pestañas-->
-            <Pivot x:Name="tabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200">
-                <PivotItem>
+            <Pivot x:Name="tabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200" SelectionChanged="tabChanged">
+                <PivotItem x:Name="PotionsTab">
                     <PivotItem.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                             <FontIcon Glyph="&#xE704;" FontSize="30" Margin="10,0,10,0"/>
@@ -166,37 +139,37 @@
                         </StackPanel>
                     </PivotItem.Header>
 
-                    <ListView Margin="-10,0,-10,0"
-                              ItemTemplate="{StaticResource PotionsTemplate}"
+                    <ListView x:Name="PotionsListView" Margin="-10,0,-10,0"
+                              ItemTemplate="{StaticResource ShopItemsTemplate}"
                               ItemsSource="{x:Bind potionsList}"/>
                 </PivotItem>
 
 
-                <PivotItem>
-                    <PivotItem.Header>
+                <PivotItem x:Name="WeaponsTab">
+                    <PivotItem.Header >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-                            <FontIcon Glyph="&#xE728;" FontSize="30" Margin="10,0,10,0"/>
+                            <FontIcon Glyph="&#xEA18;" FontSize="30" Margin="10,0,10,0"/>
                             <TextBlock Text="Armas"/>
                         </StackPanel>
                     </PivotItem.Header>
 
-                    <ListView Margin="-10,0,-10,0"
-                              ItemTemplate="{StaticResource WeaponsTemplate}"
-                              ItemsSource="{x:Bind weaponsList}"/>
+                    <ListView x:Name="WeaponsListView" Margin="-10,0,-10,0"
+                              ItemTemplate="{StaticResource ShopItemsTemplate}"
+                              ItemsSource="{x:Bind weaponList}" />
                 </PivotItem>
 
 
-                <PivotItem>
+                <PivotItem x:Name="AccessoriesTab">
                     <PivotItem.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-                            <FontIcon Glyph="&#xE717;" FontSize="30" Margin="10,0,10,0"/>
+                            <FontIcon Glyph="&#xE734;" FontSize="30" Margin="10,0,10,0"/>
                             <TextBlock Text="Accesorios"/>
                         </StackPanel>
                     </PivotItem.Header>
 
-                    <ListView Margin="-10,0,-10,0"
-                              ItemTemplate="{StaticResource AccessoriesTemplate}"
-                              ItemsSource="{x:Bind accList}"/>
+                    <ListView x:Name="AccessoriesListView" Margin="-10,0,-10,0"
+                              ItemTemplate="{StaticResource ShopItemsTemplate}"
+                              ItemsSource="{x:Bind accessoriesList}" />
                 </PivotItem>
 
             </Pivot>
@@ -216,7 +189,7 @@
             <TextBox Grid.Column="1" Style="{StaticResource PlaceHolderTextTemplate}"
                  HorizontalAlignment="Right" VerticalAlignment="Top"
                  Height="Auto" Padding="100, 10,40,10" Margin="50"
-                 CornerRadius="40" Text="1020 C" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                 CornerRadius="40" Text="{x:Bind coinsTxt}" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                  Foreground="Black" Background="#cbc2a8" BorderBrush="#232323"/>
 
 
@@ -226,14 +199,15 @@
                 <TextBlock Text="Nombre del objeto" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
 
-                <Border Background="#cbc2a8" BorderBrush="Black" VerticalAlignment="Bottom" Margin="20,50,20,0" BorderThickness="0.5">
+                <Border x:Name="WeaponsInfo" Background="#cbc2a8" BorderBrush="Black" BorderThickness="0.5"
+                        VerticalAlignment="Bottom" Margin="20,50,20,0" >
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="30,10,20,10">
                             <FontIcon Glyph="&#xEA18;" FontSize="40" Foreground="#444444"/>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Tipo de arma" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="Tipo" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind selWeapon.type}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -243,7 +217,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="Puntos de daño" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind selWeapon.dmg}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -253,7 +227,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Efecto especial" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="Efecto" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind selWeapon.effect}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -263,7 +237,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Alcance" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind selWeapon.reach}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -272,10 +246,10 @@
                 </Border>
 
 
-                <!--<TextBox x:Name="ItemDescription" TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
+                <TextBox x:Name="ItemDescription" TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
                          Margin="0,40,0,0" Height ="auto" FontSize="30"
-                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
-                        />-->
+                         Text="{x:Bind selObj.desc}" 
+                        />
 
             </StackPanel>
 

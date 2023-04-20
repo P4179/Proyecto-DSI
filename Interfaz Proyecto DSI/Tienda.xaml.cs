@@ -1,6 +1,8 @@
 ﻿using P4;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,79 +23,36 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Interfaz_Proyecto_DSI
 {
-
-    public class Potion : ObservableObject {
-        public string name { get; set; }
-        public int price { get; set; }
-        public string displayPrice { get; set; }
-        public Potion() { }
-    }
-    public class Weap : ObservableObject {
-        public string name { get; set; }
-        public int price { get; set; }
-        public string displayPrice { get; set; }
-        public Weap() { }
-
-    }
-    public class Acc : ObservableObject {
-        public string name { get; set; }
-        public int price { get; set; }
-        public string displayPrice { get; set; }
-        public Acc() { }
-    }
-
-
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
     public sealed partial class Tienda : Page
     {
+        public ObservableCollection<CommObject> potionsList { get; } = new ObservableCollection<CommObject>();
+        public ObservableCollection<Weapon> weaponList { get; } = new ObservableCollection<Weapon>();
 
-        private List<Potion> potionsList = new List<Potion>() {
-            new Potion() { name = "Poción 1", price = 100, displayPrice = "100 C" },
-            new Potion() { name = "Poción 2", price = 200, displayPrice = "200 C" },
-            new Potion() { name = "Poción 3", price = 300, displayPrice = "300 C" },
-            new Potion() { name = "Poción 4", price = 400, displayPrice = "400 C" },
-            new Potion() { name = "Poción 5", price = 500, displayPrice = "500 C" },
-            new Potion() { name = "Poción 6", price = 600, displayPrice = "600 C" },
-            new Potion() { name = "Poción 7", price = 700, displayPrice = "700 C" },
-            new Potion() { name = "Poción 8", price = 800, displayPrice = "800 C" },
-            new Potion() { name = "Poción 9", price = 900, displayPrice = "900 C" },
-            new Potion() { name = "Poción 10", price = 1000, displayPrice = "1000 C" },
-            new Potion() { name = "Poción 11", price = 1100, displayPrice = "1100 C" }
-        };
-        private List<Weap> weaponsList = new List<Weap>() {
-            new Weap() { name = "Arma 1", price = 100, displayPrice = "100 C" },
-            new Weap() { name = "Arma 2", price = 200, displayPrice = "200 C" },
-            new Weap() { name = "Arma 3", price = 300, displayPrice = "300 C" },
-            new Weap() { name = "Arma 4", price = 400, displayPrice = "400 C" },
-            new Weap() { name = "Arma 5", price = 500, displayPrice = "500 C" },
-            new Weap() { name = "Arma 6", price = 600, displayPrice = "600 C" },
-            new Weap() { name = "Arma 7", price = 700, displayPrice = "700 C" },
-            new Weap() { name = "Arma 8", price = 800, displayPrice = "800 C" },
-            new Weap() { name = "Arma 9", price = 900, displayPrice = "900 C" },
-            new Weap() { name = "Arma 10", price = 1000, displayPrice = "1000 C" },
-            new Weap() { name = "Arma 11", price = 1100, displayPrice = "1100 C" }
-        };
-        private List<Acc> accList = new List<Acc>() {
-            new Acc() { name = "Accesorio 1", price = 100, displayPrice = "100 C" },
-            new Acc() { name = "Accesorio 2", price = 200, displayPrice = "200 C" },
-            new Acc() { name = "Accesorio 3", price = 300, displayPrice = "300 C" },
-            new Acc() { name = "Accesorio 4", price = 400, displayPrice = "400 C" },
-            new Acc() { name = "Accesorio 5", price = 500, displayPrice = "500 C" },
-            new Acc() { name = "Accesorio 6", price = 600, displayPrice = "600 C" },
-            new Acc() { name = "Accesorio 7", price = 700, displayPrice = "700 C" },
-            new Acc() { name = "Accesorio 8", price = 800, displayPrice = "800 C" },
-            new Acc() { name = "Accesorio 9", price = 900, displayPrice = "900 C" },
-            new Acc() { name = "Accesorio 10", price = 1000, displayPrice = "1000 C" },
-            new Acc() { name = "Accesorio 11", price = 1100, displayPrice = "1100 C" }
-        };
+        public ObservableCollection<CommObject> accessoriesList { get; } = new ObservableCollection<CommObject>();
 
+        public CommObject selObj { get; set; }
+        public Weapon selWeapon { get; set; }
 
-        public Tienda()
-        {
+        public int coins;
+        public string coinsTxt;
+
+        public Tienda() {
             this.InitializeComponent();
-            
+
+            coins = 2000;
+            coinsTxt = coins.ToString() + " C";
+            foreach(CommObject pot in ObjectLists.getPotions()) {
+                potionsList.Add(pot);
+            }
+            foreach (Weapon weap in ObjectLists.getWeapons()) {
+                weaponList.Add(weap);
+            }
+            foreach (CommObject acc in ObjectLists.getAccessories()) {
+                accessoriesList.Add(acc);
+            }
         }
 
         private void returnToMain(object sender, RoutedEventArgs e)
@@ -113,7 +72,7 @@ namespace Interfaz_Proyecto_DSI
 
         // Hace que las pestañas sean del mismo tamaño y ocupen todo el ancho del pivot
         private void Page_Loaded(object sender, RoutedEventArgs e) {
-            float widthOffset = 0.5f;
+            double widthOffset = 0.5f;
 
             IEnumerable<PivotHeaderPanel> headerpanel = FindVisualChildren<PivotHeaderPanel>(tabs);
             double totalwidth = headerpanel.ElementAt<PivotHeaderPanel>(0).ActualWidth;
@@ -134,6 +93,42 @@ namespace Interfaz_Proyecto_DSI
                 }
             }
         }
+
+        string currTabName;
+        private void tabChanged(object sender, SelectionChangedEventArgs e) {
+            PivotItem selected = e.AddedItems[0] as PivotItem;
+            currTabName = selected.Name;
+            if (currTabName == "PotionsTab" || currTabName == "AccessoriesTab") {
+                if (currTabName == "PotionsTab") selObj = potionsList[0];
+                else selObj = accessoriesList[0];
+                WeaponsInfo.Visibility = Visibility.Collapsed;
+                ItemDescription.Visibility = Visibility.Visible;
+
+            }
+            else {
+                selWeapon = weaponList[0];
+                WeaponsInfo.Visibility = Visibility.Visible;
+                ItemDescription.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
+        private void itemPointerEntered(object sender, PointerRoutedEventArgs e) {
+            if (currTabName == "PotionsTab") {
+                int ind = PotionsListView.IndexFromContainer((DependencyObject)sender);
+                selObj = potionsList[ind];
+            }
+            else if (currTabName == "AccessoriesTab") {
+                int ind = AccessoriesListView.IndexFromContainer((DependencyObject)sender);
+                selObj = accessoriesList[ind];
+            }
+            else {
+                int ind = WeaponsListView.IndexFromContainer((DependencyObject)sender);
+                selWeapon = weaponList[ind];
+            }
+        }
+
+
 
     }
 
