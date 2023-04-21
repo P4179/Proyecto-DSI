@@ -28,6 +28,7 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Tienda : Page
     {
+
         TiendaLogic shopLogic = new TiendaLogic();
         public Tienda() {
             this.InitializeComponent();
@@ -57,10 +58,13 @@ namespace Interfaz_Proyecto_DSI
             WeaponsListView.IsTabStop = true;
             AccessoriesListView.IsTabStop = true;
         }
-        private void showQuantitySelection(object sender, RoutedEventArgs e)
-        {
+        private void showQuantitySelection(object sender, RoutedEventArgs e) {
             BuyQuantity.Visibility = Visibility.Visible;
             Quantity.Text = "1";
+            total = shopLogic.selectedObject.price;
+            if (shopLogic.selectedObject.price <= shopLogic.coins) BuyButton.IsEnabled = true;
+            else BuyButton.IsEnabled = false;
+
             ReturnButton.IsTabStop = false;
             tabs.IsTabStop = false;
             PotionsListView.IsTabStop = false;
@@ -80,7 +84,7 @@ namespace Interfaz_Proyecto_DSI
                 total = shopLogic.selectedObject.price * parsedNumber;
                 TotalPrice.Text = total.ToString() + " C";
 
-                if (total <= shopLogic.coins) BuyButton.IsEnabled = true;
+                if (total <= shopLogic.coins && parsedNumber > 0) BuyButton.IsEnabled = true;
                 else BuyButton.IsEnabled = false;
             }
             else {
@@ -125,14 +129,15 @@ namespace Interfaz_Proyecto_DSI
                 if (currTabName == "PotionsTab") {
                     shopLogic.selectedObject = shopLogic.potionsList[0];
                     PotionsListView.SelectedIndex = 0;
-                    ItemName.Text = shopLogic.potionsList[0].name;
-                    ItemDescription.Text = shopLogic.potionsList[0].desc;
+
+                    //var item = PotionsListView.ContainerFromIndex(0) as ListViewItem;
+                    //item.IsSelected= true;
                 }
                 else {
                     shopLogic.selectedObject = shopLogic.accessoriesList[0];
                     AccessoriesListView.SelectedIndex = 0;
-                    ItemName.Text = shopLogic.accessoriesList[0].name;
-                    ItemDescription.Text = shopLogic.accessoriesList[0].desc;
+                   
+
                 }
                 WeaponsInfo.Visibility = Visibility.Collapsed;
                 ItemDescription.Visibility = Visibility.Visible;
@@ -140,50 +145,35 @@ namespace Interfaz_Proyecto_DSI
             }
             else {
                 shopLogic.selectedObject = shopLogic.weaponList[0];
-                WeaponsListView.SelectedIndex= 0;
-                ItemName.Text = shopLogic.weaponList[0].name;
-                WeaponDmg.Text= shopLogic.weaponList[0].dmg.ToString();
-                WeaponEff.Text = shopLogic.weaponList[0].effect;
-                WeaponReach.Text = shopLogic.weaponList[0].reach.ToString();
-                WeaponType.Text = shopLogic.weaponList[0].type;
+                WeaponsListView.SelectedIndex = 0;
+
+
                 WeaponsInfo.Visibility = Visibility.Visible;
                 ItemDescription.Visibility = Visibility.Collapsed;
             }
         }
 
         private void potItClick(object sender, ItemClickEventArgs e) {
-            shopLogic.coins = 2;
-
-            var clicked = e.ClickedItem as CommObject;
-            shopLogic.selectedObject = clicked;
-
-            ItemName.Text = clicked.name;
-            ItemDescription.Text = clicked.desc;
+            var sel = e.ClickedItem as Objeto;
+            if (shopLogic.selectedObject.id == sel.id)
+                showQuantitySelection(null, null);
         }
 
         private void weapItClick(object sender, ItemClickEventArgs e) {
-            var clicked = e.ClickedItem as Weapon;
-            shopLogic.selectedObject = clicked;
-
-            ItemName.Text = clicked.name;
-            WeaponDmg.Text = clicked.dmg.ToString();
-            WeaponEff.Text = clicked.effect;
-            WeaponReach.Text = clicked.reach.ToString();
-            WeaponType.Text = clicked.type;
+            var sel = e.ClickedItem as Objeto;
+            if (shopLogic.selectedObject.id == sel.id)
+                showQuantitySelection(null, null);
         }
 
         private void accItClick(object sender, ItemClickEventArgs e) {
-            var clicked = e.ClickedItem as CommObject;
-            shopLogic.selectedObject = clicked;
-
-            ItemName.Text = clicked.name;
-            ItemDescription.Text = clicked.desc;
+            var sel = e.ClickedItem as Objeto;
+            if (shopLogic.selectedObject.id == sel.id)
+                showQuantitySelection(null, null);
         }
 
         private void buyItem(object sender, RoutedEventArgs e) {
             shopLogic.coins -= total;
             shopLogic.coinsTxt = shopLogic.coins.ToString() + " C";
-            CoinsBox.Text = shopLogic.coinsTxt;
 
             hideQuantitySelection(null, null);
         }

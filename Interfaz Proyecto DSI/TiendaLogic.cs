@@ -18,11 +18,40 @@ namespace Interfaz_Proyecto_DSI
             get => _selObj;
             set { Set(ref _selObj, value); }
         }
-        private Objeto _selWeap;
-        public Objeto selectedWeapon {
-            get => _selWeap;
-            set { Set(ref _selWeap, value); }
+        private CommObject _selCommObj;
+        public CommObject selectedCommonObj
+        {
+            get => _selCommObj;
+            set { Set(ref _selCommObj, value); }
         }
+
+        private CommObject _selPot;
+        public CommObject selectedPotion {
+            get => _selPot;
+            set { 
+                Set(ref _selPot, value);
+                selectedObject = _selPot;
+                selectedCommonObj = _selPot;
+            }
+        }
+        private Weapon _selWeap;
+        public Weapon selectedWeapon {
+            get => _selWeap;
+            set { 
+                Set(ref _selWeap, value);
+                selectedObject = _selWeap;
+            }
+        }
+        private CommObject _selAcc;
+        public CommObject selectedAccessory {
+            get => _selAcc;
+            set { 
+                Set(ref _selAcc, value);
+                selectedObject = _selAcc;
+                selectedCommonObj = _selAcc;
+            }
+        }
+
 
         private int _coins;
         public int coins {

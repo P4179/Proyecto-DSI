@@ -142,6 +142,7 @@
                     <ListView x:Name="PotionsListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
                               ItemsSource="{x:Bind shopLogic.potionsList}"
+                              SelectedItem="{x:Bind shopLogic.selectedPotion, Mode=TwoWay}"
                               IsItemClickEnabled="True" ItemClick="potItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
@@ -157,6 +158,7 @@
                     <ListView x:Name="WeaponsListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
                               ItemsSource="{x:Bind shopLogic.weaponList}"
+                              SelectedItem="{x:Bind shopLogic.selectedWeapon, Mode=TwoWay}"
                               IsItemClickEnabled="True" ItemClick="weapItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
@@ -172,6 +174,7 @@
                     <ListView x:Name="AccessoriesListView" Margin="-10,0,-10,0"
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
                               ItemsSource="{x:Bind shopLogic.accessoriesList}"
+                              SelectedItem="{x:Bind shopLogic.selectedAccessory, Mode=TwoWay}"
                               IsItemClickEnabled="True" ItemClick="accItClick" DoubleTapped="showQuantitySelection"/>
                 </PivotItem>
 
@@ -192,14 +195,14 @@
             <TextBox x:Name="CoinsBox" Grid.Column="1" Style="{StaticResource PlaceHolderTextTemplate}"
                  HorizontalAlignment="Right" VerticalAlignment="Top"
                  Height="Auto" Padding="100, 10,40,10" Margin="50"
-                 CornerRadius="40" Text="{x:Bind shopLogic.coinsTxt}" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                 CornerRadius="40" Text="{x:Bind shopLogic.coinsTxt, Mode=TwoWay}" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                  Foreground="Black" Background="#cbc2a8" BorderBrush="#232323"/>
 
 
 
             <!--Información del objeto-->
             <StackPanel Grid.Column="1" Margin="-40,150,40,20" VerticalAlignment="Stretch">
-                <TextBlock x:Name="ItemName" Text="Nombre del objeto" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Text="{x:Bind shopLogic.selectedObject.name, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
 
                 <Border x:Name="WeaponsInfo" Background="#cbc2a8" BorderBrush="Black" BorderThickness="0.5"
@@ -210,7 +213,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Tipo de arma" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock x:Name="WeaponType" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind shopLogic.selectedWeapon.type, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#444444" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -220,7 +223,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Daño" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock x:Name="WeaponDmg" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind shopLogic.selectedWeapon.dmg, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#af3a11" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -230,7 +233,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Efecto especial" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock x:Name="WeaponEff" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind shopLogic.selectedWeapon.effect, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#7e2199" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -240,7 +243,7 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Alcance" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="35" Padding="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock x:Name="WeaponReach" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind shopLogic.selectedWeapon.reach, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="25" Padding="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -249,7 +252,8 @@
                 </Border>
 
 
-                <TextBox x:Name="ItemDescription" TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
+                <TextBox x:Name="ItemDescription" Style="{StaticResource PlaceHolderTextTemplate}"
+                         Text="{x:Bind shopLogic.selectedCommonObj.desc, Mode=TwoWay}" TextWrapping="Wrap" 
                          Margin="0,40,0,0" Height="310" FontSize="30"/>
 
             </StackPanel>
@@ -279,7 +283,8 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="60" Margin="400,0,0,0"/>
 
-                <TextBox x:Name="Quantity" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Padding="100, 10,100,10" Margin="375,0,0,250"
+                <TextBox x:Name="Quantity" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto"
+                         Width="250" TextAlignment="Center" Padding="0,0,0,7" Margin="375,0,0,250"
                     CornerRadius="40" FontSize="50" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                     Foreground="Black" Background="#cbc2a8" BorderBrush="#232323" TextChanged="changeQuant"/>
 
