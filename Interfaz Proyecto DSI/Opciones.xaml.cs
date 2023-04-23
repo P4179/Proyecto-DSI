@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,14 +24,21 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Opciones : Page
     {
-
-        private List<String> settingsList = new List<string>() { "Configuración 1", "Configuración 2", "Configuración 3", "Configuración 4" };
-        private List<String> comboBoxSettingsList = new List<string>() { "Alto", "Medio", "Bajo" };
+        OpcionesLogic optionsLogic = new OpcionesLogic();
 
 
-        public Opciones()
-        {
+        public Opciones() {
             this.InitializeComponent();
+
+            foreach (Opcion opc in OptionLists.getGraphs()) {
+                optionsLogic.graphList.Add(opc);
+            }
+            foreach (Opcion opc in OptionLists.getSound()) {
+                optionsLogic.soundList.Add(opc);
+            }
+            foreach (Opcion opc in OptionLists.getAccess()) {
+                optionsLogic.accList.Add(opc);
+            }
         }
 
         private void closeOptions(object sender, RoutedEventArgs e) {
@@ -70,6 +78,70 @@ namespace Interfaz_Proyecto_DSI
                 }
             }
         }
+
+
+        string currTabName;
+        private void tabChanged(object sender, SelectionChangedEventArgs e) {
+            PivotItem selected = e.AddedItems[0] as PivotItem;
+            currTabName = selected.Name;
+
+            if (currTabName == "ControlsTab") {
+                //optionInfo.Visibility = Visibility.Collapsed;
+            }
+            else {
+                //optionInfo.Visibility = Visibility.Visible;
+                if (currTabName == "GraphicsTab")
+                {
+                    optionsLogic.selectedOption = optionsLogic.graphList[0];
+                }
+                else if (currTabName == "SoundTab")
+                {
+                    optionsLogic.selectedOption = optionsLogic.soundList[0];
+                }
+                else if (currTabName == "AccessTab")
+                {
+                    optionsLogic.selectedOption = optionsLogic.accList[0];
+                }
+            }
+            
+            
+        }
+
+
+        private void graphSelChanged(object sender, SelectionChangedEventArgs e) {
+            if(optionsLogic.graphList.Count() > 0) {
+                var sel = sender as ListView;
+                int index = sel.SelectedIndex;
+
+                optionsLogic.selectedOption = optionsLogic.graphList[index];
+                optionsLogic.selectedGraph = optionsLogic.graphList[index];
+
+            }
+        }
+
+        private void soundSelChanged(object sender, SelectionChangedEventArgs e) {
+            if (optionsLogic.soundList.Count() > 0) {
+                var sel = sender as ListView;
+                int index = sel.SelectedIndex;
+
+                optionsLogic.selectedOption = optionsLogic.soundList[index];
+                optionsLogic.selectedSound = optionsLogic.soundList[index];
+
+            }
+        }
+
+        private void accSelChanged(object sender, SelectionChangedEventArgs e) {
+            if (optionsLogic.accList.Count() > 0) {
+                var sel = sender as ListView;
+                int index = sel.SelectedIndex;
+
+                optionsLogic.selectedOption = optionsLogic.accList[index];
+                optionsLogic.selectedAccess = optionsLogic.accList[index];
+            }
+        }
+
+
+
 
 
     }

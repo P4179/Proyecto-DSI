@@ -10,9 +10,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
    
-
     <Viewbox >
-        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
+        <Grid x:Name="MainGrid"  Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
                 <ColumnDefinition Width="37*"/>
@@ -54,8 +53,8 @@
             <!--Pestañas-->
             <Border BorderBrush="Black" BorderThickness="1" Margin="80,80,80,200">
 
-                <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}" Background="#cbc2a8">
-                    <PivotItem>
+                <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}" Background="#cbc2a8" SelectionChanged="tabChanged">
+                    <PivotItem x:Name="GraphicsTab">
                         <PivotItem.Header>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                                 <FontIcon Glyph="&#xe7f4;" FontSize="30" Margin="10,-3,10,0"/>
@@ -63,8 +62,9 @@
                             </StackPanel>
                         </PivotItem.Header>
 
-                        <ListView Margin="20">
-                            <ListViewItem>
+                        <ListView Margin="20" x:Name="GraphicsListView" SelectionChanged="graphSelChanged"
+                                  IsItemClickEnabled="True">
+                            <ListViewItem IsSelected="True">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -128,7 +128,7 @@
                     </PivotItem>
 
 
-                    <PivotItem>
+                    <PivotItem x:Name="SoundTab">
                         <PivotItem.Header>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                                 <FontIcon Glyph="&#xe995;" FontSize="30" Margin="10,-3,10,0"/>
@@ -136,8 +136,9 @@
                             </StackPanel>
                         </PivotItem.Header>
 
-                        <ListView Margin="20">
-                            <ListViewItem>
+                        <ListView Margin="20" x:Name="SoundsListView" SelectionChanged="soundSelChanged"
+                                  IsItemClickEnabled="True">
+                            <ListViewItem IsSelected="True">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -201,7 +202,7 @@
                     </PivotItem>
 
 
-                    <PivotItem>
+                    <PivotItem x:Name="AccessTab">
                         <PivotItem.Header>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                                 <FontIcon Glyph="&#xE776;" FontSize="30" Margin="10,0,10,0"/>
@@ -209,8 +210,9 @@
                             </StackPanel>
                         </PivotItem.Header>
 
-                        <ListView Margin="20">
-                            <ListViewItem>
+                        <ListView Margin="20" x:Name="AccessListView" SelectionChanged="accSelChanged"
+                                  IsItemClickEnabled="True">
+                            <ListViewItem IsSelected="True">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -273,7 +275,7 @@
 
                     </PivotItem>
 
-                    <PivotItem>
+                    <PivotItem x:Name="ControlsTab">
                         <PivotItem.Header>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                                 <FontIcon Glyph="&#xF210;" FontSize="30" Margin="10,-3,10,0"/>
@@ -293,18 +295,17 @@
 
 
             <!--Información de la opción-->
-            <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
-                <TextBlock Text="Configuración 1" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <StackPanel x:Name="optionInfo" Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
+                <TextBlock Text="{x:Bind optionsLogic.selectedOption.name, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
-                <TextBox TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
-                         Margin="0,40,0,0" Height ="auto" FontSize="30"
-                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
-                        />
+                <TextBox Style="{StaticResource PlaceHolderTextTemplate}"
+                         Text="{x:Bind optionsLogic.selectedOption.desc, Mode=TwoWay}"
+                         TextWrapping="Wrap" Margin="0,40,0,0" Height="310" FontSize="30"/>
 
             </StackPanel>
-            
-            
-            
+
+
+
 
         </Grid>
     </Viewbox>

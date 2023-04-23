@@ -47,7 +47,7 @@
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.Background" Value="#a79c7e"/>
                                             <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
                                             <Setter Target="RootGrid.BorderBrush" Value="Black"/>
                                             <Setter Target="RootGrid.Padding" Value="20"/>
@@ -143,7 +143,7 @@
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
                               ItemsSource="{x:Bind shopLogic.potionsList}"
                               SelectedItem="{x:Bind shopLogic.selectedPotion, Mode=TwoWay}"
-                              IsItemClickEnabled="True" ItemClick="potItClick" DoubleTapped="showQuantitySelection"/>
+                              IsItemClickEnabled="True" ItemClick="potItClick"/>
                 </PivotItem>
 
 
@@ -159,7 +159,7 @@
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
                               ItemsSource="{x:Bind shopLogic.weaponList}"
                               SelectedItem="{x:Bind shopLogic.selectedWeapon, Mode=TwoWay}"
-                              IsItemClickEnabled="True" ItemClick="weapItClick" DoubleTapped="showQuantitySelection"/>
+                              IsItemClickEnabled="True" ItemClick="weapItClick"/>
                 </PivotItem>
 
 
@@ -175,7 +175,7 @@
                               ItemTemplate="{StaticResource ShopItemsTemplate}"
                               ItemsSource="{x:Bind shopLogic.accessoriesList}"
                               SelectedItem="{x:Bind shopLogic.selectedAccessory, Mode=TwoWay}"
-                              IsItemClickEnabled="True" ItemClick="accItClick" DoubleTapped="showQuantitySelection"/>
+                              IsItemClickEnabled="True" ItemClick="accItClick"/>
                 </PivotItem>
 
             </Pivot>

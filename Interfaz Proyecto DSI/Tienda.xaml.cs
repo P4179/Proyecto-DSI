@@ -129,7 +129,7 @@ namespace Interfaz_Proyecto_DSI
                 if (currTabName == "PotionsTab") {
                     shopLogic.selectedObject = shopLogic.potionsList[0];
                     PotionsListView.SelectedIndex = 0;
-
+                    
                     //var item = PotionsListView.ContainerFromIndex(0) as ListViewItem;
                     //item.IsSelected= true;
                 }
@@ -137,7 +137,6 @@ namespace Interfaz_Proyecto_DSI
                     shopLogic.selectedObject = shopLogic.accessoriesList[0];
                     AccessoriesListView.SelectedIndex = 0;
                    
-
                 }
                 WeaponsInfo.Visibility = Visibility.Collapsed;
                 ItemDescription.Visibility = Visibility.Visible;

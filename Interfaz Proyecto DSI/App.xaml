@@ -199,6 +199,10 @@
 
                                     <VisualState x:Name="Selected">
                                         <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="3"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="#827e74"/>
+                                            <Setter Target="RootGrid.CornerRadius" Value="3"/>
                                             <Setter Target="RootGrid.Margin" Value="0,30,0,0"/>
                                             <Setter Target="RootGrid.Padding" Value="20,20,0,20"/>
                                         </VisualState.Setters>
@@ -211,8 +215,8 @@
                                     </VisualState>
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
-                                            <Setter Target="RootGrid.BorderThickness" Value="3"/>
+                                            <Setter Target="RootGrid.Background" Value="#a79c7e"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="4"/>
                                             <Setter Target="RootGrid.BorderBrush" Value="#827e74"/>
                                             <Setter Target="RootGrid.CornerRadius" Value="3"/>
                                             <Setter Target="RootGrid.Margin" Value="0,30,0,0"/>

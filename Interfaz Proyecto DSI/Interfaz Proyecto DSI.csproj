@@ -144,6 +144,7 @@
     <Compile Include="Opciones.xaml.cs">
       <DependentUpon>Opciones.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OpcionesLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tienda.xaml.cs">
       <DependentUpon>Tienda.xaml</DependentUpon>

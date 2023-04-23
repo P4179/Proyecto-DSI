@@ -89,4 +89,42 @@ namespace Interfaz_Proyecto_DSI
     }
 
 
+    public class Opcion : ObservableObject {
+        public int id { get; set; }
+
+        public string name { get; set; }
+        public string desc { get; set; }
+
+        public Opcion() { }
+    }
+
+    public class OptionLists {
+        public static List<Opcion> graphicOptions { get; } = new List<Opcion>() {
+            new Opcion() {id = 0, name = "Opcion 1", desc = "Lore ipsum graf 1"},
+            new Opcion() {id = 1, name = "Opcion 2", desc = "Lore ipsum graf 2"},
+            new Opcion() {id = 2, name = "Opcion 3", desc = "Lore ipsum graf 3"},
+            new Opcion() {id = 3, name = "Opcion 4", desc = "Lore ipsum graf 4"}
+        };
+        public static List<Opcion> soundOptions { get; } = new List<Opcion>() {
+            new Opcion() {id = 0, name = "Opcion 1", desc = "Lore ipsum son 1"},
+            new Opcion() {id = 1, name = "Opcion 2", desc = "Lore ipsum son 2"},
+            new Opcion() {id = 2, name = "Opcion 3", desc = "Lore ipsum son 3"},
+            new Opcion() {id = 3, name = "Opcion 4", desc = "Lore ipsum son 4"}
+        };
+        public static List<Opcion> accessOptions { get; } = new List<Opcion>() {
+            new Opcion() {id = 0, name = "Opcion 1", desc = "Lore ipsum acc 1"},
+            new Opcion() {id = 1, name = "Opcion 2", desc = "Lore ipsum acc 2"},
+            new Opcion() {id = 2, name = "Opcion 3", desc = "Lore ipsum acc 3"},
+            new Opcion() {id = 3, name = "Opcion 4", desc = "Lore ipsum acc 4"}
+        };
+
+        public static IList<Opcion> getGraphs() { return graphicOptions; }
+        public static IList<Opcion> getSound() { return soundOptions; }
+        public static IList<Opcion> getAccess() { return accessOptions; }
+
+    }
+    
+
+
+
 }
