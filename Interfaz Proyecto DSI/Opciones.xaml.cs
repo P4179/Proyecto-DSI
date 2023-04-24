@@ -39,6 +39,9 @@ namespace Interfaz_Proyecto_DSI
             foreach (Opcion opc in OptionLists.getAccess()) {
                 optionsLogic.accList.Add(opc);
             }
+
+            SaveButton.IsEnabled = false;
+
         }
 
         private void closeOptions(object sender, RoutedEventArgs e) {
@@ -142,7 +145,110 @@ namespace Interfaz_Proyecto_DSI
 
 
 
+        int defaultComboBoxInd1 = 0;
+        int defaultComboBoxInd2 = 2;
+        int defaultSliderValue = 50;
+        bool defaultCheckBoxValue = false;
+
+        int lastCombo11 = 0;
+        int lastCombo12 = 2;
+        int lastCombo21 = 0;
+        int lastCombo22 = 2;
+        int lastCombo31 = 0;
+        int lastCombo32 = 2;
+
+        double lastSlider1 = 50;
+        double lastSlider2 = 50;
+        double lastSlider3 = 50;
+
+        bool check1 = false;
+        bool check2 = false;
+        bool check3 = false;
+        bool lastCheck1 = false;
+        bool lastCheck2 = false;
+        bool lastCheck3 = false;
+
+        private void saveButtonComboBox(object sender, SelectionChangedEventArgs e) {
+            if (!Combo11.IsLoaded)
+                return;
+
+            if (Combo11.SelectedIndex != lastCombo11 || Combo12.SelectedIndex != lastCombo12 ||
+                Combo21.SelectedIndex != lastCombo21 || Combo22.SelectedIndex != lastCombo22 ||
+                Combo31.SelectedIndex != lastCombo31 || Combo32.SelectedIndex != lastCombo32 )
+                SaveButton.IsEnabled = true;
+            else SaveButton.IsEnabled = false;
+        }
+        private void saveButtonSlider(object sender, RangeBaseValueChangedEventArgs e) {
+            if (!Slider1.IsLoaded)
+                return;
+
+            if (Slider1.Value != lastSlider1 || Slider2.Value != lastSlider2 || Slider3.Value != lastSlider3)
+                SaveButton.IsEnabled = true;
+            else SaveButton.IsEnabled = false;
+        }
+
+        private void saveButtonCheckBox(object sender, RoutedEventArgs e) {
+            if (!Check1.IsLoaded)
+                return;
+
+            var check = sender as CheckBox;
+            if (check.Name == "Check1") check1 = !check1;
+            else if (check.Name == "Check2") check2 = !check2;
+            else if (check.Name == "Check3") check3= !check3;
+
+            if (check1 != lastCheck1 || check2 != lastCheck2 || check3 != lastCheck3)
+                SaveButton.IsEnabled = true;
+            else SaveButton.IsEnabled = false;
+
+        }
+
+        private void saved(object sender, RoutedEventArgs e) {
+            SaveButton.IsEnabled = false;
+            RestoreButon.IsEnabled = true;
+
+            updateOptions();
+        }
+
+        private void restore(object sender, RoutedEventArgs e) {
+
+            Combo11.SelectedIndex = defaultComboBoxInd1;
+            Combo21.SelectedIndex = defaultComboBoxInd1;
+            Combo31.SelectedIndex = defaultComboBoxInd1;
+            Combo12.SelectedIndex = defaultComboBoxInd2;
+            Combo22.SelectedIndex = defaultComboBoxInd2;
+            Combo32.SelectedIndex = defaultComboBoxInd2;
+
+            Slider1.Value = defaultSliderValue;
+            Slider2.Value = defaultSliderValue;
+            Slider3.Value = defaultSliderValue;
+
+            Check1.IsChecked = defaultCheckBoxValue;
+            Check2.IsChecked = defaultCheckBoxValue;
+            Check3.IsChecked = defaultCheckBoxValue;
+
+            updateOptions();
+
+            RestoreButon.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+        }
 
 
+        private void updateOptions(){
+            lastCombo11 = Combo11.SelectedIndex;
+            lastCombo12 = Combo12.SelectedIndex;
+            lastCombo21 = Combo21.SelectedIndex;
+            lastCombo22 = Combo22.SelectedIndex;
+            lastCombo31 = Combo31.SelectedIndex;
+            lastCombo32 = Combo32.SelectedIndex;
+
+            lastSlider1 = Slider1.Value;
+            lastSlider2 = Slider2.Value;
+            lastSlider3 = Slider3.Value;
+
+            lastCheck1 = check1;
+            lastCheck2 = check2;
+            lastCheck3 = check3;
+        }
+  
     }
 }

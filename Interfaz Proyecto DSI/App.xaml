@@ -277,7 +277,9 @@
         </Style>
 
 
+        <!--Estilo de las comboBox-->
         <Style x:Name="ComboBoxTemplate" TargetType="ComboBox">
+            <Setter Property="RequestedTheme" Value="Light"/>
             <Setter Property="Width" Value="500"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="20"/>
@@ -287,10 +289,10 @@
             <Setter Property="PlaceholderForeground" Value="Black"/>
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="CornerRadius" Value="5"
-                    />
+            <Setter Property="CornerRadius" Value="5"/>
         </Style>
         <Style TargetType="ComboBoxItem">
+            <Setter Property="RequestedTheme" Value="Light"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Background" Value="White"/>
@@ -300,18 +302,117 @@
             <Setter Property="IsTextScaleFactorEnabled" Value="True"/>
         </Style>
 
-        
-        
         <Style TargetType="CheckBox">
-
-
-
+            <Setter Property="RequestedTheme" Value="Light"/>
         </Style>
-
+        
+        
         <Style TargetType="Slider">
             <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="BorderBrush" Value="#827e74"/>
+            <Setter Property="Background" Value="#ece8dc"/>
+            <Setter Property="Foreground" Value="#b9ad8b"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.Resources>
+                                <Style x:Key="SliderThumbStyle" TargetType="Thumb">
+                                    <Setter Property="BorderThickness" Value="4"/>
+                                    <Setter Property="BorderBrush" Value="#827e74"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Ellipse StrokeThickness="2"
+                                                         Stroke="{TemplateBinding BorderBrush}"
+                                                         Fill="{TemplateBinding Foreground}"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Grid.Resources>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid x:Name="SliderContainer" Background="Transparent" Grid.Row="1">
+                                <Grid x:Name="HorizontalTemplate">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Rectangle x:Name="HorizontalBorder"  Grid.ColumnSpan="3" Grid.RowSpan="3" 
+                                           Height="10" RadiusX="5" RadiusY="5"
+                                           Stroke="{TemplateBinding BorderBrush}"
+                                           StrokeThickness="11"
+                                           Fill="{TemplateBinding Background}"/>
+                                    <Rectangle x:Name="HorizontalTrackRect" Grid.ColumnSpan="3"
+                                           Grid.Row="1" Height="15" RadiusX="5" RadiusY="5"
+                                           Fill="{TemplateBinding Background}"/>
+                                    <Rectangle x:Name="HorizontalDecreaseRect"
+                                           Fill="{TemplateBinding Foreground}"
+                                           Grid.Row="1" Height="15"/>
+                                    
+                                    <Thumb x:Name="HorizontalThumb" Grid.Column="1" Grid.Row="1"
+                                           Height="25" Width="25"
+                                           AutomationProperties.AccessibilityView="Raw"
+                                           Background="{ThemeResource SliderThumbBackgroundThemeBrush}"
+                                           DataContext="{TemplateBinding Value}"
+                                           Style="{StaticResource SliderThumbStyle}"/>
+                                </Grid>
 
-            
+                                <Grid x:Name="VerticalTemplate" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="17"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="17"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Rectangle x:Name="VerticalBorder" 
+                                           Grid.Column="1" Grid.RowSpan="3" Width="10" RadiusX="5" RadiusY="5"
+                                           Stroke="{TemplateBinding BorderBrush}" 
+                                           StrokeThickness="10"/>
+                                    <Rectangle x:Name="VerticalTrackRect" 
+                                           Grid.Column="1" Grid.RowSpan="3" Width="15" RadiusX="5" RadiusY="5"
+                                           Fill="{TemplateBinding Background}"/>
+                                    <Rectangle x:Name="VerticalDecreaseRect" 
+                                           Grid.Column="1" Grid.Row="2" Width="15" RadiusX="5" RadiusY="5"
+                                           Fill="{TemplateBinding Foreground}"/>
+                                    
+                                    <Thumb x:Name="VerticalThumb" 
+                                       Grid.Column="1" Grid.Row="1"
+                                       Height="25" Width="25"
+                                       AutomationProperties.AccessibilityView="Raw"
+                                       Background="{ThemeResource SliderThumbBackgroundThemeBrush}"
+                                       DataContext="{TemplateBinding Value}"
+                                       Style="{StaticResource SliderThumbStyle}" />
+                                </Grid>
+
+
+                            </Grid>
+
+                            
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
         </Style>
 
 

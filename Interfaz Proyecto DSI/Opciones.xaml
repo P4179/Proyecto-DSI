@@ -9,8 +9,13 @@
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-   
-    <Viewbox >
+
+    <Viewbox>
+        <!--PARA QUE LOS COMBOBOXITEM ESCALEN CON LA VIEWBOX-->
+        <Viewbox.RenderTransform>
+            <RotateTransform Angle="0.001"></RotateTransform>
+        </Viewbox.RenderTransform>
+
         <Grid x:Name="MainGrid"  Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
@@ -30,18 +35,18 @@
 
             <!--Botones de guardar y restablecer-->
             <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-                <Button Style="{StaticResource ClickableButtonTemplate}"
+                <Button x:Name="SaveButton" Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="Auto" VerticalAlignment="Bottom" Margin="0,0,20,40" Padding="20,0,20,0" 
-                FontSize="35" IsEnabled="False">
+                FontSize="35" IsEnabled="False" Click="saved">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xE74E;" FontSize="40" Margin="0,0,20,0"/>
                         <TextBlock Text="Guardar"/>
                     </StackPanel>
                 </Button>
 
-                <Button Style="{StaticResource ClickableButtonTemplate}"
+                <Button x:Name="RestoreButon" Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="Auto" VerticalAlignment="Bottom" Margin="20,0,40,40" Padding="20,0,20,0" 
-                FontSize="35" IsEnabled="False">
+                FontSize="35" IsEnabled="False" Click="restore">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xF83E;" FontSize="40" Margin="0,0,20,0"/>
                         <TextBlock Text="Restablecer"/>
@@ -71,8 +76,9 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                                    <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <ComboBox x:Name="Combo11" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                              SelectionChanged="saveButtonComboBox">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -87,8 +93,9 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
-                                    <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <ComboBox x:Name="Combo12" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                              SelectionChanged="saveButtonComboBox">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -104,8 +111,8 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
-                                    <Slider Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="60,0,20,0" Value="50" IsTabStop="False"/>
+                                    <Slider x:Name="Slider1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                            Margin="60,0,20,0" Value="50" IsTabStop="False" ValueChanged="saveButtonSlider"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -117,9 +124,10 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
-                                    <CheckBox Grid.Column="2" 
-                                              VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                              FontSize="20" IsTabStop="False"/>
+                                    <CheckBox x:Name="Check1" Grid.Column="2" 
+                                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                              FontSize="20" IsTabStop="False" 
+                                              Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -145,8 +153,9 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                                    <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <ComboBox x:Name="Combo21" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                              SelectionChanged="saveButtonComboBox">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -161,8 +170,9 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
-                                    <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <ComboBox x:Name="Combo22" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                              SelectionChanged="saveButtonComboBox">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -178,8 +188,8 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
-                                    <Slider Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="60,0,20,0" Value="50" IsTabStop="False"/>
+                                    <Slider x:Name="Slider2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                            Margin="60,0,20,0" Value="50" IsTabStop="False" ValueChanged="saveButtonSlider"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -191,9 +201,9 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
-                                    <CheckBox Grid.Column="2" 
+                                    <CheckBox x:Name="Check2" Grid.Column="2" 
                                               VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                              FontSize="20" IsTabStop="False"/>
+                                              FontSize="20" IsTabStop="False" Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -219,8 +229,9 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                                    <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <ComboBox x:Name="Combo31" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                              SelectionChanged="saveButtonComboBox">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -235,8 +246,9 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
-                                    <ComboBox Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
-                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <ComboBox x:Name="Combo32" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
+                                              Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                              SelectionChanged="saveButtonComboBox">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -252,8 +264,8 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
-                                    <Slider Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="60,0,20,0" Value="50" IsTabStop="False"/>
+                                    <Slider x:Name="Slider3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                            Margin="60,0,20,0" Value="50" IsTabStop="False" ValueChanged="saveButtonSlider"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -265,9 +277,9 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
-                                    <CheckBox Grid.Column="2" 
+                                    <CheckBox x:Name="Check3" Grid.Column="2" 
                                               VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                              FontSize="20" IsTabStop="False"/>
+                                              FontSize="20" IsTabStop="False" Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -303,9 +315,6 @@
                          TextWrapping="Wrap" Margin="0,40,0,0" Height="310" FontSize="30"/>
 
             </StackPanel>
-
-
-
 
         </Grid>
     </Viewbox>
