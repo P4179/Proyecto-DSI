@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 namespace Interfaz_Proyecto_DSI
 {
     public class TiendaLogic : ObservableObject {
+
+        public TiendaLogic() {
+            coins = (App.Current as App).coins;
+        }
+
         public ObservableCollection<CommObject> potionsList { get; } = new ObservableCollection<CommObject>();
         public ObservableCollection<Weapon> weaponList { get; } = new ObservableCollection<Weapon>();
         public ObservableCollection<CommObject> accessoriesList { get; } = new ObservableCollection<CommObject>();
+
 
         private Objeto _selObj;
         public Objeto selectedObject {

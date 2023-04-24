@@ -68,6 +68,30 @@
 
 
                                 </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="FocusStates">
+
+                                    <VisualState x:Name="Unfocused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+
+
+                                </VisualStateGroup>
+
                             </VisualStateManager.VisualStateGroups>
                         </Grid>
                     </ControlTemplate>

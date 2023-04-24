@@ -33,7 +33,6 @@ namespace Interfaz_Proyecto_DSI
         public Tienda() {
             this.InitializeComponent();
 
-            shopLogic.coins = 2000;
             foreach(CommObject pot in ObjectLists.getPotions()) {
                 shopLogic.potionsList.Add(pot);
             }
@@ -173,9 +172,16 @@ namespace Interfaz_Proyecto_DSI
         private void buyItem(object sender, RoutedEventArgs e) {
             shopLogic.coins -= total;
             shopLogic.coinsTxt = shopLogic.coins.ToString() + " C";
+            (App.Current as App).coins = shopLogic.coins;
+
+            if (currTabName == "PotionsTab")
+                (App.Current as App).boughtPotions.Add((shopLogic.selectedPotion as CommObject));
+            else if (currTabName == "WeaponsTab")
+                (App.Current as App).boughtWeapons.Add(shopLogic.selectedWeapon);
 
             hideQuantitySelection(null, null);
         }
+
     }
 
 

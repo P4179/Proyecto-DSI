@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -96,5 +97,14 @@ namespace Interfaz_Proyecto_DSI
             //TODO: Guardar el estado de la aplicación y detener toda actividad en segundo plano
             deferral.Complete();
         }
+
+        public int coins { get; set; } = 2000;
+        public ObservableCollection<CommObject> boughtPotions { get; set; } = new ObservableCollection<CommObject>();
+        public ObservableCollection<Weapon> boughtWeapons { get; set; } = new ObservableCollection<Weapon>();
+
+
+
+
+
     }
 }

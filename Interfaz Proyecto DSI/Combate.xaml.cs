@@ -24,10 +24,20 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Combate : Page
     {
+        PocionesLogic potsLogic = new PocionesLogic();
+
+
         public Combate() {
             this.InitializeComponent();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e) {
+            potsLogic.potionsList.Clear();
+
+            foreach (var pot in (App.Current as App).boughtPotions)
+                potsLogic.potionsList.Add(pot);
+
+        }
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             if (Frame.BackStack.Last().SourcePageType == typeof(Opciones))
                 PauseMenu.Visibility = Visibility.Visible;
@@ -95,5 +105,6 @@ namespace Interfaz_Proyecto_DSI
         private void returnToMain(object sender, RoutedEventArgs e) {
             Frame.Navigate(typeof(MainPage), null, new DrillInNavigationTransitionInfo());
         }
+
     }
 }
