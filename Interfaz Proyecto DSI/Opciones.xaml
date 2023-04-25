@@ -70,14 +70,14 @@
 
                         <ListView Margin="20" x:Name="GraphicsListView" SelectionChanged="graphSelChanged"
                                   IsItemClickEnabled="True" >
-                            <ListViewItem x:Name="Graph1" KeyDown="keyDown">
+                            <ListViewItem x:Name="Graph1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                                    <ComboBox x:Name="Combo11" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
+                                    <ComboBox x:Name="Combo11" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" 
                                               Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                               SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True">
                                         <ComboBoxItem Content="Alto"/>
@@ -87,14 +87,14 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Graph2" KeyDown="keyDown">
+                            <ListViewItem x:Name="Graph2">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
-                                    <ComboBox x:Name="Combo12" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
+                                    <ComboBox x:Name="Combo12" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" 
                                               Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                               SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True" XYFocusKeyboardNavigation="Enabled">
                                         <ComboBoxItem Content="Alto"/>
@@ -104,7 +104,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Graph3" KeyDown="keyDown">
+                            <ListViewItem x:Name="Graph3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -112,12 +112,12 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
-                                    <Slider x:Name="Slider1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="60,0,20,0" Value="50" IsTabStop="False" ValueChanged="saveButtonSlider" UseSystemFocusVisuals="True"/>
+                                    <Slider x:Name="Slider1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsTabStop="True"
+                                            Margin="60,0,20,0" Value="50"  ValueChanged="saveButtonSlider" UseSystemFocusVisuals="True"/>
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Graph4" KeyDown="keyDown">
+                            <ListViewItem x:Name="Graph4">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3.21*"/>
@@ -127,7 +127,7 @@
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
                                     <CheckBox x:Name="Check1" Grid.Column="2" 
                                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                              FontSize="20" IsTabStop="False" 
+                                              FontSize="20"  
                                               Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox" UseSystemFocusVisuals="True"/>
                                 </Grid>
                             </ListViewItem>
@@ -147,14 +147,14 @@
 
                         <ListView Margin="20" x:Name="SoundsListView" SelectionChanged="soundSelChanged"
                                   IsItemClickEnabled="True">
-                            <ListViewItem x:Name="Sound1" KeyDown="keyDown">
+                            <ListViewItem x:Name="Sound1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                                    <ComboBox x:Name="Combo21" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
+                                    <ComboBox x:Name="Combo21" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" 
                                               Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                               SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True">
                                         <ComboBoxItem Content="Alto"/>
@@ -164,14 +164,14 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Sound2" KeyDown="keyDown">
+                            <ListViewItem x:Name="Sound2">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
-                                    <ComboBox x:Name="Combo22" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
+                                    <ComboBox x:Name="Combo22" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" 
                                               Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                               SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True">
                                         <ComboBoxItem Content="Alto"/>
@@ -181,7 +181,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Sound3" KeyDown="keyDown">
+                            <ListViewItem x:Name="Sound3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -189,12 +189,12 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
-                                    <Slider x:Name="Slider2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="60,0,20,0" Value="50" IsTabStop="False" ValueChanged="saveButtonSlider" UseSystemFocusVisuals="True"/>
+                                    <Slider x:Name="Slider2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsTabStop="True"
+                                            Margin="60,0,20,0" Value="50"  ValueChanged="saveButtonSlider" UseSystemFocusVisuals="True"/>
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Sound4" KeyDown="keyDown">
+                            <ListViewItem x:Name="Sound4">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3.21*"/>
@@ -204,7 +204,7 @@
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
                                     <CheckBox x:Name="Check2" Grid.Column="2" 
                                               VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                              FontSize="20" IsTabStop="False" Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox" UseSystemFocusVisuals="True"/>
+                                              FontSize="20"  Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox" UseSystemFocusVisuals="True"/>
                                 </Grid>
                             </ListViewItem>
 
@@ -223,14 +223,14 @@
 
                         <ListView Margin="20" x:Name="AccessListView" SelectionChanged="accSelChanged"
                                   IsItemClickEnabled="True">
-                            <ListViewItem x:Name="Access1" KeyDown="keyDown">
+                            <ListViewItem x:Name="Access1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-                                    <ComboBox x:Name="Combo31" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" IsTabStop="False"
+                                    <ComboBox x:Name="Combo31" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="0" 
                                               Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                               SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True">
                                         <ComboBoxItem Content="Alto"/>
@@ -240,14 +240,14 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Access2" KeyDown="keyDown">
+                            <ListViewItem x:Name="Access2">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
-                                    <ComboBox x:Name="Combo32" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" IsTabStop="False"
+                                    <ComboBox x:Name="Combo32" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" 
                                               Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                                               SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True">
                                         <ComboBoxItem Content="Alto"/>
@@ -257,7 +257,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Access3" KeyDown="keyDown">
+                            <ListViewItem x:Name="Access3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -265,12 +265,12 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="Opción 3" VerticalAlignment="Center"/>
-                                    <Slider x:Name="Slider3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                            Margin="60,0,20,0" Value="50" IsTabStop="False" ValueChanged="saveButtonSlider" UseSystemFocusVisuals="True"/>
+                                    <Slider x:Name="Slider3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsTabStop="True"
+                                            Margin="60,0,20,0" Value="50"  ValueChanged="saveButtonSlider" UseSystemFocusVisuals="True"/>
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Access4" KeyDown="keyDown">
+                            <ListViewItem x:Name="Access4">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3.21*"/>
@@ -280,7 +280,7 @@
                                     <TextBlock Text="Opción 4" VerticalAlignment="Center"/>
                                     <CheckBox x:Name="Check3" Grid.Column="2" 
                                               VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                              FontSize="20" IsTabStop="False" Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox" UseSystemFocusVisuals="True"/>
+                                              FontSize="20"  Checked="saveButtonCheckBox" Unchecked="saveButtonCheckBox" UseSystemFocusVisuals="True"/>
                                 </Grid>
                             </ListViewItem>
 

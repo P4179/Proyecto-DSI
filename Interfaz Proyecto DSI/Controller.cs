@@ -74,8 +74,7 @@ namespace Interfaz_Proyecto_DSI
             }
         }
         public bool isKeyDown(VirtualKey key) {
-            var keystate = Window.Current.CoreWindow.GetKeyState(key);
-            return (keystate & Windows.UI.Core.CoreVirtualKeyStates.Down) == CoreVirtualKeyStates.Down;
+            return (Window.Current.CoreWindow.GetKeyState(key) & Windows.UI.Core.CoreVirtualKeyStates.Down) == CoreVirtualKeyStates.Down;
         }
 
 

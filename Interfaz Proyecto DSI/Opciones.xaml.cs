@@ -6,10 +6,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Input.Preview.Injection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -123,6 +125,7 @@ namespace Interfaz_Proyecto_DSI
                     optionsLogic.selectedOption = optionsLogic.graphList[index];
                     optionsLogic.selectedGraph = optionsLogic.graphList[index];
                 }
+                selecting = false;
             }
         }
 
@@ -135,6 +138,7 @@ namespace Interfaz_Proyecto_DSI
                     optionsLogic.selectedOption = optionsLogic.soundList[index];
                     optionsLogic.selectedSound = optionsLogic.soundList[index];
                 }
+                selecting = false;
             }
         }
 
@@ -147,6 +151,7 @@ namespace Interfaz_Proyecto_DSI
                     optionsLogic.selectedOption = optionsLogic.accList[index];
                     optionsLogic.selectedAccess = optionsLogic.accList[index];
                 }
+                selecting = false;
             }
         }
 
@@ -239,7 +244,6 @@ namespace Interfaz_Proyecto_DSI
             SaveButton.IsEnabled = false;
         }
 
-
         private void updateOptions(){
             lastCombo11 = Combo11.SelectedIndex;
             lastCombo12 = Combo12.SelectedIndex;
@@ -257,20 +261,21 @@ namespace Interfaz_Proyecto_DSI
             lastCheck3 = check3;
         }
 
+
+
         ContentControl lastFocused;
         bool selecting = false;
         private void keyDown(object sender, KeyRoutedEventArgs e) {
             var focused = FocusManager.GetFocusedElement() as ContentControl;
-            //Debug.WriteLine(focused.GetType());
+            //Debug.WriteLine(focused.Name);
 
-            if (control.isKeyDown(VirtualKey.GamepadA) ) {
+            if (control.isKeyDown(VirtualKey.GamepadX) && !selecting) {
                 selectOption(focused);
             }
             switch (e.Key) {
                 case Windows.System.VirtualKey.Enter:
                     selectOption(focused);
                     break;
-
                 case Windows.System.VirtualKey.Escape:
                     if (selecting) {
                         selecting = false;
@@ -293,7 +298,6 @@ namespace Interfaz_Proyecto_DSI
 
                             optionsTabs.Focus(FocusState.Programmatic);
                         }
-                        else lastFocused.Focus(FocusState.Programmatic);
                     }
                     break;
 
@@ -309,6 +313,51 @@ namespace Interfaz_Proyecto_DSI
                         Combo11.Focus(FocusState.Programmatic);
                         selecting = true;
                         break;
+                    case "Graph2":
+                        Combo12.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Graph3":
+                        Slider1.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Graph4":
+                        Check1.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Sound1":
+                        Combo21.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Sound2":
+                        Combo22.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Sound3":
+                        Slider2.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Sound4":
+                        Check2.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Access1":
+                        Combo31.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Access2":
+                        Combo32.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Access3":
+                        Slider3.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                    case "Access4":
+                        Check3.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+
                 }
             }
 
