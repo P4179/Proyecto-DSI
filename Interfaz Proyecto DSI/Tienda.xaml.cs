@@ -60,7 +60,7 @@ namespace Interfaz_Proyecto_DSI
         private void showQuantitySelection(object sender, RoutedEventArgs e) {
             BuyQuantity.Visibility = Visibility.Visible;
             Quantity.Text = "1";
-            total = shopLogic.selectedObject.price;
+            totalPrice = shopLogic.selectedObject.price;
             if (shopLogic.selectedObject.price <= shopLogic.coins) BuyButton.IsEnabled = true;
             else BuyButton.IsEnabled = false;
 
@@ -73,17 +73,19 @@ namespace Interfaz_Proyecto_DSI
 
         }
 
-        int total;
+        int totalPrice;
+        int totalAmount;
         private void changeQuant(object sender, TextChangedEventArgs e) {
             if (int.TryParse(Quantity.Text, out int parsedNumber)) {
                 if (parsedNumber > 1000) {
                     Quantity.Text = "999";
                     parsedNumber = 999;
                 }
-                total = shopLogic.selectedObject.price * parsedNumber;
-                TotalPrice.Text = total.ToString() + " C";
+                totalPrice = shopLogic.selectedObject.price * parsedNumber;
+                TotalPrice.Text = totalPrice.ToString() + " C";
+                totalAmount = int.Parse(Quantity.Text);
 
-                if (total <= shopLogic.coins && parsedNumber > 0) BuyButton.IsEnabled = true;
+                if (totalPrice <= shopLogic.coins && parsedNumber > 0) BuyButton.IsEnabled = true;
                 else BuyButton.IsEnabled = false;
             }
             else {
@@ -169,15 +171,46 @@ namespace Interfaz_Proyecto_DSI
                 showQuantitySelection(null, null);
         }
 
+        
         private void buyItem(object sender, RoutedEventArgs e) {
-            shopLogic.coins -= total;
+            shopLogic.coins -= totalPrice;
             shopLogic.coinsTxt = shopLogic.coins.ToString() + " C";
-            (App.Current as App).coins = shopLogic.coins;
 
-            if (currTabName == "PotionsTab")
-                (App.Current as App).boughtPotions.Add((shopLogic.selectedPotion as CommObject));
-            else if (currTabName == "WeaponsTab")
-                (App.Current as App).boughtWeapons.Add(shopLogic.selectedWeapon);
+            var global = (App.Current as App);
+            global.coins = shopLogic.coins;
+
+
+            if (currTabName == "PotionsTab") {
+                bool exists = global.boughtPotions.Any(item => {
+                    return (item.name == shopLogic.selectedPotion.name);
+                });
+                if (exists) {
+                    var pot = global.boughtPotions.Single(i => i.name == shopLogic.selectedPotion.name);
+                    pot.amount += totalAmount;
+                    pot.displayAmount = "x " + pot.amount.ToString();
+                }
+                else {
+                    Potion pot = new Potion();
+                    pot.id = shopLogic.selectedPotion.id;
+                    pot.name = shopLogic.selectedPotion.name;
+                    pot.price = shopLogic.selectedPotion.price;
+                    pot.displayPrice = "";
+                    pot.desc = shopLogic.selectedPotion.desc;
+                    pot.amount = totalAmount;
+                    pot.displayAmount = "x " + pot.amount.ToString();
+                    global.boughtPotions.Add(pot);
+
+                }
+            }
+            else if (currTabName == "WeaponsTab"){
+                for(int i = 0; i < totalAmount; i++) {
+                    if((shopLogic.selectedWeapon.id + 1) % 2 != 0)
+                        global.boughtWeapons1.Add(shopLogic.selectedWeapon);
+                    else
+                        global.boughtWeapons2.Add(shopLogic.selectedWeapon);
+                }
+            }
+                
 
             hideQuantitySelection(null, null);
         }

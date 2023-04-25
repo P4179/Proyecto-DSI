@@ -310,7 +310,7 @@
             <StackPanel x:Name="optionInfo" Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
                 <TextBlock Text="{x:Bind optionsLogic.selectedOption.name, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
-                <TextBox Style="{StaticResource PlaceHolderTextTemplate}"
+                <TextBox x:Name="OptInfo" Style="{StaticResource PlaceHolderTextTemplate}"
                          Text="{x:Bind optionsLogic.selectedOption.desc, Mode=TwoWay}"
                          TextWrapping="Wrap" Margin="0,40,0,0" Height="310" FontSize="30"/>
 

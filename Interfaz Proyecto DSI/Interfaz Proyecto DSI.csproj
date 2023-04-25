@@ -122,6 +122,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EquipoLogic.cs" />
     <Compile Include="Combate.xaml.cs">
       <DependentUpon>Combate.xaml</DependentUpon>
     </Compile>

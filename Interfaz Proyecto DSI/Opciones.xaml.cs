@@ -90,19 +90,17 @@ namespace Interfaz_Proyecto_DSI
 
             if (currTabName == "ControlsTab") {
                 //optionInfo.Visibility = Visibility.Collapsed;
+                optionsLogic.selectedOption = optionsLogic.controlsOption;
             }
             else {
                 //optionInfo.Visibility = Visibility.Visible;
-                if (currTabName == "GraphicsTab")
-                {
+                if (currTabName == "GraphicsTab") {
                     optionsLogic.selectedOption = optionsLogic.graphList[0];
                 }
-                else if (currTabName == "SoundTab")
-                {
+                else if (currTabName == "SoundTab") {
                     optionsLogic.selectedOption = optionsLogic.soundList[0];
                 }
-                else if (currTabName == "AccessTab")
-                {
+                else if (currTabName == "AccessTab") {
                     optionsLogic.selectedOption = optionsLogic.accList[0];
                 }
             }

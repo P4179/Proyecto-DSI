@@ -160,7 +160,7 @@
             <Setter Property="FontFamily" Value="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="#cbc2a8" Opacity="0.63"/>
+                    <SolidColorBrush Color="#cbc2a8" Opacity="0.80"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="BorderBrush" Value="Black"/>

@@ -70,10 +70,22 @@ namespace Interfaz_Proyecto_DSI
             new Character() { Name="None", Glyph = "" },
         };
 
-        public Equipo()
-        {
+        EquipoLogic teamLogic = new EquipoLogic();
+        public Equipo() {
             this.InitializeComponent();
-            for (int i = 0; i < 10; i++) MyListView1.Items.Add("Arma " + i.ToString());
+
+            WeaponNumber.Text = "Arma princ.";
+
+            Weapon aux1 = new Weapon() { id = 0, displayPrice = "0", dmg = 5, effect = "Ninguno", name = "Arma principal 0", price = 0, reach = 5, type = "Espada" };
+            Weapon aux2 = new Weapon() { id = 0, displayPrice = "0", dmg = 5, effect = "Ninguno", name = "Arma secundaria 0", price = 0, reach = 5, type = "Escudo" };
+            teamLogic.selectedWeapon1 = aux1;
+            teamLogic.selectedWeapon2 = aux2;
+            teamLogic.weaponList1.Add(aux1);
+            teamLogic.weaponList2.Add(aux2);
+            foreach (var weap in (App.Current as App).boughtWeapons1)
+                teamLogic.weaponList1.Add(weap);
+            foreach (var weap in (App.Current as App).boughtWeapons2)
+                teamLogic.weaponList2.Add(weap);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -89,6 +101,9 @@ namespace Interfaz_Proyecto_DSI
         private void openWeaponList(object sender, RoutedEventArgs e)
         {
             weaponList.Visibility = Visibility.Visible;
+            WeaponNumber.Text = "Arma princ.";
+            Weapons1.Visibility = Visibility.Visible;
+            Weapons2.Visibility = Visibility.Collapsed;
         }
         private void closeWeaponList(object sender, RoutedEventArgs e)
         {
@@ -228,5 +243,21 @@ namespace Interfaz_Proyecto_DSI
                 }
             }
         }
+
+        private void changeWeaponList(object sender, RoutedEventArgs e) {
+            if (Weapons1.Visibility == Visibility.Visible) {
+                WeaponNumber.Text = "Arma secun.";
+                Weapons1.Visibility = Visibility.Collapsed;
+                Weapons2.Visibility = Visibility.Visible;
+            }
+            else {
+                WeaponNumber.Text = "Arma princ.";
+                Weapons1.Visibility = Visibility.Visible;
+                Weapons2.Visibility = Visibility.Collapsed;
+            }
+
+        }
+
+       
     }
 }

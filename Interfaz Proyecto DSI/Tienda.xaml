@@ -96,7 +96,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="{x:Bind name }" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                <TextBlock Text="{x:Bind name}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                 <TextBlock Text="{x:Bind displayPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Column="1"/>
             </Grid>
         </DataTemplate>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -98,9 +99,10 @@ namespace Interfaz_Proyecto_DSI
             deferral.Complete();
         }
 
-        public int coins { get; set; } = 2000;
-        public ObservableCollection<CommObject> boughtPotions { get; set; } = new ObservableCollection<CommObject>();
-        public ObservableCollection<Weapon> boughtWeapons { get; set; } = new ObservableCollection<Weapon>();
+        public int coins { get; set; } = 5000;
+        public ObservableCollection<Potion> boughtPotions { get; set; } = new ObservableCollection<Potion>();
+        public ObservableCollection<Weapon> boughtWeapons1 { get; set; } = new ObservableCollection<Weapon>();
+        public ObservableCollection<Weapon> boughtWeapons2 { get; set; } = new ObservableCollection<Weapon>();
 
 
 

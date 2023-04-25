@@ -34,6 +34,9 @@ namespace Interfaz_Proyecto_DSI
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             potsLogic.potionsList.Clear();
 
+            Potion aux = new Potion() { amount = 10, desc = "Lore Ipsum 0 poc", displayAmount ="x 4", displayPrice="", id = 0, name = "Poción 0", price = 0 };
+            potsLogic.potionsList.Add(aux);
+            potsLogic.selectedPotion = aux;
             foreach (var pot in (App.Current as App).boughtPotions)
                 potsLogic.potionsList.Add(pot);
 
@@ -106,5 +109,8 @@ namespace Interfaz_Proyecto_DSI
             Frame.Navigate(typeof(MainPage), null, new DrillInNavigationTransitionInfo());
         }
 
+        private void potChanged(object sender, SelectionChangedEventArgs e) {
+
+        }
     }
 }

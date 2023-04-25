@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Interfaz_Proyecto_DSI
 {
     public class PocionesLogic : ObservableObject {
-        public ObservableCollection<CommObject> potionsList { get; } = new ObservableCollection<CommObject>();
+        public ObservableCollection<Potion> potionsList { get; } = new ObservableCollection<Potion>();
 
         private CommObject _selPot;
         public CommObject selectedPotion {

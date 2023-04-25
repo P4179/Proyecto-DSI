@@ -48,12 +48,13 @@
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
-                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.Background" Value="#a79c7e"/>
                                             <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
                                             <Setter Target="RootGrid.BorderBrush" Value="Black"/>
                                             <Setter Target="RootGrid.Padding" Value="20"/>
                                         </VisualState.Setters>
                                     </VisualState>
+
 
                                 </VisualStateGroup>
 
@@ -87,6 +88,19 @@
             </Setter>
 
         </Style>
+
+
+        <DataTemplate x:Key="PotionsTemplate" x:DataType="local:Potion">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{x:Bind name}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                <TextBlock Text="{x:Bind displayAmount}" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
 
@@ -131,7 +145,7 @@
                 </Canvas>
             </Grid>
 
-            <!-- Panfleto con la información del objetivo del día -->
+            <!-- Panfleto con la información del objetivo -->
             <StackPanel Margin="40" Width="450"
                         VerticalAlignment="Top" HorizontalAlignment="Left">
                 <Border Background="#cfba8e"
@@ -158,6 +172,7 @@
                 Margin="40" FontSize="40">
                 <TextBlock Text="Fin de Turno"/>
             </Button>
+
 
             <StackPanel x:Name="Buttons" Orientation="Horizontal"
             HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -222,20 +237,21 @@
                 </Button>
 
                 <ListView x:Name="PotionsList" Margin="80,80,80,200"
-                          ItemsSource="{x:Bind potsLogic.potionsList}"/>
+                          ItemsSource="{x:Bind potsLogic.potionsList}"
+                          ItemTemplate="{StaticResource PotionsTemplate}"
+                          SelectedItem="{x:Bind potsLogic.selectedPotion,Mode=TwoWay}"
+                          IsItemClickEnabled="True"/>
 
 
                 <!--Información del objeto-->
                 <StackPanel Grid.Column="1" Margin="-40,80,40,200" VerticalAlignment="Stretch">
-                    <TextBlock Text="Poción X" Style="{StaticResource TextBlockTemplate}" 
+                    <TextBlock Text="{x:Bind potsLogic.selectedPotion.name, Mode=TwoWay}" Style="{StaticResource TextBlockTemplate}" 
                            FontSize="50" HorizontalAlignment="Center"
-                           Foreground="White"
-                           Margin="0,0,0,10"/>
+                           Margin="0,0,0,10" Foreground="White"/>
                     <Image Source="/Assets/imgPlaceholder.jpg" MaxHeight="300"/>
                     <TextBox TextWrapping="Wrap" Style="{StaticResource PlaceHolderTextTemplate}"
-                         Margin="0,40,0,0" Height ="auto" FontSize="30"
-                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
-                        />
+                         Margin="0,40,0,0" Height ="300" FontSize="30"
+                         Text="{x:Bind potsLogic.selectedPotion.desc, Mode=TwoWay}"/>
 
                 </StackPanel>
             </Grid>

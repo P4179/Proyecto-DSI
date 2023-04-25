@@ -23,20 +23,24 @@ namespace Interfaz_Proyecto_DSI
 
         private Opcion _selGraph;
         public Opcion selectedGraph {
-            get => _selOpt;
-            set { Set(ref _selOpt, value); }
+            get => _selGraph;
+            set { Set(ref _selGraph, value); }
         }
         private Opcion _selSound;
-        public Opcion selectedSound
-        {
+        public Opcion selectedSound {
             get => _selSound;
             set { Set(ref _selSound, value); }
         }
         private Opcion _selAcc;
-        public Opcion selectedAccess
-        {
+        public Opcion selectedAccess {
             get => _selAcc;
             set { Set(ref _selAcc, value); }
+        }
+
+        private Opcion _control=  new Opcion() { desc = "Lore Ipsum cont", id = 0, name = "Controles" };
+        public Opcion controlsOption {
+            get => _control;
+
         }
     }
 }
