@@ -76,6 +76,14 @@
                                         </VisualState.Setters>
                                     </VisualState>
 
+                                    <VisualState x:Name="FocusedPointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background" Value="#e9e2ce"/>
+                                            <Setter Target="RootGrid.BorderThickness" Value="0.5"/>
+                                            <Setter Target="RootGrid.BorderBrush" Value="Black"/>
+                                            <Setter Target="RootGrid.Padding" Value="20"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
 
 
                                 </VisualStateGroup>
@@ -105,10 +113,8 @@
         
     </Page.Resources>
 
-    
-    
 
-    <Viewbox >
+    <Viewbox>
         <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>

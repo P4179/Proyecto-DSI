@@ -106,22 +106,22 @@ namespace Interfaz_Proyecto_DSI
 
     public class OptionLists {
         public static List<Opcion> graphicOptions { get; } = new List<Opcion>() {
-            new Opcion() {id = 0, name = "Opción 1", desc = "Lore Ipsum graf 1"},
-            new Opcion() {id = 1, name = "Opción 2", desc = "Lore Ipsum graf 2"},
-            new Opcion() {id = 2, name = "Opción 3", desc = "Lore Ipsum graf 3"},
-            new Opcion() {id = 3, name = "Opción 4", desc = "Lore Ipsum graf 4"}
+            new Opcion() {id = 0, name = "Opción graf 1", desc = "Lore Ipsum graf 1"},
+            new Opcion() {id = 1, name = "Opción graf 2", desc = "Lore Ipsum graf 2"},
+            new Opcion() {id = 2, name = "Opción graf 3", desc = "Lore Ipsum graf 3"},
+            new Opcion() {id = 3, name = "Opción graf 4", desc = "Lore Ipsum graf 4"}
         };
         public static List<Opcion> soundOptions { get; } = new List<Opcion>() {
-            new Opcion() {id = 0, name = "Opción 1", desc = "Lore Ipsum son 1"},
-            new Opcion() {id = 1, name = "Opción 2", desc = "Lore Ipsum son 2"},
-            new Opcion() {id = 2, name = "Opción 3", desc = "Lore Ipsum son 3"},
-            new Opcion() {id = 3, name = "Opción 4", desc = "Lore Ipsum son 4"}
+            new Opcion() {id = 0, name = "Opción son 1", desc = "Lore Ipsum son 1"},
+            new Opcion() {id = 1, name = "Opción son 2", desc = "Lore Ipsum son 2"},
+            new Opcion() {id = 2, name = "Opción son 3", desc = "Lore Ipsum son 3"},
+            new Opcion() {id = 3, name = "Opción son 4", desc = "Lore Ipsum son 4"}
         };
         public static List<Opcion> accessOptions { get; } = new List<Opcion>() {
-            new Opcion() {id = 0, name = "Opción 1", desc = "Lore Ipsum acc 1"},
-            new Opcion() {id = 1, name = "Opción 2", desc = "Lore Ipsum acc 2"},
-            new Opcion() {id = 2, name = "Opción 3", desc = "Lore Ipsum acc 3"},
-            new Opcion() {id = 3, name = "Opción 4", desc = "Lore Ipsum acc 4"}
+            new Opcion() {id = 0, name = "Opción access 1", desc = "Lore Ipsum acc 1"},
+            new Opcion() {id = 1, name = "Opción access 2", desc = "Lore Ipsum acc 2"},
+            new Opcion() {id = 2, name = "Opción access 3", desc = "Lore Ipsum acc 3"},
+            new Opcion() {id = 3, name = "Opción access 4", desc = "Lore Ipsum acc 4"}
         };
 
         public static IList<Opcion> getGraphs() { return graphicOptions; }

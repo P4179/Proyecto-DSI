@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Gaming.Input;
+using Windows.System;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Interfaz_Proyecto_DSI
@@ -16,19 +19,17 @@ namespace Interfaz_Proyecto_DSI
 
         // Lectura del mando
         public GamepadReading gamepadState;
-        MainPage mainPage = null;
+        Page page = null;
 
         // Constructora
-        public Controller(Page main)
-        {
-            mainPage = main as MainPage;
+        public Controller(Page main) {
+            page = main;
 
             gamepadAdded();
             gamepadRemoved();
         }
         // Función llamada al conectar un mando
-        public void gamepadAdded()
-        {
+        public void gamepadAdded() {
             Gamepad.GamepadAdded += (object sender, Gamepad e) => {
                 // Check if the just-added gamepad is already in myGamepads; if it isn't, add it.
                 lock (myLock)
@@ -71,6 +72,10 @@ namespace Interfaz_Proyecto_DSI
             {
                 gamepadState = mainGamepad.GetCurrentReading();
             }
+        }
+        public bool isKeyDown(VirtualKey key) {
+            var keystate = Window.Current.CoreWindow.GetKeyState(key);
+            return (keystate & Windows.UI.Core.CoreVirtualKeyStates.Down) == CoreVirtualKeyStates.Down;
         }
 
 

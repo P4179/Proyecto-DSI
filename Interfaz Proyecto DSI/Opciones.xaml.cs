@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,7 +29,9 @@ namespace Interfaz_Proyecto_DSI
     public sealed partial class Opciones : Page
     {
         OpcionesLogic optionsLogic = new OpcionesLogic();
-
+        // Controlador con su bucle de lectura
+        Controller control = null;
+        ControllerLoop ctrlLoop = null;
 
         public Opciones() {
             this.InitializeComponent();
@@ -41,7 +47,8 @@ namespace Interfaz_Proyecto_DSI
             }
 
             SaveButton.IsEnabled = false;
-
+            control = new Controller(this);
+            ctrlLoop = new ControllerLoop(this, control);
         }
 
         private void closeOptions(object sender, RoutedEventArgs e) {
@@ -59,6 +66,8 @@ namespace Interfaz_Proyecto_DSI
         // Hace que las pestañas sean del mismo tamaño y ocupen todo el ancho del pivot
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            optionsTabs.Focus(FocusState.Programmatic);
+
             double widthOffset = 0.26;
 
             IEnumerable<PivotHeaderPanel> headerpanel = FindVisualChildren<PivotHeaderPanel>(optionsTabs);
@@ -89,11 +98,9 @@ namespace Interfaz_Proyecto_DSI
             currTabName = selected.Name;
 
             if (currTabName == "ControlsTab") {
-                //optionInfo.Visibility = Visibility.Collapsed;
                 optionsLogic.selectedOption = optionsLogic.controlsOption;
             }
             else {
-                //optionInfo.Visibility = Visibility.Visible;
                 if (currTabName == "GraphicsTab") {
                     optionsLogic.selectedOption = optionsLogic.graphList[0];
                 }
@@ -104,8 +111,6 @@ namespace Interfaz_Proyecto_DSI
                     optionsLogic.selectedOption = optionsLogic.accList[0];
                 }
             }
-            
-            
         }
 
 
@@ -114,9 +119,10 @@ namespace Interfaz_Proyecto_DSI
                 var sel = sender as ListView;
                 int index = sel.SelectedIndex;
 
-                optionsLogic.selectedOption = optionsLogic.graphList[index];
-                optionsLogic.selectedGraph = optionsLogic.graphList[index];
-
+                if(index != -1 && currTabName == "GraphicsTab") {
+                    optionsLogic.selectedOption = optionsLogic.graphList[index];
+                    optionsLogic.selectedGraph = optionsLogic.graphList[index];
+                }
             }
         }
 
@@ -125,9 +131,10 @@ namespace Interfaz_Proyecto_DSI
                 var sel = sender as ListView;
                 int index = sel.SelectedIndex;
 
-                optionsLogic.selectedOption = optionsLogic.soundList[index];
-                optionsLogic.selectedSound = optionsLogic.soundList[index];
-
+                if (index != -1 && currTabName == "SoundTab") {
+                    optionsLogic.selectedOption = optionsLogic.soundList[index];
+                    optionsLogic.selectedSound = optionsLogic.soundList[index];
+                }
             }
         }
 
@@ -136,8 +143,10 @@ namespace Interfaz_Proyecto_DSI
                 var sel = sender as ListView;
                 int index = sel.SelectedIndex;
 
-                optionsLogic.selectedOption = optionsLogic.accList[index];
-                optionsLogic.selectedAccess = optionsLogic.accList[index];
+                if (index != -1 && currTabName == "AccessTab") {
+                    optionsLogic.selectedOption = optionsLogic.accList[index];
+                    optionsLogic.selectedAccess = optionsLogic.accList[index];
+                }
             }
         }
 
@@ -247,6 +256,64 @@ namespace Interfaz_Proyecto_DSI
             lastCheck2 = check2;
             lastCheck3 = check3;
         }
-  
+
+        ContentControl lastFocused;
+        bool selecting = false;
+        private void keyDown(object sender, KeyRoutedEventArgs e) {
+            var focused = FocusManager.GetFocusedElement() as ContentControl;
+            //Debug.WriteLine(focused.GetType());
+
+            if (control.isKeyDown(VirtualKey.GamepadA) ) {
+                selectOption(focused);
+            }
+            switch (e.Key) {
+                case Windows.System.VirtualKey.Enter:
+                    selectOption(focused);
+                    break;
+
+                case Windows.System.VirtualKey.Escape:
+                    if (selecting) {
+                        selecting = false;
+                        lastFocused.Focus(FocusState.Programmatic);
+                    }
+                    else {
+                        if (focused.Name == "HeaderClipper" || focused.Name == "ReturnButton" ||
+                        focused.Name == "SaveButton" || focused.Name == "RestoreButon")
+                            closeOptions(null, null);
+                        else if (focused.Name == "Graph1" || focused.Name == "Graph2" || focused.Name == "Graph3" || focused.Name == "Graph4" ||
+                                 focused.Name == "Sound1" || focused.Name == "Sound2" || focused.Name == "Sound3" || focused.Name == "Sound4" ||
+                                 focused.Name == "Access1" || focused.Name == "Access2" || focused.Name == "Access3" || focused.Name == "Access4")
+                        {
+                            GraphicsListView.SelectedIndex = 0;
+                            SoundsListView.SelectedIndex = 0;
+                            AccessListView.SelectedIndex = 0;
+                            GraphicsListView.SelectedIndex = -1;
+                            SoundsListView.SelectedIndex = -1;
+                            AccessListView.SelectedIndex = -1;
+
+                            optionsTabs.Focus(FocusState.Programmatic);
+                        }
+                        else lastFocused.Focus(FocusState.Programmatic);
+                    }
+                    break;
+
+            }
+        }
+
+
+        void selectOption(ContentControl focused) {
+            if (!selecting) {
+                lastFocused = focused;
+                switch (focused.Name) {
+                    case "Graph1":
+                        Combo11.Focus(FocusState.Programmatic);
+                        selecting = true;
+                        break;
+                }
+            }
+
+        }
+
+
     }
 }

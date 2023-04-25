@@ -56,9 +56,9 @@ namespace Interfaz_Proyecto_DSI
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (Frame.BackStack.Last().SourcePageType == typeof(Opciones))
-            {
+            if (Frame.BackStack.Last().SourcePageType == typeof(Opciones)) {
                 PauseMenu.Visibility = Visibility.Visible;
+                ResumeButton.Focus(FocusState.Programmatic);
             }
 
             // se inicia el timer
@@ -127,6 +127,7 @@ namespace Interfaz_Proyecto_DSI
             {
                 enableMapFocus(false);
                 PauseMenu.Visibility = Visibility.Visible;
+                ResumeButton.Focus(FocusState.Programmatic);
             }
             else
             {
@@ -166,6 +167,7 @@ namespace Interfaz_Proyecto_DSI
                 e.Handled = true;
             }
         }
+
 
         // se mueve el puntero dentro del mapa
         private void ScrollViewer_PointerMoved(object sender, PointerRoutedEventArgs e)

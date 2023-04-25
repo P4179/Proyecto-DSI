@@ -32,8 +32,7 @@ namespace Interfaz_Proyecto_DSI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // si se puede volver atrás, es que ya se ha entrado en el juego
-            if (Frame.CanGoBack)
-            {
+            if (Frame.CanGoBack && Frame.BackStack.Last().SourcePageType != typeof(Opciones)) {
                 SaveGame.IsEnabled = true;
             }
             base.OnNavigatedTo(e);
@@ -58,26 +57,39 @@ namespace Interfaz_Proyecto_DSI
         }
 
         // MENÚ DE CONFIRMACIÓN
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void ExitButton_Click(object sender, RoutedEventArgs e) {
             ConfirmationMenu.Visibility = Visibility.Visible;
             ConfirmationBg.Visibility = Visibility.Visible;
+
+            NewGame.IsTabStop = false;
+            SaveGame.IsTabStop = false;
+            Options.IsTabStop = false;
+            Exit.IsTabStop = false;
+            VisualStateManager.GoToState(NoButton, "Focused", true);
+            NoButton.Focus(FocusState.Programmatic);
         }
-        private void ButtonYes_Click(object sender, RoutedEventArgs e)
-        {
+        private void ButtonYes_Click(object sender, RoutedEventArgs e) {
             Application.Current.Exit();
         }
-        private void ButtonNo_Click(object sender, RoutedEventArgs e)
-        {
+        private void ButtonNo_Click(object sender, RoutedEventArgs e) {
             ConfirmationMenu.Visibility = Visibility.Collapsed;
             ConfirmationBg.Visibility = Visibility.Collapsed;
+
+            NewGame.IsTabStop = true;
+            SaveGame.IsTabStop = true;
+            Options.IsTabStop = true;
+            Exit.IsTabStop = true;
+            NewGame.Focus(FocusState.Programmatic);
         }
 
-
-
-        private void Equipo(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Tienda), null, new DrillInNavigationTransitionInfo());
+            NewGame.Focus(FocusState.Programmatic);
+            VisualStateManager.GoToState(NewGame, "Focused", true);
+        }
+
+        private void keyDown(object sender, KeyRoutedEventArgs e) {
+            ButtonNo_Click(null, null);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Tienda : Page
     {
-
+    
         TiendaLogic shopLogic = new TiendaLogic();
         public Tienda() {
             this.InitializeComponent();
@@ -42,6 +42,7 @@ namespace Interfaz_Proyecto_DSI
             foreach (CommObject acc in ObjectLists.getAccessories()) {
                 shopLogic.accessoriesList.Add(acc);
             }
+
         }
 
         private void returnToMap(object sender, RoutedEventArgs e) {
@@ -95,7 +96,6 @@ namespace Interfaz_Proyecto_DSI
 
 
 
-
         // Hace que las pestañas sean del mismo tamaño y ocupen todo el ancho del pivot
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             double widthOffset = 0.5f;
@@ -130,23 +130,19 @@ namespace Interfaz_Proyecto_DSI
                 if (currTabName == "PotionsTab") {
                     shopLogic.selectedObject = shopLogic.potionsList[0];
                     PotionsListView.SelectedIndex = 0;
-                    
-                    //var item = PotionsListView.ContainerFromIndex(0) as ListViewItem;
-                    //item.IsSelected= true;
                 }
                 else {
                     shopLogic.selectedObject = shopLogic.accessoriesList[0];
                     AccessoriesListView.SelectedIndex = 0;
-                   
+                    
                 }
                 WeaponsInfo.Visibility = Visibility.Collapsed;
                 ItemDescription.Visibility = Visibility.Visible;
-
             }
             else {
                 shopLogic.selectedObject = shopLogic.weaponList[0];
                 WeaponsListView.SelectedIndex = 0;
-
+                
 
                 WeaponsInfo.Visibility = Visibility.Visible;
                 ItemDescription.Visibility = Visibility.Collapsed;
