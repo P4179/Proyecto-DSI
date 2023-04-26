@@ -101,7 +101,6 @@ namespace Interfaz_Proyecto_DSI
 
             if (currTabName == "ControlsTab") {
                 optionsLogic.selectedOption = optionsLogic.controlsOption;
-
             }
             else {
                 if (currTabName == "GraphicsTab") {
@@ -269,10 +268,10 @@ namespace Interfaz_Proyecto_DSI
         bool changingVolume = false;
         private void keyDown(object sender, KeyRoutedEventArgs e) {
             var focused = FocusManager.GetFocusedElement() as ContentControl;
-            //Debug.WriteLine(focused.Name);
+            
+            //Debug.WriteLine(foccc);
 
             if (changingVolume) {
-
                 if (control.gamepadState.RightThumbstickX < 0) {
                     if (currTabName == "GraphicsTab") {
                         Slider1.Value--;
@@ -302,28 +301,34 @@ namespace Interfaz_Proyecto_DSI
                     selOption(null, null);
                     break;
                 case Windows.System.VirtualKey.Escape:
-                    if (selecting) {
-                        selecting = false;
-                        changingVolume = false;
-                        lastFocused.Focus(FocusState.Programmatic);
+                    if (focused == null) {
+                        var otherFoc = FocusManager.GetFocusedElement();
+                        if (otherFoc == Combo11 || otherFoc == Combo12 || otherFoc == Slider1 || otherFoc == Check1 ||
+                            otherFoc == Combo21 || otherFoc == Combo22 || otherFoc == Slider2 || otherFoc == Check2 ||
+                            otherFoc == Combo31 || otherFoc == Combo32 || otherFoc == Slider3 || otherFoc == Check3)
+                        {
+                            lastFocused.Focus(FocusState.Programmatic);
+                        }
+                        else if (selecting) {
+                            selecting = false;
+                            changingVolume = false;
+                            lastFocused.Focus(FocusState.Programmatic);
+                        }
                     }
                     else {
-                        if(focused != null) {
-                            if (focused.Name == "HeaderClipper" || focused.Name == "ReturnButton" ||
+                        if (focused.Name == "HeaderClipper" || focused.Name == "ReturnButton" ||
                                 focused.Name == "SaveButton" || focused.Name == "RestoreButon")
-                                closeOptions(null, null);
-                            else if (focused.Name == "Graph1" || focused.Name == "Graph2" || focused.Name == "Graph3" || focused.Name == "Graph4" ||
-                                     focused.Name == "Sound1" || focused.Name == "Sound2" || focused.Name == "Sound3" || focused.Name == "Sound4" ||
-                                     focused.Name == "Access1" || focused.Name == "Access2" || focused.Name == "Access3" || focused.Name == "Access4")
-                            {
-                                GraphicsListView.SelectedIndex = 0;
-                                SoundsListView.SelectedIndex = 0;
-                                AccessListView.SelectedIndex = 0;
+                            closeOptions(null, null);
+                        else if (focused.Name == "Graph1" || focused.Name == "Graph2" || focused.Name == "Graph3" || focused.Name == "Graph4" ||
+                                 focused.Name == "Sound1" || focused.Name == "Sound2" || focused.Name == "Sound3" || focused.Name == "Sound4" ||
+                                 focused.Name == "Access1" || focused.Name == "Access2" || focused.Name == "Access3" || focused.Name == "Access4")
+                        {
+                            GraphicsListView.SelectedIndex = 0;
+                            SoundsListView.SelectedIndex = 0;
+                            AccessListView.SelectedIndex = 0;
 
-                                optionsTabs.Focus(FocusState.Programmatic);
-                            }
+                            optionsTabs.Focus(FocusState.Programmatic);
                         }
-                        
                     }
                     break;
 
@@ -390,5 +395,8 @@ namespace Interfaz_Proyecto_DSI
                 }
             }
         }
+
+
+
     }
 }

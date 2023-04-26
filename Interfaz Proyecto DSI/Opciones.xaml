@@ -70,7 +70,7 @@
 
                         <ListView Margin="20" x:Name="GraphicsListView" SelectionChanged="graphSelChanged"
                                   IsItemClickEnabled="True" ItemClick="selOption">
-                            <ListViewItem x:Name="Graph1">
+                            <ListViewItem x:Name="Graph1" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -87,7 +87,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Graph2">
+                            <ListViewItem x:Name="Graph2" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -104,7 +104,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Graph3">
+                            <ListViewItem x:Name="Graph3" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -117,7 +117,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Graph4">
+                            <ListViewItem x:Name="Graph4" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3.21*"/>
@@ -147,7 +147,7 @@
 
                         <ListView Margin="20" x:Name="SoundsListView" SelectionChanged="soundSelChanged"
                                   IsItemClickEnabled="True" ItemClick="selOption">
-                            <ListViewItem x:Name="Sound1">
+                            <ListViewItem x:Name="Sound1" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -164,7 +164,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Sound2">
+                            <ListViewItem x:Name="Sound2" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -181,7 +181,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Sound3">
+                            <ListViewItem x:Name="Sound3" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -194,7 +194,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Sound4">
+                            <ListViewItem x:Name="Sound4" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3.21*"/>
@@ -223,7 +223,7 @@
 
                         <ListView Margin="20" x:Name="AccessListView" SelectionChanged="accSelChanged"
                                   IsItemClickEnabled="True" ItemClick="selOption">
-                            <ListViewItem x:Name="Access1">
+                            <ListViewItem x:Name="Access1" XYFocusKeyboardNavigation="Enabled" >
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -240,7 +240,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Access2">
+                            <ListViewItem x:Name="Access2" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -257,7 +257,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Access3">
+                            <ListViewItem x:Name="Access3" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -270,7 +270,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="Access4">
+                            <ListViewItem x:Name="Access4" XYFocusKeyboardNavigation="Enabled">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3.21*"/>
