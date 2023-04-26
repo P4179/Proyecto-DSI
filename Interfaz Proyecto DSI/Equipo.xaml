@@ -107,7 +107,7 @@
 
 
 
-    <Viewbox >
+    <Viewbox KeyDown="keyDown">
         <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
 
             <Grid.ColumnDefinitions>
@@ -305,7 +305,8 @@
             <!--Lista de armas-->
             <StackPanel x:Name="weaponList" Visibility="Collapsed"
                         Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="750,480,0,0"
-                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        XYFocusKeyboardNavigation="Enabled">
 
                 <Border BorderBrush="Black" BorderThickness="1" Padding="10">
                     <Border.Background>
@@ -346,18 +347,18 @@
                         <Border BorderThickness="0.5" BorderBrush="Black"/>
                         <ListView x:Name="Weapons1" Background="#cbc2a8" MaxHeight="300"
                                   SelectedItem="{x:Bind teamLogic.selectedWeapon1, Mode=TwoWay}"
-                                  IsItemClickEnabled="True"
+                                  IsItemClickEnabled="True" ItemClick="weaponSelected"
                                   ItemsSource="{x:Bind teamLogic.weaponList1}" ItemTemplate="{StaticResource WeaponsTemplate}"/>
                         <ListView x:Name="Weapons2" Background="#cbc2a8" MaxHeight="300" Visibility="Collapsed"
                                   SelectedItem="{x:Bind teamLogic.selectedWeapon2, Mode=TwoWay}"
-                                  IsItemClickEnabled="True"
+                                  IsItemClickEnabled="True" ItemClick="weaponSelected"
                                   ItemsSource="{x:Bind teamLogic.weaponList2}" ItemTemplate="{StaticResource WeaponsTemplate}"/>
 
                         <Border BorderThickness="0.5" BorderBrush="Black"/>
-                        <Button Style="{StaticResource ClickableButtonTemplate}"
-                            Height="auto" Width="auto" Margin="100,25,100,0" Padding="10"
-                            VerticalAlignment="Center" HorizontalAlignment="Center"
-                            FontSize="30" Click="closeWeaponList">
+                        <Button x:Name="ConfirmButton" Style="{StaticResource ClickableButtonTemplate}"
+                                Height="auto" Width="auto" Margin="100,25,100,0" Padding="10"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                FontSize="30" Click="closeWeaponList">
                             <TextBlock Text="Confirmar"/>
                         </Button>
                     </StackPanel>

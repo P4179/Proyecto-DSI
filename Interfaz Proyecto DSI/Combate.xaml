@@ -104,8 +104,8 @@
     </Page.Resources>
 
 
-    <Viewbox >
-        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920" KeyDown="keyDown">
+    <Viewbox KeyDown="keyDown">
+        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920" XYFocusKeyboardNavigation="Enabled">
 
             <!-- Tablero y personajes -->
             <Grid Margin="170, 0">
@@ -174,10 +174,10 @@
             </Button>
 
 
-            <StackPanel x:Name="Buttons" Orientation="Horizontal"
-            HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <StackPanel x:Name="Buttons" Orientation="Horizontal" XYFocusKeyboardNavigation="Enabled"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <!--Botón de atacar-->
-                <Button Style="{StaticResource ClickableButtonTemplate}"
+                <Button x:Name="AttackButton"  Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0, 0, 30, 40" 
                 FontSize="40" Click="Button_Click">
                     <StackPanel Orientation="Horizontal">
@@ -204,7 +204,7 @@
                     </StackPanel>
                 </Button>
                 <!--Botón de poción-->
-                <Button Style="{StaticResource ClickableButtonTemplate}"
+                <Button x:Name="PotionsButton" Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="0,0,0,40" 
                 FontSize="40" Foreground="#444444" Click="openPotionsMenu">
                     <StackPanel Orientation="Horizontal">
@@ -216,7 +216,7 @@
             </StackPanel>
 
             <!--Menú de pociones-->
-            <Grid x:Name="UsePotionMenu" Visibility="Collapsed">
+            <Grid x:Name="UsePotionMenu" Visibility="Collapsed" XYFocusKeyboardNavigation="Enabled">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="91*"/>
                     <ColumnDefinition Width="37*"/>
@@ -227,9 +227,9 @@
 
 
                 <!--Botón de volver-->
-                <Button Style="{StaticResource ClickableButtonTemplate}"
-                Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40" Click="closePotionsMenu">
+                <Button x:Name="ReturnButton" Style="{StaticResource ClickableButtonTemplate}"
+                        Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
+                        FontSize="40" Click="closePotionsMenu">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
                         <TextBlock Text="Volver"/>

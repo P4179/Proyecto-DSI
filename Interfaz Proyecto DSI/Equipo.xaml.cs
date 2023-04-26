@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -71,6 +72,9 @@ namespace Interfaz_Proyecto_DSI
         };
 
         EquipoLogic teamLogic = new EquipoLogic();
+        // Controlador con su bucle de lectura
+        Controller control = null;
+        ControllerLoop ctrlLoop = null;
         public Equipo() {
             this.InitializeComponent();
 
@@ -86,6 +90,9 @@ namespace Interfaz_Proyecto_DSI
                 teamLogic.weaponList1.Add(weap);
             foreach (var weap in (App.Current as App).boughtWeapons2)
                 teamLogic.weaponList2.Add(weap);
+
+            control = new Controller(this);
+            ctrlLoop = new ControllerLoop(this, control);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -98,12 +105,31 @@ namespace Interfaz_Proyecto_DSI
             Frame.Navigate(typeof(Abilities), null, new DrillInNavigationTransitionInfo());
         }
 
-        private void openWeaponList(object sender, RoutedEventArgs e)
+        private async void openWeaponList(object sender, RoutedEventArgs e)
         {
             weaponList.Visibility = Visibility.Visible;
             WeaponNumber.Text = "Arma princ.";
             Weapons1.Visibility = Visibility.Visible;
             Weapons2.Visibility = Visibility.Collapsed;
+
+            ConfirmButton.Focus(FocusState.Programmatic);
+
+            ListViewItem item = Weapons1.ContainerFromIndex(0) as ListViewItem;
+            if (item != null) {
+                item.Focus(FocusState.Programmatic);
+                item.IsSelected = true;
+                VisualStateManager.GoToState(item, "Pressed", true);
+            }
+            else
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => {
+                    item = Weapons1.ContainerFromIndex(0) as ListViewItem;
+                    if (item != null) {
+                        item.Focus(FocusState.Programmatic);
+                        item.IsSelected = true;
+                        VisualStateManager.GoToState(item, "Pressed", true);
+                    }
+                });
+
         }
         private void closeWeaponList(object sender, RoutedEventArgs e)
         {
@@ -258,6 +284,25 @@ namespace Interfaz_Proyecto_DSI
 
         }
 
-       
+        private void keyDown(object sender, KeyRoutedEventArgs e) {
+
+            if (weaponList.Visibility == Visibility.Visible) {
+                if (control.isKeyDown(VirtualKey.GamepadLeftShoulder) || control.isKeyDown(VirtualKey.GamepadRightShoulder) ||
+                    e.Key == Windows.System.VirtualKey.Left || e.Key == Windows.System.VirtualKey.Right) {
+                    changeWeaponList(null, null);
+                }
+                if (e.Key == Windows.System.VirtualKey.Escape) {
+                    closeWeaponList(null, null);
+                }
+            }
+
+
+
+        }
+
+        private void weaponSelected(object sender, ItemClickEventArgs e) {
+            ConfirmButton.Focus(FocusState.Programmatic);
+            VisualStateManager.GoToState(ConfirmButton, "Focused", true);
+        }
     }
 }

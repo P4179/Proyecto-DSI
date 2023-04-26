@@ -98,7 +98,7 @@
 
 
         <DataTemplate x:Key="ShopItemsTemplate" x:DataType="local:Objeto">
-            <Grid >
+            <Grid x:Name="asdasmkldasd">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="9*"/>
                     <ColumnDefinition Width="*"/>
@@ -114,7 +114,7 @@
     </Page.Resources>
 
 
-    <Viewbox>
+    <Viewbox KeyDown="keyDown">
         <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="91*"/>
@@ -136,7 +136,8 @@
 
 
             <!--Pestañas-->
-            <Pivot x:Name="tabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200" SelectionChanged="tabChanged">
+            <Pivot x:Name="tabs" Style="{StaticResource TabsTemplate}" Margin="80,80,80,200" 
+                   SelectionChanged="tabChanged" XYFocusKeyboardNavigation="Enabled">
                 <PivotItem x:Name="PotionsTab">
                     <PivotItem.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
@@ -267,7 +268,7 @@
 
 
             <!--Ventana de selección de cantidad-->
-            <Grid x:Name="BuyQuantity" Grid.ColumnSpan="2" Visibility="Collapsed">
+            <Grid x:Name="BuyQuantity" Grid.ColumnSpan="2" Visibility="Collapsed" XYFocusKeyboardNavigation="Enabled" >
                 <Rectangle Grid.ColumnSpan="2" Fill="Black" Opacity="0.37"/>
                 <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" 
                        Width="822" Height="520" RadiusX="50" RadiusY="50" Stroke="Black">
@@ -294,17 +295,18 @@
                     CornerRadius="40" FontSize="50" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                     Foreground="Black" Background="#cbc2a8" BorderBrush="#232323" TextChanged="changeQuant"/>
 
-                <Button Style="{StaticResource ClickableButtonTemplate}"
+                <Button x:Name="CancelButton"  Style="{StaticResource ClickableButtonTemplate}"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Width="299" Padding="20" Margin="-350,0,0,-300"
-                    FontSize="50" Content="Cancelar" Click="hideQuantitySelection">
+                    FontSize="50" Content="Cancelar" Click="hideQuantitySelection" XYFocusKeyboardNavigation="Enabled">
                 </Button>
                 <Button x:Name="BuyButton" Click="buyItem"
                         Style="{StaticResource ClickableButtonTemplate}" IsEnabled="False"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Width="299" Padding="20" Margin="350,0,0,-300"
-                    FontSize="50" Content="Comprar">
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Width="299" Padding="20" Margin="350,0,0,-300"
+                        FontSize="50" Content="Comprar" XYFocusKeyboardNavigation="Enabled">
                 </Button>
+
 
             </Grid>
 

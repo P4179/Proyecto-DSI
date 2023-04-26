@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -32,6 +33,9 @@ namespace Interfaz_Proyecto_DSI
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) {
+            AttackButton.Focus(FocusState.Programmatic);
+            VisualStateManager.GoToState(AttackButton, "Focused", true);
+
             potsLogic.potionsList.Clear();
 
             Potion aux = new Potion() { amount = 10, desc = "Lore Ipsum 0 poc", displayAmount ="x 4", displayPrice="", id = 0, name = "Poción 0", price = 0 };
@@ -48,8 +52,7 @@ namespace Interfaz_Proyecto_DSI
 
         private void enableFocus(bool enabled) {
             EndButton.IsTabStop = enabled;
-            foreach (Button button in Buttons.Children)
-            {
+            foreach (Button button in Buttons.Children) {
                 button.IsTabStop = enabled;
             }
         }
@@ -64,21 +67,38 @@ namespace Interfaz_Proyecto_DSI
             Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
         }
 
-        private void openPotionsMenu(object sender, RoutedEventArgs e) {
-            enableFocus(false);
+        private async void openPotionsMenu(object sender, RoutedEventArgs e) {
             UsePotionMenu.Visibility = Visibility.Visible;
+            enableFocus(false);
+            ReturnButton.Focus(FocusState.Programmatic);
+
+            ListViewItem item = PotionsList.ContainerFromIndex(0) as ListViewItem;
+            if (item != null) {
+                item.Focus(FocusState.Programmatic);
+                item.IsSelected = true;
+                VisualStateManager.GoToState(item, "Pressed", true);
+            }
+            else
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => {
+                    item = PotionsList.ContainerFromIndex(0) as ListViewItem;
+                    if (item != null) {
+                        item.Focus(FocusState.Programmatic);
+                        item.IsSelected = true;
+                        VisualStateManager.GoToState(item, "Pressed", true);
+                    }
+                });
         }
 
         private void closePotionsMenu(object sender, RoutedEventArgs e) {
             enableFocus(true);
             UsePotionMenu.Visibility = Visibility.Collapsed;
+            PotionsButton.Focus(FocusState.Programmatic);
         }
 
         private void keyDown(object sender, KeyRoutedEventArgs e) {
             if (e.Key == Windows.System.VirtualKey.Escape) {
                 if (UsePotionMenu.Visibility == Visibility.Visible) {
-                    enableFocus(true);
-                    UsePotionMenu.Visibility = Visibility.Collapsed;
+                    ReturnButton.Focus(FocusState.Programmatic);
                 }
                 else {
                     togglePause();

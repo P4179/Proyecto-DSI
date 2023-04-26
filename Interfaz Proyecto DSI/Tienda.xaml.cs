@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Services.Store;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -28,12 +30,15 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Tienda : Page
     {
-    
         TiendaLogic shopLogic = new TiendaLogic();
+        // Controlador con su bucle de lectura
+        Controller control = null;
+        ControllerLoop ctrlLoop = null;
+
         public Tienda() {
             this.InitializeComponent();
 
-            foreach(CommObject pot in ObjectLists.getPotions()) {
+            foreach (CommObject pot in ObjectLists.getPotions()) {
                 shopLogic.potionsList.Add(pot);
             }
             foreach (Weapon weap in ObjectLists.getWeapons()) {
@@ -42,7 +47,8 @@ namespace Interfaz_Proyecto_DSI
             foreach (CommObject acc in ObjectLists.getAccessories()) {
                 shopLogic.accessoriesList.Add(acc);
             }
-
+            control = new Controller(this);
+            ctrlLoop = new ControllerLoop(this, control);
         }
 
         private void returnToMap(object sender, RoutedEventArgs e) {
@@ -52,11 +58,8 @@ namespace Interfaz_Proyecto_DSI
         private void hideQuantitySelection(object sender, RoutedEventArgs e) {
             BuyQuantity.Visibility= Visibility.Collapsed;
             ReturnButton.IsTabStop = true;
-            tabs.IsTabStop = true;
 
-            PotionsListView.IsTabStop = true;
-            WeaponsListView.IsTabStop = true;
-            AccessoriesListView.IsTabStop = true;
+            lastFocused.Focus(FocusState.Programmatic);
         }
         private void showQuantitySelection(object sender, RoutedEventArgs e) {
             BuyQuantity.Visibility = Visibility.Visible;
@@ -66,11 +69,8 @@ namespace Interfaz_Proyecto_DSI
             else BuyButton.IsEnabled = false;
 
             ReturnButton.IsTabStop = false;
-            tabs.IsTabStop = false;
-            PotionsListView.IsTabStop = false;
-            WeaponsListView.IsTabStop = false;
-            AccessoriesListView.IsTabStop = false;
             TotalPrice.Text = (shopLogic.selectedObject.price * int.Parse(Quantity.Text)).ToString() + " C";
+            Quantity.Focus(FocusState.Programmatic);
 
         }
 
@@ -95,9 +95,13 @@ namespace Interfaz_Proyecto_DSI
         }
 
 
-
+        bool loaded = false;
         // Hace que las pestañas sean del mismo tamaño y ocupen todo el ancho del pivot
         private void Page_Loaded(object sender, RoutedEventArgs e) {
+            tabs.Focus(FocusState.Programmatic);
+            loaded = true;
+            resetSelection();
+
             double widthOffset = 0.5f;
 
             IEnumerable<PivotHeaderPanel> headerpanel = FindVisualChildren<PivotHeaderPanel>(tabs);
@@ -122,8 +126,56 @@ namespace Interfaz_Proyecto_DSI
             }
         }
 
+
+        private async void resetSelection() {
+            if (loaded) {
+                ListViewItem item1 = PotionsListView.ContainerFromIndex(0) as ListViewItem;
+                if (item1 != null) {
+                    item1.IsSelected = true;
+                    VisualStateManager.GoToState(item1, "Pressed", true);
+                }
+                else
+                    await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => {
+                        item1 = PotionsListView.ContainerFromIndex(0) as ListViewItem;
+                        if (item1 != null) {
+                            item1.IsSelected = true;
+                            VisualStateManager.GoToState(item1, "Pressed", true);
+                        }
+                    });
+
+                ListViewItem item2 = WeaponsListView.ContainerFromIndex(0) as ListViewItem;
+                if (item2 != null) {
+                    item2.IsSelected = true;
+                    VisualStateManager.GoToState(item2, "Pressed", true);
+                }
+                else
+                    await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => {
+                        item2 = WeaponsListView.ContainerFromIndex(0) as ListViewItem;
+                        if (item2 != null){
+                            item2.IsSelected = true;
+                            VisualStateManager.GoToState(item2, "Pressed", true);
+                        }
+                    });
+
+                ListViewItem item3 = AccessoriesListView.ContainerFromIndex(0) as ListViewItem;
+                if (item3 != null) {
+                    item3.IsSelected = true;
+                    VisualStateManager.GoToState(item3, "Pressed", true);
+                }
+                else
+                    await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => {
+                        item3 = AccessoriesListView.ContainerFromIndex(0) as ListViewItem;
+                        if (item3 != null) {
+                            item3.IsSelected = true;
+                            VisualStateManager.GoToState(item3, "Pressed", true);
+                        }
+                    });
+            }
+        }
+
         string currTabName;
         private void tabChanged(object sender, SelectionChangedEventArgs e) {
+            resetSelection();
             PivotItem selected = e.AddedItems[0] as PivotItem;
             currTabName = selected.Name;
             if (currTabName == "PotionsTab" || currTabName == "AccessoriesTab") {
@@ -150,24 +202,33 @@ namespace Interfaz_Proyecto_DSI
         }
 
         private void potItClick(object sender, ItemClickEventArgs e) {
+            var focused = FocusManager.GetFocusedElement() as ListViewItem;
+            lastFocused = focused;
+
             var sel = e.ClickedItem as Objeto;
             if (shopLogic.selectedObject.id == sel.id)
                 showQuantitySelection(null, null);
         }
 
         private void weapItClick(object sender, ItemClickEventArgs e) {
+            var focused = FocusManager.GetFocusedElement() as ListViewItem;
+            lastFocused = focused;
+
             var sel = e.ClickedItem as Objeto;
             if (shopLogic.selectedObject.id == sel.id)
                 showQuantitySelection(null, null);
+
         }
 
         private void accItClick(object sender, ItemClickEventArgs e) {
+            var focused = FocusManager.GetFocusedElement() as ListViewItem;
+            lastFocused = focused;
+
             var sel = e.ClickedItem as Objeto;
             if (shopLogic.selectedObject.id == sel.id)
                 showQuantitySelection(null, null);
         }
 
-        
         private void buyItem(object sender, RoutedEventArgs e) {
             shopLogic.coins -= totalPrice;
             shopLogic.coinsTxt = shopLogic.coins.ToString() + " C";
@@ -211,11 +272,50 @@ namespace Interfaz_Proyecto_DSI
             hideQuantitySelection(null, null);
         }
 
+
+
+        ListViewItem lastFocused;
+        private void keyDown(object sender, KeyRoutedEventArgs e) {
+            var focused = FocusManager.GetFocusedElement() as ContentControl;
+            //Debug.WriteLine(focused.Name);
+
+            if (BuyQuantity.Visibility == Visibility.Visible) {
+                if (control.isKeyDown(VirtualKey.GamepadLeftShoulder)) {
+                    int quant = int.Parse(Quantity.Text);
+                    quant--;
+                    if(quant < 0) quant= 0;
+
+                    Quantity.Text = quant.ToString();
+                }
+                else if (control.isKeyDown(VirtualKey.GamepadRightShoulder)) {
+                    int quant = int.Parse(Quantity.Text);
+                    quant++;
+                    if (quant > 999) quant = 999;
+
+                    Quantity.Text = quant.ToString();
+                }
+            }
+            switch (e.Key) {
+                case Windows.System.VirtualKey.Escape:
+                    if (BuyQuantity.Visibility == Visibility.Visible) hideQuantitySelection(null, null);
+                    else {
+                        if (focused.Name == "HeaderClipper") {
+                            ReturnButton.Focus(FocusState.Programmatic);
+                        }
+                        else if(focused.Name != "ReturnButton") {
+                            tabs.Focus(FocusState.Programmatic);
+                        }
+                    }
+                    
+                    break;
+            }
+        }
+
+
+
+
+
     }
-
-
-
-
 
 
 }
