@@ -25,7 +25,8 @@
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                      DataContext="Tienda" Width="400"
                                      Canvas.Left="650" Canvas.Top="500"
-                                     TabIndex="1" IsTabStop="True">
+                                     TabIndex="1" IsTabStop="True"
+                                     KeyDown="Level_KeyDown">
                             <RadioButton.Content>
                                 <Image Source="/Assets/shop.png" MaxWidth="30"/>
                             </RadioButton.Content>
@@ -34,7 +35,8 @@
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                      DataContext="Jefe 1" Width="400"
                                      Canvas.Left="550" Canvas.Top="130"
-                                     TabIndex="3" IsTabStop="True">
+                                     TabIndex="3" IsTabStop="True"
+                                     KeyDown="Level_KeyDown">
                             <!-- Contenido del botón -->
                             <Image Source="/Assets/boss.png" MaxWidth="30" Margin="0,4,0,0"/>
                         </RadioButton>
@@ -42,12 +44,14 @@
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                      DataContext="1-1" Width="200"
                                      Canvas.Left="650" Canvas.Top="790"
-                                     TabIndex="2" IsTabStop="True">
+                                     TabIndex="2" IsTabStop="True"
+                                     KeyDown="Level_KeyDown">
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                      DataContext="1-2" Width="200" IsEnabled="False"
-                                     Canvas.Left="850" Canvas.Top="1000">
+                                     Canvas.Left="850" Canvas.Top="1000"
+                                     KeyDown="Level_KeyDown">
                         </RadioButton>
                     </Canvas>
                 </Grid>
@@ -90,7 +94,7 @@
                 </Border>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal" XYFocusKeyboardNavigation="Enabled"
                         VerticalAlignment="Top" HorizontalAlignment="Left">
                 <!--Botón de pausa -->
                 <Button x:Name="PauseButton" Style="{StaticResource ClickableButtonTemplate}"

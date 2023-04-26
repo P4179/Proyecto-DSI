@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -74,11 +75,12 @@ namespace Interfaz_Proyecto_DSI
     /// </summary>
     public sealed partial class Abilities : Page
     {
-        private DispatcherTimer timer;
         private AbilitiesLogic abilitiesLogic = new AbilitiesLogic();
         private RadioButton radioAbilitySelected;
         private ObservableCollection<RadioButton> radioAbilities = new ObservableCollection<RadioButton>();
         private ObservableCollection<FontIcon> fontIcons = new ObservableCollection<FontIcon>();
+        private Controller control = null;
+        private ControllerLoop ctrlLoop = null;
 
         public Abilities()
         {
@@ -101,6 +103,9 @@ namespace Interfaz_Proyecto_DSI
                     fontIcons[i].Opacity = 1;
                 }
             }
+
+            control = new Controller(this);
+            ctrlLoop = new ControllerLoop(this, control);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -120,7 +125,19 @@ namespace Interfaz_Proyecto_DSI
             radioAbilitySelected = radioButton;
 
             int index = radioAbilities.IndexOf(radioAbilitySelected);
+            // información de la habilidad seleccionada
             abilitiesLogic.selAbility = abilitiesLogic.abilitiesList[index];
+
+            // desactivar el botón de desbloquear si no hay suficiente experiencia
+            Ability ability = abilitiesLogic.abilitiesList[index];
+            if (abilitiesLogic.exp < ability.Exp)
+            {
+                UnlockButton.IsEnabled = false;
+            }
+            else
+            {
+                UnlockButton.IsEnabled = true;
+            }
         }
 
         private void CheckNextAbility()
@@ -156,6 +173,16 @@ namespace Interfaz_Proyecto_DSI
         {
             int index = radioAbilities.IndexOf(radioAbilitySelected);
             UnlockAbility(index);
+        }
+
+        private void Ability_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (control.isKeyDown(VirtualKey.Enter)
+                || control.isKeyDown(VirtualKey.GamepadX))
+            {
+                int index = radioAbilities.IndexOf(radioAbilitySelected);
+                UnlockAbility(index);
+            }
         }
     }
 }

@@ -22,7 +22,7 @@
                     HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid>
                     <Image Source="Assets/Tree.png"/>
-                    <Canvas>
+                    <Canvas TabFocusNavigation="Local" XYFocusKeyboardNavigation="Enabled">
                         <!-- Arriba izquierda -->
                         <Grid Canvas.Left="22" Canvas.Top="159">
                             <Grid.RowDefinitions>
@@ -30,6 +30,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <RadioButton x:Name="Ability1" Style="{StaticResource RadioAbility}"
+                                         TabIndex="1" KeyDown="Ability_KeyDown"
                                          Grid.Row="0" Grid.RowSpan="2"
                                          GotFocus="Ability_GotFocus"
                                          Checked="Ability_Checked"/>
@@ -44,6 +45,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <RadioButton x:Name="Ability2" Style="{StaticResource RadioAbility}"
+                                         TabIndex="2" KeyDown="Ability_KeyDown"
                                          Grid.Row="0" Grid.RowSpan="2"
                                          GotFocus="Ability_GotFocus"
                                          Checked="Ability_Checked"/>
@@ -58,6 +60,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <RadioButton x:Name="Ability3" Style="{StaticResource RadioAbility}"
+                                         TabIndex="3" KeyDown="Ability_KeyDown"
                                          Grid.Row="0" Grid.RowSpan="2"
                                          GotFocus="Ability_GotFocus"
                                          Checked="Ability_Checked"/>
@@ -114,10 +117,10 @@
                              FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                              Text="{x:Bind abilitiesLogic.selAbility.Infor, Mode=TwoWay}"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Button Style="{StaticResource ClickableButtonTemplate}"
+                            <Button x:Name="UnlockButton" Style="{StaticResource ClickableButtonTemplate}"
                                     Height="88" Width="270" Margin="40,40,20,40" 
                                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    FontSize="38" Click="Unlock_Click">
+                                    FontSize="38" Click="Unlock_Click" TabIndex="4">
                                 <TextBlock Text="Desbloquear"/>
                             </Button>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -170,7 +173,7 @@
             <!-- Botón volver -->
             <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" Margin="40" 
-                FontSize="40" Click="BackButton_Click">
+                FontSize="40" Click="BackButton_Click" TabIndex="5">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>
                     <TextBlock Text="Volver"/>

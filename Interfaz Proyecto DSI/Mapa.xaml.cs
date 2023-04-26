@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Input;
 using Windows.UI.Xaml;
@@ -64,6 +65,8 @@ namespace Interfaz_Proyecto_DSI
         private CoreCursor cursorArrow = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 0);
         private MapaLogic mapaLogic = new MapaLogic();
         private Image boss;
+        private Controller control = null;
+        private ControllerLoop ctrlLoop = null;
 
         public Mapa()
         {
@@ -74,6 +77,9 @@ namespace Interfaz_Proyecto_DSI
             timer.Interval = new TimeSpan(100000);
 
             boss = createBoss();
+
+            control = new Controller(this);
+            ctrlLoop = new ControllerLoop(this, control);
         }
 
         private Image createBoss()
@@ -120,7 +126,7 @@ namespace Interfaz_Proyecto_DSI
             base.OnNavigatedFrom(e);
         }
 
-        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        private void AccessLevel()
         {
             switch (levelSelected.DataContext)
             {
@@ -132,6 +138,11 @@ namespace Interfaz_Proyecto_DSI
                     Frame.Navigate(typeof(Combate), null, new DrillInNavigationTransitionInfo());
                     break;
             }
+        }
+
+        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            AccessLevel();
         }
 
         private void TeamButton_Click(object sender, RoutedEventArgs e)
@@ -276,6 +287,15 @@ namespace Interfaz_Proyecto_DSI
             draggingMap = false;
             firstTouchPointer = null;
             Window.Current.CoreWindow.PointerCursor = cursorArrow;
+        }
+
+        private void Level_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (control.isKeyDown(VirtualKey.Enter)
+                || control.isKeyDown(VirtualKey.GamepadX))
+            {
+                AccessLevel();
+            }
         }
     }
 }

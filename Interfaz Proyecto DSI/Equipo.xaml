@@ -125,6 +125,7 @@
                            FontSize="60" FontWeight="Medium"/>
 
                     <GridView x:Name="TeamGrid"
+                              TabIndex="1"
                               ItemsSource="{x:Bind characterLogic.TeamList}"
                               Style="{StaticResource CharacterTemplateStyle}"
                               ItemTemplate="{StaticResource CharactersTemplate}"
@@ -148,6 +149,7 @@
                            FontSize="60" FontWeight="Medium"/>
 
                     <GridView x:Name="TemplateGrid"
+                              TabIndex="2"
                               ItemsSource="{x:Bind characterLogic.TemplateList}"
                               Style="{StaticResource CharacterTemplateStyle}"
                               ItemTemplate="{StaticResource CharactersTemplate}"
@@ -271,13 +273,14 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal"
                             VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <Button Style="{StaticResource ClickableButtonTemplate}"
-                            Height="200" Width="330"
+                            Height="200" Width="330" TabIndex="3"
                             FontSize="50" Click="openWeaponList">
                         <TextBlock Text="Cambiar arma" TextAlignment="Center" TextWrapping="Wrap"/>
                     </Button>
 
                     <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="200" Width="330" Margin="100,0,80,0"
+                            TabIndex="4"
                             FontSize="50" Click="ButtonTree_Click">
                         <TextBlock Text="Árbol de habilidades" 
                                    TextAlignment="Center" TextWrapping="Wrap"/>
@@ -294,7 +297,7 @@
             <!--Botón de volver-->
             <Button Style="{StaticResource ClickableButtonTemplate}"
                 Height="88" Width="234" VerticalAlignment="Bottom" 
-                Margin="40" Grid.Row="1"
+                Margin="40" Grid.Row="1" TabIndex="5"
                 FontSize="40" Click="BackButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xe751;" FontSize="40" Margin="0,5,20,0"/>

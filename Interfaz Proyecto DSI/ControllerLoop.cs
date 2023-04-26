@@ -33,6 +33,11 @@ namespace Interfaz_Proyecto_DSI
             GamePadTimer.Start();
         }
 
+        public void StopGamePadTimer()
+        {
+            GamePadTimer.Stop();
+        }
+
         // Bucle de eventos del mando
         void GamePadTimer_Tick(object sender, object e)
         {

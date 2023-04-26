@@ -544,6 +544,7 @@
         
         <!-- Estilo de la selección de habilidades -->
         <Style x:Key="RadioAbility" TargetType="RadioButton">
+            <Setter Property="IsTabStop" Value="True"/>
             <Setter Property="MinHeight" Value="0"/>
             <Setter Property="MinWidth" Value="0"/>
             <Setter Property="IsChecked" Value="False"/>

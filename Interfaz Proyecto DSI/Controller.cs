@@ -73,6 +73,7 @@ namespace Interfaz_Proyecto_DSI
                 gamepadState = mainGamepad.GetCurrentReading();
             }
         }
+
         public bool isKeyDown(VirtualKey key) {
             return (Window.Current.CoreWindow.GetKeyState(key) & Windows.UI.Core.CoreVirtualKeyStates.Down) == CoreVirtualKeyStates.Down;
         }

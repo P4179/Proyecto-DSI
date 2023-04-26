@@ -242,6 +242,13 @@ namespace Interfaz_Proyecto_DSI
 
         private void TeamGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if(control.isKeyDown(VirtualKey.Enter) || control.isKeyDown(VirtualKey.GamepadA))
+            {
+                GridViewItem item = TeamGrid.ContainerFromItem(e.ClickedItem as Character) as GridViewItem;
+                item.IsSelected = true;
+                VisualStateManager.GoToState(item, "Selected", false);
+            }
+
             // se deselecciona el personaje de la plantilla que está seleccionado
             Deselect(TemplateGrid);
             characterLogic.selCharacter = e.ClickedItem as Character;
@@ -249,6 +256,13 @@ namespace Interfaz_Proyecto_DSI
 
         private void TemplateGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (control.isKeyDown(VirtualKey.Enter) || control.isKeyDown(VirtualKey.GamepadA))
+            {
+                GridViewItem item = TemplateGrid.ContainerFromItem(e.ClickedItem as Character) as GridViewItem;
+                item.IsSelected = true;
+                VisualStateManager.GoToState(item, "Selected", false);
+            }
+
             // se deselecciona el personaje del equipo que está seleccionado
             Deselect(TeamGrid);
             characterLogic.selCharacter = e.ClickedItem as Character;
