@@ -263,7 +263,7 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100">
                     <TextBlock Text="Juego Pausado" HorizontalAlignment="Center" 
                                FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
-                               FontSize="100"/>
+                               FontSize="100" Foreground="#f7f6f6" FontWeight="Bold"/>
                     <Button Style="{StaticResource ClickableButtonTemplate}"
                             Height="130" Width="700" FontSize="70" Margin="40"
                             Click="exitPause">

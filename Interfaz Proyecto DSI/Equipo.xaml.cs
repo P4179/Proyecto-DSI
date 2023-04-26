@@ -1,4 +1,5 @@
-﻿using System;
+﻿using P4;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,7 +31,47 @@ namespace Interfaz_Proyecto_DSI
     {
         public string Name { get; set; }
         public string Glyph { get; set; }
-        public Character() { }
+        public int Life { get; set; }
+        public int Displacement { get; set; }
+    }
+
+    public class CharacterLogic : ObservableObject
+    {
+        // al añadir o quitar un objeto, se actualiza el grid solo porque se trata de una
+        // ObservableCollection, es decir, que manda notificaciones cuando se modifican sus elementos
+        public ObservableCollection<Character> TeamList { get; } = new ObservableCollection<Character>()
+        {
+            new Character() {Name="Personaje 1", Glyph = "\xEA8C", Life=60, Displacement=2},
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""}
+        };
+
+        public ObservableCollection<Character> TemplateList { get; } = new ObservableCollection<Character>()
+        {
+            // fila 1
+            new Character() {Name="Personaje 2", Glyph = "\xEA8C", Life=32, Displacement=9},
+            new Character() {Name="Personaje 3", Glyph = "\xEA8C", Life=81, Displacement=1},
+            new Character() {Name="Personaje 4", Glyph = "\xEA8C", Life=76, Displacement=5},
+            new Character() {Name="Personaje 5", Glyph = "\xEA8C", Life=90, Displacement=3},
+            // fila 2
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""},
+            // fila 3
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""},
+            new Character() {Glyph = ""},
+        };
+
+        private Character selectedCharacter;
+        public Character selCharacter
+        {
+            get => selectedCharacter;
+            set { Set(ref selectedCharacter, value); }
+        }
     }
 
     /// <summary>
@@ -41,41 +82,14 @@ namespace Interfaz_Proyecto_DSI
         private CoreCursor cursorHand = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 0);
         private CoreCursor cursorArrow = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 0);
         private bool dragginObject = false;
-
-        // al añadir o quitar un objeto, se actualiza el grid solo porque se trata de una
-        // ObservableCollection, es decir, que manda notificaciones cuando se modifican sus elementos
-        private ObservableCollection<Character> TeamList { get; } = new ObservableCollection<Character>()
-        {
-            new Character() { Name="Character1", Glyph = "\xEA8C" },
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" }
-        };
-
-        private ObservableCollection<Character> TemplateList { get; } = new ObservableCollection<Character>()
-        {
-            // fila 1
-            new Character() { Name="Character2", Glyph = "\xEA8C" },
-            new Character() { Name="Character3", Glyph = "\xEA8C" },
-            new Character() { Name="Character4", Glyph = "\xEA8C" },
-            new Character() { Name="Character5", Glyph = "\xEA8C" },
-            // fila 2
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" },
-            // fila 3
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" },
-            new Character() { Name="None", Glyph = "" },
-        };
-
         EquipoLogic teamLogic = new EquipoLogic();
         // Controlador con su bucle de lectura
         Controller control = null;
         ControllerLoop ctrlLoop = null;
+        CharacterLogic characterLogic = new CharacterLogic();
+
         public Equipo() {
+
             this.InitializeComponent();
 
             WeaponNumber.Text = "Arma princ.";
@@ -95,6 +109,7 @@ namespace Interfaz_Proyecto_DSI
             ctrlLoop = new ControllerLoop(this, control);
         }
 
+        // BOTONES
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Mapa), null, new DrillInNavigationTransitionInfo());
@@ -105,6 +120,7 @@ namespace Interfaz_Proyecto_DSI
             Frame.Navigate(typeof(Abilities), null, new DrillInNavigationTransitionInfo());
         }
 
+        // ARMAS
         private async void openWeaponList(object sender, RoutedEventArgs e)
         {
             weaponList.Visibility = Visibility.Visible;
@@ -129,18 +145,34 @@ namespace Interfaz_Proyecto_DSI
                         VisualStateManager.GoToState(item, "Pressed", true);
                     }
                 });
-
         }
+
         private void closeWeaponList(object sender, RoutedEventArgs e)
         {
             weaponList.Visibility = Visibility.Collapsed;
         }
 
-        private void TeamGrid_DragOver(object sender, DragEventArgs e)
+        private void changeWeaponList(object sender, RoutedEventArgs e)
+        {
+            if (Weapons1.Visibility == Visibility.Visible)
+            {
+                WeaponNumber.Text = "Arma secun.";
+                Weapons1.Visibility = Visibility.Collapsed;
+                Weapons2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                WeaponNumber.Text = "Arma princ.";
+                Weapons1.Visibility = Visibility.Visible;
+                Weapons2.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private bool IsTeamFull()
         {
             // se comprueba que no está lleno
             bool full = true;
-            foreach (Character cTeam in TeamList)
+            foreach (Character cTeam in characterLogic.TeamList)
             {
                 if (cTeam.Glyph == "")
                 {
@@ -148,9 +180,14 @@ namespace Interfaz_Proyecto_DSI
                     break;
                 }
             }
+            return full;
+        }
 
+        // PLANTILLAS
+        private void TeamGrid_DragOver(object sender, DragEventArgs e)
+        {
             // dependiendo de si está lleno o no, se realiza una operación u otra
-            if (full)
+            if (IsTeamFull())
             {
                 e.AcceptedOperation = DataPackageOperation.None;
 
@@ -161,13 +198,12 @@ namespace Interfaz_Proyecto_DSI
             }
         }
 
-        private async void TeamGrid_Drop(object sender, DragEventArgs e)
+        private Character GetCharacterSent(string name)
         {
             Character cTemplate = null;
-            string name = await e.DataView.GetTextAsync();
 
             // se encuentra el que se había enviado
-            foreach (Character character in TemplateList)
+            foreach (Character character in characterLogic.TemplateList)
             {
                 if (character.Name == name)
                 {
@@ -175,22 +211,38 @@ namespace Interfaz_Proyecto_DSI
                     break;
                 }
             }
+            return cTemplate;
+        }
 
-            foreach (Character cTeam in TeamList)
+        private async void TeamGrid_Drop(object sender, DragEventArgs e)
+        {
+            string name = await e.DataView.GetTextAsync();
+
+            Character cTemplate = GetCharacterSent(name);
+
+            foreach (Character cTeam in characterLogic.TeamList)
             {
                 // se encuentra el primero vacío
                 if (cTeam.Glyph == "")
                 {
                     // se intercambian
-                    int indexTeam = TeamList.IndexOf(cTeam);
-                    TeamList[indexTeam] = cTemplate;
-                    // se habilita
-                    (TeamGrid.ContainerFromItem(cTemplate) as GridViewItem).IsEnabled = true;
 
-                    int indexTemplate = TemplateList.IndexOf(cTemplate);
-                    TemplateList[indexTemplate] = cTeam;
+                    // de la plantilla al equipo (que es hacia donde se ha movido)
+                    int indexTeam = characterLogic.TeamList.IndexOf(cTeam);
+                    characterLogic.TeamList[indexTeam] = cTemplate;
+                    // se habilita
+                    var teamItem = (TeamGrid.ContainerFromItem(cTemplate) as GridViewItem);
+                    teamItem.IsEnabled = true;
+                    characterLogic.selCharacter = cTemplate;
+                    teamItem.IsSelected = true;
+
+                    // del equipo a la plantilla
+                    int indexTemplate = characterLogic.TemplateList.IndexOf(cTemplate);
+                    characterLogic.TemplateList[indexTemplate] = cTeam;
                     // se deshabilita
-                    (TemplateGrid.ContainerFromItem(cTeam) as GridViewItem).IsEnabled = false;
+                    var templateItem = (TemplateGrid.ContainerFromItem(cTeam) as GridViewItem);
+                    templateItem.IsEnabled = false;
+                    Deselect(TemplateGrid);
 
                     break;
                 }
@@ -229,59 +281,62 @@ namespace Interfaz_Proyecto_DSI
             }
         }
 
-        private void TeamGrid_ItemClick(object sender, ItemClickEventArgs e)
+        private void Deselect(GridView gridView)
         {
-            foreach (Character character in TemplateGrid.Items)
+            // se deselecciona el personaje de la plantilla que está seleccionado
+            foreach (Character character in gridView.Items)
             {
-                GridViewItem item = TemplateGrid.ContainerFromItem(character) as GridViewItem;
+                GridViewItem item = gridView.ContainerFromItem(character) as GridViewItem;
                 if (item.IsSelected)
                 {
                     item.IsSelected = false;
-                    VisualStateManager.GoToState(item, "Normal", false);
                     break;
                 }
             }
+        }
+
+        private void TeamGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            // se deselecciona el personaje de la plantilla que está seleccionado
+            Deselect(TemplateGrid);
+            characterLogic.selCharacter = e.ClickedItem as Character;
         }
 
         private void TemplateGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Character character in TeamGrid.Items)
-            {
-                GridViewItem item = TeamGrid.ContainerFromItem(character) as GridViewItem;
-                if (item.IsSelected)
-                {
-                    item.IsSelected = false;
-                    VisualStateManager.GoToState(item, "Normal", false);
-                    break;
-                }
-            }
+            // se deselecciona el personaje del equipo que está seleccionado
+            Deselect(TeamGrid);
+            characterLogic.selCharacter = e.ClickedItem as Character;
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void DisableEmpty(GridView gridView)
         {
-            GridView gridView = sender as GridView;
-            foreach(Character character in gridView.Items)
+            foreach (Character character in gridView.Items)
             {
+                GridViewItem item = gridView.ContainerFromItem(character) as GridViewItem;
                 if (character.Glyph == "")
                 {
-                    GridViewItem item = gridView.ContainerFromItem(character) as GridViewItem;
                     item.IsEnabled = false;
                 }
             }
         }
 
-        private void changeWeaponList(object sender, RoutedEventArgs e) {
-            if (Weapons1.Visibility == Visibility.Visible) {
-                WeaponNumber.Text = "Arma secun.";
-                Weapons1.Visibility = Visibility.Collapsed;
-                Weapons2.Visibility = Visibility.Visible;
-            }
-            else {
-                WeaponNumber.Text = "Arma princ.";
-                Weapons1.Visibility = Visibility.Visible;
-                Weapons2.Visibility = Visibility.Collapsed;
-            }
+        private void Team_Loaded(object sender, RoutedEventArgs e)
+        {
+            GridView teamGrid = sender as GridView;
+            DisableEmpty(teamGrid);
 
+            // se marca el primer personaje de la plantilla
+            foreach(Character character in teamGrid.Items)
+            {
+                GridViewItem item = teamGrid.ContainerFromItem(character) as GridViewItem;
+                if (item.IsEnabled)
+                {
+                    characterLogic.selCharacter = character;
+                    item.IsSelected = true;
+                    break;
+                }
+            }
         }
 
         private void keyDown(object sender, KeyRoutedEventArgs e) {
@@ -303,6 +358,11 @@ namespace Interfaz_Proyecto_DSI
         private void weaponSelected(object sender, ItemClickEventArgs e) {
             ConfirmButton.Focus(FocusState.Programmatic);
             VisualStateManager.GoToState(ConfirmButton, "Focused", true);
+        }
+
+        private void Template_Loaded(object sender, RoutedEventArgs e)
+        {
+            DisableEmpty(sender as GridView);
         }
     }
 }

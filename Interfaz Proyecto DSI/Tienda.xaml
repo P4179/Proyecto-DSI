@@ -201,7 +201,7 @@
             <!--Cantidad de dinero-->
             <TextBox x:Name="CoinsBox" Grid.Column="1" Style="{StaticResource PlaceHolderTextTemplate}"
                  HorizontalAlignment="Right" VerticalAlignment="Top"
-                 Height="Auto" Padding="100, 10,40,10" Margin="50"
+                 Height="Auto" Padding="100,10,40,10" Margin="50"
                  CornerRadius="40" Text="{x:Bind shopLogic.coinsTxt, Mode=TwoWay}" FontSize="40" FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                  Foreground="Black" Background="#cbc2a8" BorderBrush="#232323"/>
 

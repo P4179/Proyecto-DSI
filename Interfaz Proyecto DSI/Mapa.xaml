@@ -12,7 +12,7 @@
     <Viewbox >
         <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920" KeyDown="keyDown">
             <!-- Mapa y niveles -->
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
                           PointerPressed="ScrollViewer_PointerPressed"
                           PointerMoved="ScrollViewer_PointerMoved"
                           PointerReleased="ScrollViewer_PointerReleased"
@@ -21,28 +21,33 @@
                     <Image x:Name="ImageMap" Source="Assets/map.png"
                            Width="1950"
                            Opacity="0.85"/>
-                    <!-- DUDA: NO SOY CAPAZ DE QUE SOLO SE MUEVA CON CURSORES POR EL MAPA -->
                     <Canvas x:Name="LevelsMap" TabFocusNavigation="Local" XYFocusKeyboardNavigation="Enabled">
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
                                      DataContext="Tienda" Width="400"
                                      Canvas.Left="650" Canvas.Top="500"
-                                     TabIndex="1">
+                                     TabIndex="1" IsTabStop="True">
                             <RadioButton.Content>
                                 <Image Source="/Assets/shop.png" MaxWidth="30"/>
                             </RadioButton.Content>
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
-                                     DataContext="Jefe 1" Width="400" IsEnabled="False"
-                                     Canvas.Left="550" Canvas.Top="130" IsTabStop="False">
+                                     DataContext="Jefe 1" Width="400"
+                                     Canvas.Left="550" Canvas.Top="130"
+                                     TabIndex="3" IsTabStop="True">
                             <!-- Contenido del botón -->
                             <Image Source="/Assets/boss.png" MaxWidth="30" Margin="0,4,0,0"/>
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
-                                     DataContext="Nivel 1" Width="300"
-                                     Canvas.Left="650" Canvas.Top="780"
-                                     TabIndex="2">
+                                     DataContext="1-1" Width="200"
+                                     Canvas.Left="650" Canvas.Top="790"
+                                     TabIndex="2" IsTabStop="True">
+                        </RadioButton>
+
+                        <RadioButton Style="{StaticResource RadioLevel}" Checked="Level_Checked"
+                                     DataContext="1-2" Width="200" IsEnabled="False"
+                                     Canvas.Left="850" Canvas.Top="1000">
                         </RadioButton>
                     </Canvas>
                 </Grid>
@@ -54,10 +59,13 @@
                         VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Border Background="#cfba8e" Height="90"
                         BorderBrush="Black" BorderThickness="1">
-                    <TextBlock Text="Nivel 1-1" FontSize="50"
+                    <StackPanel x:Name="TextInfo" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind mapaLogic.selLevel.Name, Mode=TwoWay}" FontSize="50"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC">
-                    </TextBlock>
+                        </TextBlock>
+                    </StackPanel>
                 </Border>
                 <Border Background="#ffffff"
                         BorderThickness="1,0,1,1" BorderBrush="Black">
@@ -71,12 +79,11 @@
                                  FontSize="30" BorderThickness="0" Width="400"
                                  FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                                  IsHitTestVisible="False" IsReadOnly="True" IsTabStop="False"
-                                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
-                                 />
+                                 Text="{x:Bind mapaLogic.selLevel.Infor, Mode=TwoWay}"/>
                         <Button x:Name="StartGameButton" Style="{StaticResource ClickableButtonTemplate}"
                                 Height="88" Width="270" Margin="40" Click="StartGameButton_Click"
                                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                                FontSize="38" TabIndex="5">
+                                FontSize="38" TabIndex="6">
                             <TextBlock Text="Comenzar"/>
                         </Button>
                     </StackPanel>
@@ -89,7 +96,7 @@
                 <Button x:Name="PauseButton" Style="{StaticResource ClickableButtonTemplate}"
                         Height="130" Width="130"
                         Margin="40,40,0,0" Click="PauseButton_Click"
-                        TabIndex="3">
+                        TabIndex="4">
                     <FontIcon Glyph="&#xE769;" FontSize="80"/>
                 </Button>
 
@@ -97,7 +104,7 @@
                 <Button x:Name="TeamButton" Style="{StaticResource ClickableButtonTemplate}"
                         Height="130" Width="130"
                         Margin="40,40,0,0" Click="TeamButton_Click"
-                        TabIndex="4">
+                        TabIndex="5">
                     <FontIcon Glyph="&#xE716;" FontSize="80"/>
                 </Button>
             </StackPanel>

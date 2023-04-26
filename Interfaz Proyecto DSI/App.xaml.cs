@@ -99,14 +99,17 @@ namespace Interfaz_Proyecto_DSI
             deferral.Complete();
         }
 
+        // Tienda
         public int coins { get; set; } = 5000;
         public ObservableCollection<Potion> boughtPotions { get; set; } = new ObservableCollection<Potion>();
         public ObservableCollection<Weapon> boughtWeapons1 { get; set; } = new ObservableCollection<Weapon>();
         public ObservableCollection<Weapon> boughtWeapons2 { get; set; } = new ObservableCollection<Weapon>();
 
-
-
-
-
+        // Habilidades
+        public int exp { get; set; } = 1304;
+        public List<bool> unlocked { get; set; } = new List<bool>()
+        {
+            false, false, false
+        };
     }
 }

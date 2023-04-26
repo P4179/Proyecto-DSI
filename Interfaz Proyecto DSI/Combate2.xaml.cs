@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,7 +38,7 @@ namespace Interfaz_Proyecto_DSI
         {
             Object focus = FocusManager.GetFocusedElement();
             RadioButton character = focus as RadioButton;
-            if (character != null && character.Parent == Map)
+            if (character != null && character.Parent == CanvasMap)
             {
                 character.IsChecked = true;
             }
@@ -60,6 +61,35 @@ namespace Interfaz_Proyecto_DSI
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Combate), null, new SuppressNavigationTransitionInfo());
+        }
+
+        private void Character_Checked(object sender, RoutedEventArgs e)
+        {
+            const double scale = 2;
+
+            RadioButton character = sender as RadioButton;
+            // centro del personaje seleccionado en el mundo
+            double posX = (double)character.GetValue(Canvas.LeftProperty) + GridMap.Margin.Left + character.ActualWidth / 2;
+            double posY = (double)character.GetValue(Canvas.TopProperty) + GridMap.Margin.Top + character.ActualHeight / 2;
+
+            // centro del canvas en el mundo
+            double centerX = RootGrid.Width / 2;
+            double centerY = RootGrid.Height / 2;
+
+            // diferencia entre ambos, es decir, lo que debería moverse para estar en el centro
+            double translateX = centerX - posX;
+            double translateY = centerY - posY;
+
+            TransformMap2.TranslateX = translateX;
+            TransformMap2.TranslateY = translateY;
+            TransformMap1.ScaleX = scale;
+            TransformMap1.ScaleY = scale;
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            TransformMap1.CenterX = RootGrid.Width / 2;
+            TransformMap1.CenterY = RootGrid.Height / 2;
         }
     }
 }

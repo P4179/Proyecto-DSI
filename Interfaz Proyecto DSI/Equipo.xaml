@@ -88,9 +88,6 @@
                                             <Setter Target="RootGrid.Padding" Value="20"/>
                                         </VisualState.Setters>
                                     </VisualState>
-
-
-
                                 </VisualStateGroup>
 
                             </VisualStateManager.VisualStateGroups>
@@ -127,9 +124,9 @@
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                    <GridView x:Name="TeamGrid"
+                    <GridView x:Name="TeamGrid" IsFocusEngagementEnabled="True"
                               VerticalAlignment="Center" HorizontalAlignment="Center"
-                              ItemsSource="{x:Bind TeamList}"
+                              ItemsSource="{x:Bind characterLogic.TeamList}"
                               Style="{StaticResource CharacterTemplateStyle}"
                               ItemTemplate="{StaticResource CharactersTemplate}"
                               ItemsPanel="{StaticResource CharactersPanel}"
@@ -138,7 +135,7 @@
                               DragOver="TeamGrid_DragOver" Drop="TeamGrid_Drop"
                               IsItemClickEnabled="True"
                               ItemClick="TeamGrid_ItemClick"
-                              Loaded="Grid_Loaded">
+                              Loaded="Team_Loaded">
                     </GridView>
                 </StackPanel>
 
@@ -149,9 +146,9 @@
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                    <GridView x:Name="TemplateGrid"
+                    <GridView x:Name="TemplateGrid" IsFocusEngagementEnabled="True"
                               VerticalAlignment="Center" HorizontalAlignment="Center"
-                              ItemsSource="{x:Bind TemplateList}"
+                              ItemsSource="{x:Bind characterLogic.TemplateList}"
                               Style="{StaticResource CharacterTemplateStyle}"
                               ItemTemplate="{StaticResource CharactersTemplate}"
                               ItemsPanel="{StaticResource CharactersPanel}"
@@ -161,7 +158,7 @@
                               PointerExited="TemplateGrid_PointerExited"
                               IsItemClickEnabled="True"
                               ItemClick="TemplateGrid_ItemClick"
-                              Loaded="Grid_Loaded">
+                              Loaded="Template_Loaded">
                     </GridView>
                 </StackPanel>
             </StackPanel>
@@ -195,7 +192,8 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Vida" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#4c7a34" FontSize="40" Margin="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="Puntos de Vida" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind characterLogic.selCharacter.Life, Mode=TwoWay}" 
+                                           Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#4c7a34" FontSize="30" Margin="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -207,7 +205,8 @@
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Desplazamiento" Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="40" Margin="20,0,0,0" FontWeight="Bold"/>
-                                <TextBlock Text="Número de casillas" Style="{StaticResource TextBlockTemplate}" 
+                                <TextBlock Text="{x:Bind characterLogic.selCharacter.Displacement, Mode=TwoWay}" 
+                                           Style="{StaticResource TextBlockTemplate}" 
                                    Foreground="#5180e1" FontSize="30" Margin="20,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -262,7 +261,7 @@
                     </Grid>
                 </Border>
                 <!-- Texto nombre personaje -->
-                <TextBlock Text="Nombre personaje" Margin="0, 0, 0, 250"
+                <TextBlock Text="{x:Bind characterLogic.selCharacter.Name,Mode=TwoWay}" Margin="0, 0, 0, 250"
                        HorizontalAlignment="Left" VerticalAlignment="Top"
                        FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                        Grid.Row="1" FontSize="60" Foreground="Black"/>

@@ -9,54 +9,73 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Viewbox >
-        <Grid Style="{StaticResource GridTemplate}" Height="1080" Width="1920">
+        <Grid x:Name="RootGrid" Style="{StaticResource GridTemplate}" Height="1080" Width="1920"
+              HorizontalAlignment="Center" VerticalAlignment="Center">
+            
             <!-- Tablero y personajes -->
-            <Grid Margin="170, 0">
-                <Image Source="Assets/board.png"
-                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Canvas x:Name="Map" TabFocusNavigation="Local" XYFocusKeyboardNavigation="Enabled">
-                    <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
-                                 Canvas.Left="970" Canvas.Top="585" 
-                                 x:Name="Character1" IsEnabled="True"
-                                 TabIndex="5">
-                        <RadioButton.Content>
-                            <Image Source="Assets/character1.png"/>
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource RadioCharacter}" Width="90"
-                                 Canvas.Left="1225" Canvas.Top="470" 
-                                 x:Name="Character2" IsEnabled="True"
-                                 TabIndex="6">
-                        <RadioButton.Content>
-                            <Image Source="Assets/character2.png"/>
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
-                                 Canvas.Left="200" Canvas.Top="450" 
-                                 x:Name="Character3" IsEnabled="True"
-                                 TabIndex="2">
-                        <RadioButton.Content>
-                            <Image Source="Assets/character3.png"/>
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
-                                 Canvas.Left="508" Canvas.Top="305" 
-                                 x:Name="Character4" IsEnabled="True"
-                                 TabIndex="3">
-                        <RadioButton.Content>
-                            <Image Source="Assets/character4.png"/>
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource RadioCharacter}" Width="105"
+            <!-- Se incluye dentro de un ScrollViewer para que los lados que se salen al hacer la transformación no aparezcan -->
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+                <!-- Escalar la imagen -->
+                <Grid Loaded="Grid_Loaded">
+                    <Grid.RenderTransform>
+                        <CompositeTransform x:Name="TransformMap1"/>
+                    </Grid.RenderTransform>
+                    <!-- Desplazar la imagen para que cada personaje se sitúe en el centro
+                    Se hace en otro grid diferente a escalar la imagen para que no haya que calcular la pos de la imagen
+                    respecto al centro una vez que ha cambiado de tamaño -->
+                    <Grid x:Name="GridMap" Margin="170,0">
+                        <Grid.RenderTransform>
+                            <CompositeTransform x:Name="TransformMap2"/>
+                        </Grid.RenderTransform>
+                        <Image x:Name="ImageMap" Source="Assets/board.png"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Canvas x:Name="CanvasMap" TabFocusNavigation="Local" XYFocusKeyboardNavigation="Enabled">
+                            <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
+                                     Canvas.Left="970" Canvas.Top="585" 
+                                     x:Name="Character1" IsEnabled="True"
+                                     TabIndex="5" Checked="Character_Checked">
+                                <RadioButton.Content>
+                                    <Image Source="Assets/character1.png"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource RadioCharacter}" Width="90"
+                                     Canvas.Left="1225" Canvas.Top="470" 
+                                     x:Name="Character2" IsEnabled="True"
+                                     TabIndex="6" Checked="Character_Checked">
+                                <RadioButton.Content>
+                                    <Image Source="Assets/character2.png"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
+                                     Canvas.Left="200" Canvas.Top="450" 
+                                     x:Name="Character3" IsEnabled="True"
+                                     TabIndex="2" Checked="Character_Checked">
+                                <RadioButton.Content>
+                                    <Image Source="Assets/character3.png"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource RadioCharacter}" Width="95"
+                                     Canvas.Left="508" Canvas.Top="305" 
+                                     x:Name="Character4" IsEnabled="True"
+                                     TabIndex="3" Checked="Character_Checked">
+                                <RadioButton.Content>
+                                    <Image Source="Assets/character4.png"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource RadioCharacter}" Width="105"
                                  Canvas.Left="790" Canvas.Top="350" 
                                  x:Name="Character5" IsEnabled="True"
-                                 TabIndex="4">
-                        <RadioButton.Content>
-                            <Image Source="Assets/character5.png"/>
-                        </RadioButton.Content>
-                    </RadioButton>
-                </Canvas>
-            </Grid>
+                                 TabIndex="4" Checked="Character_Checked">
+                                <RadioButton.Content>
+                                    <Image Source="Assets/character5.png"/>
+                                </RadioButton.Content>
+                            </RadioButton>
+                        </Canvas>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+
+
 
 
             <!-- Botón volver -->
@@ -71,6 +90,6 @@
         </Grid>
 
     </Viewbox>
-    
-    
+
+
 </Page>

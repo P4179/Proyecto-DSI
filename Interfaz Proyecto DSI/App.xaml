@@ -609,6 +609,7 @@
         
         <!-- Estilo selección personaje -->
         <Style x:Key="RadioCharacter" TargetType="RadioButton">
+            <Setter Property="UseSystemFocusVisuals" Value="False"/>
             <Setter Property="MinHeight" Value="0"/>
             <Setter Property="MinWidth" Value="0"/>
             <Setter Property="IsChecked" Value="False"/>
@@ -768,9 +769,7 @@
                                 <Border HorizontalAlignment="Left" VerticalAlignment="Center"
                                         BorderBrush="Black" Background="#cbc2a8" Grid.Column="2"
                                         BorderThickness="1" CornerRadius="10" Padding="15, 12">
-                                    <!-- DUDA: ¿Por qué no me deja vincularla con Content?
-                                    ¿Utilizar un ContentPresenter o un TextBlock?
-                                    Al dar valor a la Propiedad Content, se crea un TextBlock dentro del ContentPresenter -->
+                                    <!-- Al dar valor a la Propiedad Content, se crea un TextBlock dentro del ContentPresenter -->
                                     <ContentPresenter Content="{TemplateBinding DataContext}" 
                                                       FontSize="23" FontWeight="Bold"
                                                       FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"/>
@@ -796,6 +795,7 @@
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Disabled"/>
                                     <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Pressed"/>
 
                                     <VisualState x:Name="PointerOver">
                                         <VisualState.Setters>
@@ -805,22 +805,11 @@
                                             <StateTrigger IsActive="False"/>
                                         </VisualState.StateTriggers>
                                     </VisualState>
-                                    <VisualState x:Name="Pressed">
+                                    <VisualState x:Name="Selected">
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.Background" Value="#cfba8e"/>
                                             <Setter Target="Item.FontSize" Value="120"/>
                                             <Setter Target="Item.Foreground" Value="#655c43"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-
-                                <VisualStateGroup>
-                                    <VisualState>
-                                        <VisualState.StateTriggers>
-                                            <StateTrigger IsActive="False"/>
-                                        </VisualState.StateTriggers>
-                                        <VisualState.Setters>
-                                            <Setter Target="RootGrid.Opacity" Value="0.5"/>
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -830,6 +819,8 @@
                                     <VisualState x:Name="Focused">
                                         <VisualState.Setters>
                                             <Setter Target="RootGrid.Background" Value="#cfba8e"/>
+                                            <Setter Target="Item.FontSize" Value="90"/>
+                                            <Setter Target="Item.Foreground" Value="#606060"/>
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>

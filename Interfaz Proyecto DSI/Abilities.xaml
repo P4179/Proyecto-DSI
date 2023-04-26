@@ -16,25 +16,55 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
+            
             <!-- Árbol de habilidades -->
-            <StackPanel Width="650"
+            <StackPanel Width="650" Visibility="Visible"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid>
                     <Image Source="Assets/Tree.png"/>
-                    <Canvas x:Name="Tree">
+                    <Canvas>
                         <!-- Arriba izquierda -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                                     Canvas.Left="22" Canvas.Top="179"
-                                     GotFocus="Ability_GotFocus"/>
+                        <Grid Canvas.Left="22" Canvas.Top="159">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton x:Name="Ability1" Style="{StaticResource RadioAbility}"
+                                         Grid.Row="0" Grid.RowSpan="2"
+                                         GotFocus="Ability_GotFocus"
+                                         Checked="Ability_Checked"/>
+                            <FontIcon x:Name="TickAbility1" Glyph="&#xF78C;" Grid.Row="1"
+                                      Foreground="#4c7a34" Opacity="0"
+                                      FontSize="60" Margin="50,60,0,0"/>
+                        </Grid>
                         <!-- Arriba centro -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                                     Canvas.Left="272" Canvas.Top="179"
-                                     GotFocus="Ability_GotFocus"/>
+                        <Grid Canvas.Left="272" Canvas.Top="159">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton x:Name="Ability2" Style="{StaticResource RadioAbility}"
+                                         Grid.Row="0" Grid.RowSpan="2"
+                                         GotFocus="Ability_GotFocus"
+                                         Checked="Ability_Checked"/>
+                            <FontIcon x:Name="TickAbility2" Glyph="&#xF78C;" Grid.Row="1"
+                                      Foreground="#4c7a34" Opacity="0"
+                                      FontSize="60" Margin="50,60,0,0"/>
+                        </Grid>
                         <!-- Arriba derecha -->
-                        <RadioButton Style="{StaticResource RadioAbility}"
-                                     Canvas.Left="522" Canvas.Top="179"
-                                     GotFocus="Ability_GotFocus"/>
+                        <Grid Canvas.Left="522" Canvas.Top="159">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton x:Name="Ability3" Style="{StaticResource RadioAbility}"
+                                         Grid.Row="0" Grid.RowSpan="2"
+                                         GotFocus="Ability_GotFocus"
+                                         Checked="Ability_Checked"/>
+                            <FontIcon x:Name="TickAbility3" Glyph="&#xF78C;" Grid.Row="1"
+                                      Foreground="#4c7a34" Opacity="0"
+                                      FontSize="60" Margin="50,60,0,0"/>
+                        </Grid>
                     </Canvas>
                 </Grid>
 
@@ -64,14 +94,13 @@
                 <Border
                 Background="#cfba8e" Height="80"
                 BorderBrush="Black" BorderThickness="1">
-                    <TextBlock Text="Habilidad 1" FontSize="45"
+                    <TextBlock Text="{x:Bind abilitiesLogic.selAbility.Name, Mode=TwoWay}" FontSize="45"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC">
                     </TextBlock>
                 </Border>
-                <Border
-                Background="#ffffff"
-                BorderThickness="1,0,1,1" BorderBrush="Black">
+                <Border Background="#ffffff"
+                        BorderThickness="1,0,1,1" BorderBrush="Black">
                     <StackPanel>
                         <Border VerticalAlignment="Center" HorizontalAlignment="Center"
                             Margin="150, 20"
@@ -83,14 +112,30 @@
                              Margin="150, 0" IsTabStop="False"
                              IsHitTestVisible="False" IsReadOnly="True"
                              FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
-                             Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." 
-                        />
-                        <Button Style="{StaticResource ClickableButtonTemplate}"
-                            Height="88" Width="300" Margin="40" 
-                            VerticalAlignment="Center" HorizontalAlignment="Center"
-                            FontSize="38">
-                            <TextBlock Text="Desbloquear"/>
-                        </Button>
+                             Text="{x:Bind abilitiesLogic.selAbility.Infor, Mode=TwoWay}"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource ClickableButtonTemplate}"
+                                    Height="88" Width="270" Margin="40,40,20,40" 
+                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    FontSize="38" Click="Unlock_Click">
+                                <TextBlock Text="Desbloquear"/>
+                            </Button>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Padding="25,10" CornerRadius="40" 
+                                    BorderBrush="#232323" BorderThickness="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Bind abilitiesLogic.selAbility.Exp, Mode=TwoWay}" FontSize="35" FontWeight="Bold"
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                                               Foreground="#232323" Margin="0,0,10,0"/>
+                                    <TextBlock Text="EXP" FontSize="35" FontWeight="Bold"
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                                               Foreground="#232323"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -108,13 +153,17 @@
                 BorderBrush="#232323" BorderThickness="1"
                 Grid.ColumnSpan="2">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                    <FontIcon Glyph="&#xE719;" Margin="0,0,20,0"
+                            Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE734;" Margin="0,0,20,0"
                           FontSize="40" Foreground="White"/>
-                    <TextBlock Text="1304 EXP" FontSize="40"
+                    <TextBlock Text="{x:Bind abilitiesLogic.exp,Mode=TwoWay}" FontSize="40"
+                       FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
+                       Foreground="White" Margin="0,0,10,0"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="EXP" FontSize="40"
                        FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                        Foreground="White"
-                       HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
             </Border>
 

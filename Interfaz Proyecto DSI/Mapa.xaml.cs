@@ -1,5 +1,7 @@
-﻿using System;
+﻿using P4;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,6 +24,32 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Interfaz_Proyecto_DSI
 {
+    public class Level
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Infor { get; set; }
+    }
+
+    public class MapaLogic : ObservableObject
+    {
+        public ObservableCollection<Level> levelsList { get; } = new ObservableCollection<Level>()
+        {
+            new Level() {Id="1-1", Name="Nivel 1-1",
+                Infor="Lorem ipsum1 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
+            new Level() {Id="Tienda", Name="Tienda",
+                Infor="Lorem ipsum2 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
+            new Level() {Id="Jefe 1", Name="Nivel 1-",
+                Infor = "Lorem ipsum3 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
+        };
+
+        private Level selectedLevel;
+        public Level selLevel
+        {
+            get => selectedLevel;
+            set { Set(ref selectedLevel, value); }
+        }
+    }
 
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
@@ -34,14 +62,33 @@ namespace Interfaz_Proyecto_DSI
         private PointerPoint firstTouchPointer = null;
         private CoreCursor cursorHand = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Hand, 0);
         private CoreCursor cursorArrow = new Windows.UI.Core.CoreCursor(Windows.UI.Core.CoreCursorType.Arrow, 0);
+        private MapaLogic mapaLogic = new MapaLogic();
+        private Image boss;
 
         public Mapa()
         {
+            this.InitializeComponent();
+
             timer = new DispatcherTimer();
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(100000);
 
-            this.InitializeComponent();
+            boss = createBoss();
+        }
+
+        private Image createBoss()
+        {
+            Image boss = new Image();
+            string path = System.IO.Directory.GetCurrentDirectory() + "\\Assets\\boss.png";
+            // se crea un bitmap a partir del uri de la imagen
+            boss.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(path));
+            boss.Width = 50;
+            // estructura thickness para poder darle valores al margen
+            Thickness margin = boss.Margin;
+            margin.Left = 10;
+            boss.Margin = margin;
+
+            return boss;
         }
 
         void timer_Tick(object sender, object e)
@@ -80,7 +127,8 @@ namespace Interfaz_Proyecto_DSI
                 case "Tienda":
                     Frame.Navigate(typeof(Tienda), null, new DrillInNavigationTransitionInfo());
                     break;
-                case "Nivel 1":
+                case "1-1":
+                case "Jefe 1":
                     Frame.Navigate(typeof(Combate), null, new DrillInNavigationTransitionInfo());
                     break;
             }
@@ -91,15 +139,42 @@ namespace Interfaz_Proyecto_DSI
             Frame.Navigate(typeof(Equipo), null, new DrillInNavigationTransitionInfo());
         }
 
+
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             togglePause();
+        }
+
+        private void ChangeInfo(Level level)
+        {
+            mapaLogic.selLevel = level;
+
+            if (level.Id == "Jefe 1")
+            {
+                TextInfo.Children.Add(boss);
+            }
+            else
+            {
+                if (TextInfo.Children.Contains(boss))
+                {
+                    TextInfo.Children.Remove(boss);
+                }
+            }
         }
 
         private void Level_Checked(object sender, RoutedEventArgs e)
         {
             levelSelected = sender as RadioButton;
             Info.Visibility = Visibility.Visible;
+
+            foreach(Level level in mapaLogic.levelsList)
+            {
+                if((string)levelSelected.DataContext == level.Id)
+                {
+                    ChangeInfo(level);
+                    break;
+                }
+            }
         }
 
         private void keyDown(object sender, KeyRoutedEventArgs e)
