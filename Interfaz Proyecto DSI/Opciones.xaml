@@ -56,7 +56,7 @@
 
 
             <!--Pestañas-->
-            <Border BorderBrush="Black" BorderThickness="1" Margin="80,80,80,200" XYFocusKeyboardNavigation="Enabled">
+            <Border x:Name="PivotBorder" BorderBrush="Black" BorderThickness="1" Margin="80,80,80,200" XYFocusKeyboardNavigation="Enabled">
 
                 <Pivot x:Name="optionsTabs" Style="{StaticResource TabsTemplate}"
                        Background="#cbc2a8" SelectionChanged="tabChanged">
@@ -69,7 +69,7 @@
                         </PivotItem.Header>
 
                         <ListView Margin="20" x:Name="GraphicsListView" SelectionChanged="graphSelChanged"
-                                  IsItemClickEnabled="True" >
+                                  IsItemClickEnabled="True" ItemClick="selOption">
                             <ListViewItem x:Name="Graph1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
                                     <TextBlock Text="Opción 2" VerticalAlignment="Center"/>
                                     <ComboBox x:Name="Combo12" Style="{StaticResource ComboBoxTemplate}" SelectedIndex="2" 
                                               Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                                              SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True" XYFocusKeyboardNavigation="Enabled">
+                                              SelectionChanged="saveButtonComboBox" UseSystemFocusVisuals="True">
                                         <ComboBoxItem Content="Alto"/>
                                         <ComboBoxItem Content="Medio"/>
                                         <ComboBoxItem Content="Bajo"/>
@@ -146,7 +146,7 @@
                         </PivotItem.Header>
 
                         <ListView Margin="20" x:Name="SoundsListView" SelectionChanged="soundSelChanged"
-                                  IsItemClickEnabled="True">
+                                  IsItemClickEnabled="True" ItemClick="selOption">
                             <ListViewItem x:Name="Sound1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -222,7 +222,7 @@
                         </PivotItem.Header>
 
                         <ListView Margin="20" x:Name="AccessListView" SelectionChanged="accSelChanged"
-                                  IsItemClickEnabled="True">
+                                  IsItemClickEnabled="True" ItemClick="selOption">
                             <ListViewItem x:Name="Access1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>

@@ -89,7 +89,12 @@ namespace Interfaz_Proyecto_DSI
         }
 
         private void keyDown(object sender, KeyRoutedEventArgs e) {
-            ButtonNo_Click(null, null);
+            switch (e.Key) {
+                case Windows.System.VirtualKey.Escape:
+                    ButtonNo_Click(null, null);
+                    break;
+
+            }
         }
     }
 }
