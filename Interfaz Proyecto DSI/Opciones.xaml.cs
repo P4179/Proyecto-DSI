@@ -125,7 +125,6 @@ namespace Interfaz_Proyecto_DSI
                     optionsLogic.selectedOption = optionsLogic.graphList[index];
                     optionsLogic.selectedGraph = optionsLogic.graphList[index];
                 }
-                selecting = false;
             }
         }
 
@@ -138,7 +137,6 @@ namespace Interfaz_Proyecto_DSI
                     optionsLogic.selectedOption = optionsLogic.soundList[index];
                     optionsLogic.selectedSound = optionsLogic.soundList[index];
                 }
-                selecting = false;
             }
         }
 
@@ -151,7 +149,6 @@ namespace Interfaz_Proyecto_DSI
                     optionsLogic.selectedOption = optionsLogic.accList[index];
                     optionsLogic.selectedAccess = optionsLogic.accList[index];
                 }
-                selecting = false;
             }
         }
 
@@ -186,7 +183,7 @@ namespace Interfaz_Proyecto_DSI
 
             if (Combo11.SelectedIndex != lastCombo11 || Combo12.SelectedIndex != lastCombo12 ||
                 Combo21.SelectedIndex != lastCombo21 || Combo22.SelectedIndex != lastCombo22 ||
-                Combo31.SelectedIndex != lastCombo31 || Combo32.SelectedIndex != lastCombo32 )
+                Combo31.SelectedIndex != lastCombo31 || Combo32.SelectedIndex != lastCombo32)
                 SaveButton.IsEnabled = true;
             else SaveButton.IsEnabled = false;
         }
@@ -263,140 +260,109 @@ namespace Interfaz_Proyecto_DSI
 
 
 
-        ContentControl lastFocused;
-        bool selecting = false;
-        bool changingVolume = false;
         private void keyDown(object sender, KeyRoutedEventArgs e) {
-            var focused = FocusManager.GetFocusedElement() as ContentControl;
-            
-            //Debug.WriteLine(foccc);
+            var focused = FocusManager.GetFocusedElement();
 
-            if (changingVolume) {
+            if (focused == Slider1 || focused == Slider2 || focused == Slider3) {
                 if (control.gamepadState.RightThumbstickX < 0) {
-                    if (currTabName == "GraphicsTab") {
-                        Slider1.Value--;
-                    }
-                    else if (currTabName == "SoundTab") {
-                        Slider2.Value--;
-                    }
-                    else if (currTabName == "AccessTab") {
-                        Slider3.Value--;
-                    }
-
+                    if (focused == Slider1) Slider1.Value--;
+                    else if (focused == Slider2) Slider2.Value--;
+                    else if (focused == Slider3) Slider3.Value--;
                 }
                 else if (control.gamepadState.RightThumbstickX > 0) {
-                    if (currTabName == "GraphicsTab") {
-                        Slider1.Value++;
-                    }
-                    else if (currTabName == "SoundTab") {
-                        Slider2.Value++;
-                    }
-                    else if (currTabName == "AccessTab") {
-                        Slider3.Value++;
+                    if (focused == Slider1) Slider1.Value++;
+                    else if (focused == Slider2) Slider2.Value++;
+                    else if (focused == Slider3) Slider3.Value++;
+                }
+            }
+
+            if (e.Key == Windows.System.VirtualKey.Enter) selOption(null, null);
+            else if (e.Key == Windows.System.VirtualKey.Escape) {
+                var focusedContent = FocusManager.GetFocusedElement() as ContentControl;
+                if (focusedContent == null) unselOption();
+                else {
+                    if (focusedContent.Name == "HeaderClipper" || focused == ReturnButton || focused == SaveButton || focused == RestoreButon)
+                        closeOptions(null, null);
+
+                    else if (focused  == Graph1 || focused == Graph2 || focused == Graph3 || focused == Graph4 ||
+                             focused == Sound1 || focused == Sound2 || focused == Sound3 || focused == Sound4 ||
+                             focused == Access1 || focused == Access2 || focused == Access3 || focused == Access4)
+                    {
+                        GraphicsListView.SelectedIndex = 0;
+                        SoundsListView.SelectedIndex = 0;
+                        AccessListView.SelectedIndex = 0;
+
+                        optionsTabs.Focus(FocusState.Programmatic);
                     }
                 }
             }
-            switch (e.Key) {
-                case Windows.System.VirtualKey.Enter:
-                    selOption(null, null);
-                    break;
-                case Windows.System.VirtualKey.Escape:
-                    if (focused == null) {
-                        var otherFoc = FocusManager.GetFocusedElement();
-                        if (otherFoc == Combo11 || otherFoc == Combo12 || otherFoc == Slider1 || otherFoc == Check1 ||
-                            otherFoc == Combo21 || otherFoc == Combo22 || otherFoc == Slider2 || otherFoc == Check2 ||
-                            otherFoc == Combo31 || otherFoc == Combo32 || otherFoc == Slider3 || otherFoc == Check3)
-                        {
-                            lastFocused.Focus(FocusState.Programmatic);
-                        }
-                        else if (selecting) {
-                            selecting = false;
-                            changingVolume = false;
-                            lastFocused.Focus(FocusState.Programmatic);
-                        }
-                    }
-                    else {
-                        if (focused.Name == "HeaderClipper" || focused.Name == "ReturnButton" ||
-                                focused.Name == "SaveButton" || focused.Name == "RestoreButon")
-                            closeOptions(null, null);
-                        else if (focused.Name == "Graph1" || focused.Name == "Graph2" || focused.Name == "Graph3" || focused.Name == "Graph4" ||
-                                 focused.Name == "Sound1" || focused.Name == "Sound2" || focused.Name == "Sound3" || focused.Name == "Sound4" ||
-                                 focused.Name == "Access1" || focused.Name == "Access2" || focused.Name == "Access3" || focused.Name == "Access4")
-                        {
-                            GraphicsListView.SelectedIndex = 0;
-                            SoundsListView.SelectedIndex = 0;
-                            AccessListView.SelectedIndex = 0;
 
-                            optionsTabs.Focus(FocusState.Programmatic);
-                        }
-                    }
-                    break;
 
-            }
         }
 
         private void selOption(object sender, ItemClickEventArgs e) {
-            if (!selecting) {
-                var focused = FocusManager.GetFocusedElement() as ContentControl;
-                lastFocused = focused;
-                switch (focused.Name) {
-                    case "Graph1":
-                        Combo11.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Graph2":
-                        Combo12.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Graph3":
-                        Slider1.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        changingVolume = true;
-                        break;
-                    case "Graph4":
-                        Check1.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Sound1":
-                        Combo21.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Sound2":
-                        Combo22.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Sound3":
-                        Slider2.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        changingVolume = true;
-                        break;
-                    case "Sound4":
-                        Check2.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Access1":
-                        Combo31.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Access2":
-                        Combo32.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
-                    case "Access3":
-                        Slider3.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        changingVolume = true;
-                        break;
-                    case "Access4":
-                        Check3.Focus(FocusState.Programmatic);
-                        selecting = true;
-                        break;
+            var focused = FocusManager.GetFocusedElement();
+            if (focused == Graph1)
+                Combo11.Focus(FocusState.Programmatic);
+            else if (focused == Graph2)
+                Combo12.Focus(FocusState.Programmatic);
+            else if (focused == Graph3)
+                Slider1.Focus(FocusState.Programmatic);
+            else if (focused == Graph4)
+                Check1.Focus(FocusState.Programmatic);
 
-                }
-            }
+            else if (focused == Sound1)
+                Combo21.Focus(FocusState.Programmatic);
+            else if (focused == Sound2 )
+                Combo22.Focus(FocusState.Programmatic);
+            else if (focused == Sound3)
+                Slider2.Focus(FocusState.Programmatic);
+            else if (focused == Sound4)
+                Check2.Focus(FocusState.Programmatic);
+
+            else if (focused == Access1)
+                Combo31.Focus(FocusState.Programmatic);
+            else if (focused == Access2)
+                Combo32.Focus(FocusState.Programmatic);
+            else if (focused == Access3)
+                Slider3.Focus(FocusState.Programmatic);
+            else if (focused == Access4)
+                Check3.Focus(FocusState.Programmatic);
+
+
         }
 
 
+        private void unselOption() {
+            var focused = FocusManager.GetFocusedElement();
+
+            if (focused == Combo11)
+                Graph1.Focus(FocusState.Programmatic);
+            else if (focused == Combo12)
+                Graph2.Focus(FocusState.Programmatic);
+            else if (focused == Slider1)
+                Graph3.Focus(FocusState.Programmatic);
+            else if (focused == Check1)
+                Graph4.Focus(FocusState.Programmatic);
+
+            else if (focused == Combo21)
+                Sound1.Focus(FocusState.Programmatic);
+            else if (focused == Combo22)
+                Sound2.Focus(FocusState.Programmatic);
+            else if (focused == Slider2)
+                Sound3.Focus(FocusState.Programmatic);
+            else if (focused == Check2)
+                Sound4.Focus(FocusState.Programmatic);
+
+            else if (focused == Combo31)
+                Access1.Focus(FocusState.Programmatic);
+            else if (focused == Combo32)
+                Access2.Focus(FocusState.Programmatic);
+            else if (focused == Slider3)
+                Access3.Focus(FocusState.Programmatic);
+            else if (focused == Check3)
+                Access4.Focus(FocusState.Programmatic);
+        }
 
     }
 }

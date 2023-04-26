@@ -37,7 +37,7 @@ namespace Interfaz_Proyecto_DSI
             set { Set(ref _selAcc, value); }
         }
 
-        private Opcion _control=  new Opcion() { desc = "Lore Ipsum cont", id = 0, name = "Controles" };
+        private Opcion _control=  new Opcion() { desc = "Lorem Ipsum cont", id = 0, name = "Controles" };
         public Opcion controlsOption {
             get => _control;
 

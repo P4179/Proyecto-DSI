@@ -41,17 +41,17 @@ namespace Interfaz_Proyecto_DSI
 
     public class ObjectLists {
         public static List<CommObject> potions { get; } = new List<CommObject>() {
-            new CommObject() {id = 0, name = "Poción 1", price = 100, displayPrice = "100 C", desc = "Lore Ipsum 1 poc" },
-            new CommObject() {id = 1, name = "Poción 2", price = 200, displayPrice = "200 C", desc = "Lore Ipsum 2 poc"  },
-            new CommObject() {id = 2, name = "Poción 3", price = 300, displayPrice = "300 C", desc = "Lore Ipsum 3 poc"  },
-            new CommObject() {id = 3,  name = "Poción 4", price = 400, displayPrice = "400 C", desc = "Lore Ipsum 4 poc"  },
-            new CommObject() {id = 4,  name = "Poción 5", price = 500, displayPrice = "500 C", desc = "Lore Ipsum 5 poc"  },
-            new CommObject() {id = 5,  name = "Poción 6", price = 600, displayPrice = "600 C", desc = "Lore Ipsum 6 poc"  },
-            new CommObject() {id = 6,  name = "Poción 7", price = 700, displayPrice = "700 C", desc = "Lore Ipsum 7 poc"  },
-            new CommObject() {id = 7,  name = "Poción 8", price = 800, displayPrice = "800 C", desc = "Lore Ipsum 8 poc"  },
-            new CommObject() {id = 8,  name = "Poción 9", price = 900, displayPrice = "900 C", desc = "Lore Ipsum 9 poc"  },
-            new CommObject() {id = 9,  name = "Poción 10", price = 1000, displayPrice = "1000 C", desc = "Lore Ipsum 10 poc"  },
-            new CommObject() {id = 10,  name = "Poción 11", price = 1100, displayPrice = "1100 C", desc = "Lore Ipsum 11 poc"  }
+            new CommObject() {id = 0, name = "Poción 1", price = 100, displayPrice = "100 C", desc = "Lorem Ipsum 1 poc" },
+            new CommObject() {id = 1, name = "Poción 2", price = 200, displayPrice = "200 C", desc = "Lorem Ipsum 2 poc"  },
+            new CommObject() {id = 2, name = "Poción 3", price = 300, displayPrice = "300 C", desc = "Lorem Ipsum 3 poc"  },
+            new CommObject() {id = 3,  name = "Poción 4", price = 400, displayPrice = "400 C", desc = "Lorem Ipsum 4 poc"  },
+            new CommObject() {id = 4,  name = "Poción 5", price = 500, displayPrice = "500 C", desc = "Lorem Ipsum 5 poc"  },
+            new CommObject() {id = 5,  name = "Poción 6", price = 600, displayPrice = "600 C", desc = "Lorem Ipsum 6 poc"  },
+            new CommObject() {id = 6,  name = "Poción 7", price = 700, displayPrice = "700 C", desc = "Lorem Ipsum 7 poc"  },
+            new CommObject() {id = 7,  name = "Poción 8", price = 800, displayPrice = "800 C", desc = "Lorem Ipsum 8 poc"  },
+            new CommObject() {id = 8,  name = "Poción 9", price = 900, displayPrice = "900 C", desc = "Lorem Ipsum 9 poc"  },
+            new CommObject() {id = 9,  name = "Poción 10", price = 1000, displayPrice = "1000 C", desc = "Lorem Ipsum 10 poc"  },
+            new CommObject() {id = 10,  name = "Poción 11", price = 1100, displayPrice = "1100 C", desc = "Lorem Ipsum 11 poc"  }
         };
 
         public static List<Weapon> weapons { get; } = new List<Weapon>() {
@@ -70,17 +70,17 @@ namespace Interfaz_Proyecto_DSI
 
 
         public static List<CommObject> accessories { get; } = new List<CommObject>() {
-            new CommObject() {id = 0, name = "Accesorio 1", price = 100, displayPrice = "100 C", desc = "Lore Ipsum 1 acc" },
-            new CommObject() {id = 1,  name = "Accesorio 2", price = 200, displayPrice = "200 C", desc = "Lore Ipsum 2 acc" },
-            new CommObject() {id = 2,  name = "Accesorio 3", price = 300, displayPrice = "300 C", desc = "Lore Ipsum 3 acc" },
-            new CommObject() {id = 3,  name = "Accesorio 4", price = 400, displayPrice = "400 C", desc = "Lore Ipsum 4 acc" },
-            new CommObject() {id = 4,  name = "Accesorio 5", price = 500, displayPrice = "500 C", desc = "Lore Ipsum 5 acc" },
-            new CommObject() {id = 5,  name = "Accesorio 6", price = 600, displayPrice = "600 C", desc = "Lore Ipsum 6 acc" },
-            new CommObject() {id = 6,  name = "Accesorio 7", price = 700, displayPrice = "700 C", desc = "Lore Ipsum 7 acc" },
-            new CommObject() {id = 7,  name = "Accesorio 8", price = 800, displayPrice = "800 C", desc = "Lore Ipsum 8 acc" },
-            new CommObject() {id = 8,  name = "Accesorio 9", price = 900, displayPrice = "900 C", desc = "Lore Ipsum 9 acc" },
-            new CommObject() {id = 9,  name = "Accesorio 10", price = 1000, displayPrice = "1000 C", desc = "Lore Ipsum 10 acc"},
-            new CommObject() {id = 10,  name = "Accesorio 11", price = 1100, displayPrice = "1100 C", desc = "Lore Ipsum 11 acc" }
+            new CommObject() {id = 0, name = "Accesorio 1", price = 100, displayPrice = "100 C", desc = "Lorem Ipsum 1 acc" },
+            new CommObject() {id = 1,  name = "Accesorio 2", price = 200, displayPrice = "200 C", desc = "Lorem Ipsum 2 acc" },
+            new CommObject() {id = 2,  name = "Accesorio 3", price = 300, displayPrice = "300 C", desc = "Lorem Ipsum 3 acc" },
+            new CommObject() {id = 3,  name = "Accesorio 4", price = 400, displayPrice = "400 C", desc = "Lorem Ipsum 4 acc" },
+            new CommObject() {id = 4,  name = "Accesorio 5", price = 500, displayPrice = "500 C", desc = "Lorem Ipsum 5 acc" },
+            new CommObject() {id = 5,  name = "Accesorio 6", price = 600, displayPrice = "600 C", desc = "Lorem Ipsum 6 acc" },
+            new CommObject() {id = 6,  name = "Accesorio 7", price = 700, displayPrice = "700 C", desc = "Lorem Ipsum 7 acc" },
+            new CommObject() {id = 7,  name = "Accesorio 8", price = 800, displayPrice = "800 C", desc = "Lorem Ipsum 8 acc" },
+            new CommObject() {id = 8,  name = "Accesorio 9", price = 900, displayPrice = "900 C", desc = "Lorem Ipsum 9 acc" },
+            new CommObject() {id = 9,  name = "Accesorio 10", price = 1000, displayPrice = "1000 C", desc = "Lorem Ipsum 10 acc"},
+            new CommObject() {id = 10,  name = "Accesorio 11", price = 1100, displayPrice = "1100 C", desc = "Lorem Ipsum 11 acc" }
         };
 
         public static IList<CommObject> getPotions() { return potions; }
@@ -106,22 +106,22 @@ namespace Interfaz_Proyecto_DSI
 
     public class OptionLists {
         public static List<Opcion> graphicOptions { get; } = new List<Opcion>() {
-            new Opcion() {id = 0, name = "Opción graf 1", desc = "Lore Ipsum graf 1"},
-            new Opcion() {id = 1, name = "Opción graf 2", desc = "Lore Ipsum graf 2"},
-            new Opcion() {id = 2, name = "Opción graf 3", desc = "Lore Ipsum graf 3"},
-            new Opcion() {id = 3, name = "Opción graf 4", desc = "Lore Ipsum graf 4"}
+            new Opcion() {id = 0, name = "Opción graf 1", desc = "Lorem Ipsum graf 1"},
+            new Opcion() {id = 1, name = "Opción graf 2", desc = "Lorem Ipsum graf 2"},
+            new Opcion() {id = 2, name = "Opción graf 3", desc = "Lorem Ipsum graf 3"},
+            new Opcion() {id = 3, name = "Opción graf 4", desc = "Lorem Ipsum graf 4"}
         };
         public static List<Opcion> soundOptions { get; } = new List<Opcion>() {
-            new Opcion() {id = 0, name = "Opción son 1", desc = "Lore Ipsum son 1"},
-            new Opcion() {id = 1, name = "Opción son 2", desc = "Lore Ipsum son 2"},
-            new Opcion() {id = 2, name = "Opción son 3", desc = "Lore Ipsum son 3"},
-            new Opcion() {id = 3, name = "Opción son 4", desc = "Lore Ipsum son 4"}
+            new Opcion() {id = 0, name = "Opción son 1", desc = "Lorem Ipsum son 1"},
+            new Opcion() {id = 1, name = "Opción son 2", desc = "Lorem Ipsum son 2"},
+            new Opcion() {id = 2, name = "Opción son 3", desc = "Lorem Ipsum son 3"},
+            new Opcion() {id = 3, name = "Opción son 4", desc = "Lorem Ipsum son 4"}
         };
         public static List<Opcion> accessOptions { get; } = new List<Opcion>() {
-            new Opcion() {id = 0, name = "Opción access 1", desc = "Lore Ipsum acc 1"},
-            new Opcion() {id = 1, name = "Opción access 2", desc = "Lore Ipsum acc 2"},
-            new Opcion() {id = 2, name = "Opción access 3", desc = "Lore Ipsum acc 3"},
-            new Opcion() {id = 3, name = "Opción access 4", desc = "Lore Ipsum acc 4"}
+            new Opcion() {id = 0, name = "Opción access 1", desc = "Lorem Ipsum acc 1"},
+            new Opcion() {id = 1, name = "Opción access 2", desc = "Lorem Ipsum acc 2"},
+            new Opcion() {id = 2, name = "Opción access 3", desc = "Lorem Ipsum acc 3"},
+            new Opcion() {id = 3, name = "Opción access 4", desc = "Lorem Ipsum acc 4"}
         };
 
         public static IList<Opcion> getGraphs() { return graphicOptions; }
