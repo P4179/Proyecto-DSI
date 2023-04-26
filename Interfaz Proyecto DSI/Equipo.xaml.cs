@@ -88,7 +88,8 @@ namespace Interfaz_Proyecto_DSI
         ControllerLoop ctrlLoop = null;
         CharacterLogic characterLogic = new CharacterLogic();
 
-        public Equipo() {
+        public Equipo()
+        {
 
             this.InitializeComponent();
 
@@ -131,15 +132,18 @@ namespace Interfaz_Proyecto_DSI
             ConfirmButton.Focus(FocusState.Programmatic);
 
             ListViewItem item = Weapons1.ContainerFromIndex(0) as ListViewItem;
-            if (item != null) {
+            if (item != null)
+            {
                 item.Focus(FocusState.Programmatic);
                 item.IsSelected = true;
                 VisualStateManager.GoToState(item, "Pressed", true);
             }
             else
-                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () => {
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () =>
+                {
                     item = Weapons1.ContainerFromIndex(0) as ListViewItem;
-                    if (item != null) {
+                    if (item != null)
+                    {
                         item.Focus(FocusState.Programmatic);
                         item.IsSelected = true;
                         VisualStateManager.GoToState(item, "Pressed", true);
@@ -168,6 +172,30 @@ namespace Interfaz_Proyecto_DSI
             }
         }
 
+        private void weaponSelected(object sender, ItemClickEventArgs e)
+        {
+            ConfirmButton.Focus(FocusState.Programmatic);
+            VisualStateManager.GoToState(ConfirmButton, "Focused", true);
+        }
+
+        private void keyDown(object sender, KeyRoutedEventArgs e)
+        {
+
+            if (weaponList.Visibility == Visibility.Visible)
+            {
+                if (control.isKeyDown(VirtualKey.GamepadLeftShoulder) || control.isKeyDown(VirtualKey.GamepadRightShoulder) ||
+                    e.Key == Windows.System.VirtualKey.Left || e.Key == Windows.System.VirtualKey.Right)
+                {
+                    changeWeaponList(null, null);
+                }
+                if (e.Key == Windows.System.VirtualKey.Escape)
+                {
+                    closeWeaponList(null, null);
+                }
+            }
+        }
+
+        // PLANTILLAS
         private bool IsTeamFull()
         {
             // se comprueba que no está lleno
@@ -183,102 +211,19 @@ namespace Interfaz_Proyecto_DSI
             return full;
         }
 
-        // PLANTILLAS
-        private void TeamGrid_DragOver(object sender, DragEventArgs e)
+        private Character GetCharacterSent(string name, ObservableCollection<Character> characterList)
         {
-            // dependiendo de si está lleno o no, se realiza una operación u otra
-            if (IsTeamFull())
-            {
-                e.AcceptedOperation = DataPackageOperation.None;
-
-            }
-            else
-            {
-                e.AcceptedOperation = DataPackageOperation.Move;
-            }
-        }
-
-        private Character GetCharacterSent(string name)
-        {
-            Character cTemplate = null;
-
+            Character characterAux = null;
             // se encuentra el que se había enviado
-            foreach (Character character in characterLogic.TemplateList)
+            foreach (Character character in characterList)
             {
                 if (character.Name == name)
                 {
-                    cTemplate = character;
+                    characterAux = character;
                     break;
                 }
             }
-            return cTemplate;
-        }
-
-        private async void TeamGrid_Drop(object sender, DragEventArgs e)
-        {
-            string name = await e.DataView.GetTextAsync();
-
-            Character cTemplate = GetCharacterSent(name);
-
-            foreach (Character cTeam in characterLogic.TeamList)
-            {
-                // se encuentra el primero vacío
-                if (cTeam.Glyph == "")
-                {
-                    // se intercambian
-
-                    // de la plantilla al equipo (que es hacia donde se ha movido)
-                    int indexTeam = characterLogic.TeamList.IndexOf(cTeam);
-                    characterLogic.TeamList[indexTeam] = cTemplate;
-                    // se habilita
-                    var teamItem = (TeamGrid.ContainerFromItem(cTemplate) as GridViewItem);
-                    teamItem.IsEnabled = true;
-                    characterLogic.selCharacter = cTemplate;
-                    teamItem.IsSelected = true;
-
-                    // del equipo a la plantilla
-                    int indexTemplate = characterLogic.TemplateList.IndexOf(cTemplate);
-                    characterLogic.TemplateList[indexTemplate] = cTeam;
-                    // se deshabilita
-                    var templateItem = (TemplateGrid.ContainerFromItem(cTeam) as GridViewItem);
-                    templateItem.IsEnabled = false;
-                    Deselect(TemplateGrid);
-
-                    break;
-                }
-            }
-
-            Window.Current.CoreWindow.PointerCursor = cursorArrow;
-            dragginObject = false;
-        }
-
-        private void TemplateGrid_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
-        {
-            Character character = e.Items[0] as Character;
-            if (character.Glyph == "")
-            {
-                // se cancela
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Data.SetText(character.Name);
-                e.Data.RequestedOperation = DataPackageOperation.Move;
-                dragginObject = true;
-            }
-        }
-
-        private void TemplateGrid_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            Window.Current.CoreWindow.PointerCursor = cursorHand;
-        }
-
-        private void TemplateGrid_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            if (!dragginObject)
-            {
-                Window.Current.CoreWindow.PointerCursor = cursorArrow;
-            }
+            return characterAux;
         }
 
         private void Deselect(GridView gridView)
@@ -327,7 +272,7 @@ namespace Interfaz_Proyecto_DSI
             DisableEmpty(teamGrid);
 
             // se marca el primer personaje de la plantilla
-            foreach(Character character in teamGrid.Items)
+            foreach (Character character in teamGrid.Items)
             {
                 GridViewItem item = teamGrid.ContainerFromItem(character) as GridViewItem;
                 if (item.IsEnabled)
@@ -339,30 +284,198 @@ namespace Interfaz_Proyecto_DSI
             }
         }
 
-        private void keyDown(object sender, KeyRoutedEventArgs e) {
-
-            if (weaponList.Visibility == Visibility.Visible) {
-                if (control.isKeyDown(VirtualKey.GamepadLeftShoulder) || control.isKeyDown(VirtualKey.GamepadRightShoulder) ||
-                    e.Key == Windows.System.VirtualKey.Left || e.Key == Windows.System.VirtualKey.Right) {
-                    changeWeaponList(null, null);
-                }
-                if (e.Key == Windows.System.VirtualKey.Escape) {
-                    closeWeaponList(null, null);
-                }
-            }
-
-
-
-        }
-
-        private void weaponSelected(object sender, ItemClickEventArgs e) {
-            ConfirmButton.Focus(FocusState.Programmatic);
-            VisualStateManager.GoToState(ConfirmButton, "Focused", true);
-        }
-
         private void Template_Loaded(object sender, RoutedEventArgs e)
         {
             DisableEmpty(sender as GridView);
+        }
+
+        private bool IsOnGridView(Character character, GridView gridView)
+        {
+            return gridView.Items.Contains(character);
+        }
+
+        private void Grid_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.PointerCursor = cursorHand;
+        }
+
+        private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+
+            if (!dragginObject)
+            {
+                Window.Current.CoreWindow.PointerCursor = cursorArrow;
+            }
+        }
+
+        private void closeGapTemplate()
+        {
+            bool completelyEmpty = false;
+            int i = 0;
+            while (i < characterLogic.TemplateList.Count && !completelyEmpty)
+            {
+                // se busca el primer hueco vacío
+                // para intercambiarlo con el hueco que viene después que no está vacío
+                if (characterLogic.TemplateList[i].Glyph == "")
+                {
+                    Character empty = characterLogic.TemplateList[i];
+                    int j = i + 1;
+                    // si no se ha encontrado ningún hueco no vacío quiere decir que solo hay
+                    // huecos vacíos después, por lo tanto, se termina la búsqueda
+                    completelyEmpty = true;
+                    while (j < characterLogic.TemplateList.Count && completelyEmpty)
+                    {
+                        // se busca el primer hueco que no está vacío
+                        if (characterLogic.TemplateList[j].Glyph != "")
+                        {
+                            // se intercambian
+                            characterLogic.TemplateList[i] = characterLogic.TemplateList[j];
+                            characterLogic.TemplateList[j] = empty;
+                            completelyEmpty = false;
+
+                            i = j;
+                        }
+                        ++j;
+                    }
+                }
+                else
+                {
+                    ++i;
+                }
+            }
+        }
+
+        private async void TeamGrid_Drop(object sender, DragEventArgs e)
+        {
+            string name = await e.DataView.GetTextAsync();
+            Character cTemplate = GetCharacterSent(name, characterLogic.TemplateList);
+
+            if (cTemplate != null)
+            {
+                foreach (Character cTeam in characterLogic.TeamList)
+                {
+                    // se encuentra el primero vacío
+                    if (cTeam.Glyph == "")
+                    {
+                        // se intercambian
+
+                        // de la plantilla al equipo (que es hacia donde se ha movido)
+                        int indexTeam = characterLogic.TeamList.IndexOf(cTeam);
+                        characterLogic.TeamList[indexTeam] = cTemplate;
+                        // se habilita
+                        var teamItem = (TeamGrid.ContainerFromItem(cTemplate) as GridViewItem);
+                        teamItem.IsEnabled = true;
+                        characterLogic.selCharacter = cTemplate;
+                        teamItem.IsSelected = true;
+
+                        // del equipo a la plantilla (casilla vacía)
+                        int indexTemplate = characterLogic.TemplateList.IndexOf(cTemplate);
+                        characterLogic.TemplateList[indexTemplate] = cTeam;
+                        // se deshabilita
+                        var templateItem = (TemplateGrid.ContainerFromItem(cTeam) as GridViewItem);
+                        templateItem.IsEnabled = false;
+                        Deselect(TemplateGrid);
+
+                        // cerrar hueco en el template
+                        closeGapTemplate();
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private async void TeamGrid_DragOver(object sender, DragEventArgs e)
+        {
+            string name = await e.DataView.GetTextAsync();
+            Character characterTeam = GetCharacterSent(name, characterLogic.TeamList);
+
+            // dependiendo de si está lleno o no, se realiza una operación u otra
+            if (IsTeamFull() || IsOnGridView(characterTeam, TeamGrid))
+            {
+                e.AcceptedOperation = DataPackageOperation.None;
+
+            }
+            else
+            {
+                e.AcceptedOperation = DataPackageOperation.Move;
+            }
+        }
+
+        private void Grid_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        {
+            Character character = e.Items[0] as Character;
+            if (character.Glyph == "")
+            {
+                // se cancela
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Data.SetText(character.Name);
+                e.Data.RequestedOperation = DataPackageOperation.Move;
+                dragginObject = true;
+            }
+        }
+
+        private async void TemplateGrid_Drop(object sender, DragEventArgs e)
+        {
+            string name = await e.DataView.GetTextAsync();
+            Character cTeam = GetCharacterSent(name, characterLogic.TeamList);
+
+            if (cTeam != null)
+            {
+                foreach (Character cTemplate in characterLogic.TemplateList)
+                {
+                    // se encuentra el primero vacío
+                    if (cTemplate.Glyph == "")
+                    {
+                        // se intercambian
+
+                        // del equipo a la plantilla (que es hacia donde se ha movido)
+                        int indexTemplate = characterLogic.TemplateList.IndexOf(cTemplate);
+                        characterLogic.TemplateList[indexTemplate] = cTeam;
+                        // se habilita
+                        var templateItem = (TemplateGrid.ContainerFromItem(cTeam) as GridViewItem);
+                        templateItem.IsEnabled = true;
+                        characterLogic.selCharacter = cTeam;
+                        templateItem.IsSelected = true;
+
+                        // de la plantilla al equipo (casilla vacía)
+                        int indexTeam = characterLogic.TeamList.IndexOf(cTeam);
+                        characterLogic.TeamList[indexTeam] = cTemplate;
+                        // se deshabilita
+                        var teamItem = (TeamGrid.ContainerFromItem(cTemplate) as GridViewItem);
+                        teamItem.IsEnabled = false;
+                        Deselect(TeamGrid);
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private async void TemplateGrid_DragOver(object sender, DragEventArgs e)
+        {
+            string name = await e.DataView.GetTextAsync();
+            Character characterTemplate = GetCharacterSent(name, characterLogic.TemplateList);
+
+            // dependiendo de si está lleno o no, se realiza una operación u otra
+            if (IsOnGridView(characterTemplate, TemplateGrid))
+            {
+                e.AcceptedOperation = DataPackageOperation.None;
+
+            }
+            else
+            {
+                e.AcceptedOperation = DataPackageOperation.Move;
+            }
+        }
+
+        private void Grid_DragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
+        {
+            Window.Current.CoreWindow.PointerCursor = cursorArrow;
+            dragginObject = false;
         }
     }
 }

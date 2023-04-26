@@ -124,16 +124,17 @@
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                    <GridView x:Name="TeamGrid" IsFocusEngagementEnabled="True"
-                              VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <GridView x:Name="TeamGrid"
                               ItemsSource="{x:Bind characterLogic.TeamList}"
                               Style="{StaticResource CharacterTemplateStyle}"
                               ItemTemplate="{StaticResource CharactersTemplate}"
                               ItemsPanel="{StaticResource CharactersPanel}"
                               ItemContainerStyle="{StaticResource CharacterGridViewItem}"
-                              AllowDrop="True"
                               DragOver="TeamGrid_DragOver" Drop="TeamGrid_Drop"
-                              IsItemClickEnabled="True"
+                              DragItemsStarting="Grid_DragItemsStarting"
+                              DragItemsCompleted="Grid_DragItemsCompleted"
+                              PointerMoved="Grid_PointerMoved"
+                              PointerExited="Grid_PointerExited"
                               ItemClick="TeamGrid_ItemClick"
                               Loaded="Team_Loaded">
                     </GridView>
@@ -146,17 +147,17 @@
                            FontFamily="/Assets/fonts/AlegreyaSC-Medium.ttf#Alegreya SC"
                            FontSize="60" FontWeight="Medium"/>
 
-                    <GridView x:Name="TemplateGrid" IsFocusEngagementEnabled="True"
-                              VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <GridView x:Name="TemplateGrid"
                               ItemsSource="{x:Bind characterLogic.TemplateList}"
                               Style="{StaticResource CharacterTemplateStyle}"
                               ItemTemplate="{StaticResource CharactersTemplate}"
                               ItemsPanel="{StaticResource CharactersPanel}"
                               ItemContainerStyle="{StaticResource CharacterGridViewItem }"
-                              CanDragItems="True" DragItemsStarting="TemplateGrid_DragItemsStarting"
-                              PointerMoved="TemplateGrid_PointerMoved"
-                              PointerExited="TemplateGrid_PointerExited"
-                              IsItemClickEnabled="True"
+                              DragItemsStarting="Grid_DragItemsStarting"
+                              DragItemsCompleted="Grid_DragItemsCompleted"
+                              DragOver="TemplateGrid_DragOver" Drop="TemplateGrid_Drop"
+                              PointerMoved="Grid_PointerMoved"
+                              PointerExited="Grid_PointerExited"
                               ItemClick="TemplateGrid_ItemClick"
                               Loaded="Template_Loaded">
                     </GridView>

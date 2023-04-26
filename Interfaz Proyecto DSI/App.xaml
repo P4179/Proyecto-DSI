@@ -841,6 +841,12 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+            <Setter Property="IsFocusEngagementEnabled" Value="True"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="IsItemClickEnabled" Value="True"/>
+            <Setter Property="CanDragItems" Value="True"/>
         </Style>
         
         <!-- Estilo de los botones triángulos -->
